@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>VYAPAR ONE — Item Master</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,
+body{
+    min-height:100%;
+}
+
+body{
+
+    font-family:Arial,Helvetica,sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            #123c59 0%,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 90% 90%,
+            #075b55 0%,
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #031321,
+            #061f36 50%,
+            #052d35
+        );
+
+    color:white;
+
+    min-height:100vh;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.topbar{
+
+    height:75px;
+
+    background:
+        rgba(5,25,43,.92);
+
+    border-bottom:
+        1px solid #164d73;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 30px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:20;
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.18);
+}
+
+.title-area h1{
+
+    color:white;
+
+    font-size:23px;
+
+    margin-bottom:4px;
+}
+
+.title-area span{
+
+    color:#82a9b9;
+
+    font-size:11px;
+
+    letter-spacing:.4px;
+}
+
+.back-btn{
+
+    border:1px solid #245777;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0c3453,
+            #0b4a61
+        );
+
+    color:white;
+
+    border-radius:9px;
+
+    padding:11px 18px;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.back-btn:hover{
+
+    border-color:#21a5b5;
+
+    background:
+        linear-gradient(
+            135deg,
+            #087f8c,
+            #075b78
+        );
+
+    transform:translateY(-2px);
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content{
+
+    width:100%;
+
+    max-width:1250px;
+
+    margin:auto;
+
+    padding:30px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card{
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7,29,53,.96),
+            rgba(11,45,77,.96)
+        );
+
+    border:
+        1px solid #164d73;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    margin-bottom:22px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.20);
+}
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+    right:0;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #4ad0df,
+            transparent
+        );
+}
+
+.card-title{
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:900;
+
+    margin-bottom:20px;
+
+    letter-spacing:.3px;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:18px;
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:7px;
+}
+
+.form-group.full{
+
+    grid-column:1/-1;
+}
+
+label{
+
+    color:#9db8c7;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    letter-spacing:.7px;
+}
+
+input,
+select{
+
+    width:100%;
+
+    height:46px;
+
+    border:1px solid #285b78;
+
+    border-radius:9px;
+
+    outline:none;
+
+    background:
+        linear-gradient(
+            145deg,
+            #09243d,
+            #0b304e
+        );
+
+    color:white;
+
+    padding:0 14px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    transition:.2s;
+}
+
+input{
+
+    text-transform:uppercase;
+}
+
+input::placeholder{
+
+    color:#708b9b;
+
+    text-transform:uppercase;
+}
+
+select{
+
+    cursor:pointer;
+}
+
+select option{
+
+    background:#08243c;
+
+    color:white;
+}
+
+input:focus,
+select:focus{
+
+    border-color:#22a8b8;
+
+    box-shadow:
+        0 0 0 3px rgba(34,168,184,.10);
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:20px;
+
+    flex-wrap:wrap;
+}
+
+.btn{
+
+    min-height:43px;
+
+    min-width:125px;
+
+    padding:0 18px;
+
+    border-radius:9px;
+
+    border:1px solid #245777;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.save-btn{
+
+    background:
+        linear-gradient(
+            135deg,
+            #087f8c,
+            #075b78
+        );
+
+    border-color:#1695a5;
+
+    color:white;
+}
+
+.clear-btn{
+
+    background:
+        #12324e;
+
+    color:#cfe0e8;
+}
+
+.btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 9px 22px rgba(0,0,0,.20);
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.message{
+
+    min-height:20px;
+
+    margin-top:13px;
+
+    font-size:12px;
+
+    font-weight:900;
+}
+
+.success{
+
+    color:#4ee09a;
+}
+
+.error{
+
+    color:#ff8585;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-box{
+
+    margin-bottom:16px;
+}
+
+.search-box input{
+
+    background:
+        linear-gradient(
+            145deg,
+            #081f36,
+            #0c3554
+        );
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrap{
+
+    width:100%;
+
+    overflow-x:auto;
+
+    border-radius:10px;
+}
+
+table{
+
+    width:100%;
+
+    min-width:760px;
+
+    border-collapse:collapse;
+}
+
+thead{
+
+    background:
+        linear-gradient(
+            135deg,
+            #0a304d,
+            #0b4763
+        );
+}
+
+th{
+
+    padding:14px 10px;
+
+    text-align:left;
+
+    color:#8fdce5;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    border-bottom:
+        1px solid #245777;
+}
+
+td{
+
+    padding:13px 10px;
+
+    color:#d9e8f0;
+
+    font-size:11px;
+
+    border-bottom:
+        1px solid rgba(130,180,200,.13);
+}
+
+tbody tr{
+
+    background:
+        rgba(5,28,47,.45);
+
+    transition:.2s;
+}
+
+tbody tr:hover{
+
+    background:
+        rgba(15,67,91,.60);
+}
+
+
+/* =========================================================
+   ACTION BUTTONS
+========================================================= */
+
+.action-btn{
+
+    border:none;
+
+    border-radius:6px;
+
+    padding:7px 10px;
+
+    cursor:pointer;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    margin-right:4px;
+}
+
+.edit-btn{
+
+    background:#164d73;
+
+    color:white;
+}
+
+.delete-btn{
+
+    background:#642d38;
+
+    color:#ffd9dd;
+}
+
+.edit-btn:hover{
+
+    background:#087f8c;
+}
+
+.delete-btn:hover{
+
+    background:#8b3945;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:700px){
+
+    .topbar{
+
+        padding:0 15px;
+    }
+
+    .title-area h1{
+
+        font-size:18px;
+    }
+
+    .title-area span{
+
+        display:none;
+    }
+
+    .content{
+
+        padding:15px;
+    }
+
+    .card{
+
+        padding:18px;
+    }
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+
+        grid-column:auto;
+    }
+
+    .buttons{
+
+        display:grid;
+
+        grid-template-columns:1fr 1fr;
+    }
+
+    .btn{
+
+        width:100%;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOP BAR
+===================================================== -->
+
+<div class="topbar">
+
+    <div class="title-area">
+
+        <h1>
+            ITEM MASTER
+        </h1>
+
+        <span>
+            VYAPAR ONE BILLING SOFTWARE
+        </span>
+
+    </div>
+
+
+    <button
+        class="back-btn"
+        onclick="goDashboard()">
+
+        ← DASHBOARD
+
+    </button>
+
+</div>
+
+
+
+<div class="content">
+
+
+<!-- =====================================================
+     ITEM FORM
+===================================================== -->
+
+<div class="card">
+
+    <div class="card-title">
+        ITEM INFORMATION
+    </div>
+
+
+    <div class="form-grid">
+
+
+        <div class="form-group">
+
+            <label>
+                ITEM NAME
+            </label>
+
+            <input
+                id="itemName"
+                type="text"
+                placeholder="ENTER ITEM NAME"
+                autocomplete="off">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                UNIT
+            </label>
+
+            <select id="itemUnit">
+
+                <option value="">
+                    SELECT UNIT
+                </option>
+
+                <option value="PCS">
+                    PCS
+                </option>
+
+                <option value="KG">
+                    KG
+                </option>
+
+                <option value="GRAM">
+                    GRAM
+                </option>
+
+                <option value="LITRE">
+                    LITRE
+                </option>
+
+                <option value="METER">
+                    METER
+                </option>
+
+                <option value="FEET">
+                    FEET
+                </option>
+
+                <option value="BOX">
+                    BOX
+                </option>
+
+                <option value="BAG">
+                    BAG
+                </option>
+
+                <option value="QUINTAL">
+                    QUINTAL
+                </option>
+
+                <option value="OTHER">
+                    OTHER
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                SELLING RATE
+            </label>
+
+            <input
+                id="itemRate"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="ENTER SELLING RATE">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                PURCHASE RATE
+            </label>
+
+            <input
+                id="purchaseRate"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="ENTER PURCHASE RATE">
+
+        </div>
+
+
+    </div>
+
+
+    <div class="buttons">
+
+        <button
+            class="btn save-btn"
+            onclick="saveItem()">
+
+            SAVE ITEM
+
+        </button>
+
+
+        <button
+            class="btn clear-btn"
+            onclick="clearForm()">
+
+            CLEAR
+
+        </button>
+
+    </div>
+
+
+    <div
+        id="message"
+        class="message">
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     ITEM LIST
+===================================================== -->
+
+<div class="card">
+
+    <div class="card-title">
+        ITEM LIST
+    </div>
+
+
+    <div class="search-box">
+
+        <input
+            id="searchItem"
+            type="text"
+            placeholder="SEARCH ITEM..."
+            oninput="showItems()">
+
+    </div>
+
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        #
+                    </th>
+
+                    <th>
+                        ITEM NAME
+                    </th>
+
+                    <th>
+                        UNIT
+                    </th>
+
+                    <th>
+                        SELLING RATE
+                    </th>
+
+                    <th>
+                        PURCHASE RATE
+                    </th>
+
+                    <th>
+                        ACTION
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="itemTable">
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+let items =
+    JSON.parse(
+        localStorage.getItem("items") || "[]"
+    );
+
+let editIndex = -1;
+
+
+/* =========================================================
+   SAVE ITEM
+========================================================= */
+
+function saveItem(){
+
+    const name =
+        document
+        .getElementById("itemName")
+        .value
+        .trim()
+        .toUpperCase();
+
+    const unit =
+        document
+        .getElementById("itemUnit")
+        .value
+        .trim()
+        .toUpperCase();
+
+    const rate =
+        document
+        .getElementById("itemRate")
+        .value
+        .trim();
+
+    const purchaseRate =
+        document
+        .getElementById("purchaseRate")
+        .value
+        .trim();
+
+
+    if(!name){
+
+        showMessage(
+            "PLEASE ENTER ITEM NAME",
+            false
+        );
+
+        document
+        .getElementById("itemName")
+        .focus();
+
+        return;
+    }
+
+
+    if(!unit){
+
+        showMessage(
+            "PLEASE SELECT UNIT",
+            false
+        );
+
+        document
+        .getElementById("itemUnit")
+        .focus();
+
+        return;
+    }
+
+
+    if(rate === "" || Number(rate) < 0){
+
+        showMessage(
+            "PLEASE ENTER VALID SELLING RATE",
+            false
+        );
+
+        document
+        .getElementById("itemRate")
+        .focus();
+
+        return;
+    }
+
+
+    const item = {
+
+        name:name,
+
+        unit:unit,
+
+        rate:Number(rate),
+
+        purchaseRate:
+            purchaseRate === ""
+            ? 0
+            : Number(purchaseRate)
+
+    };
+
+
+    if(editIndex === -1){
+
+        items.push(item);
+
+        showMessage(
+            "ITEM SAVED SUCCESSFULLY",
+            true
+        );
+
+    }else{
+
+        items[editIndex] =
+            item;
+
+        showMessage(
+            "ITEM UPDATED SUCCESSFULLY",
+            true
+        );
+
+        editIndex = -1;
+    }
+
+
+    localStorage.setItem(
+        "items",
+        JSON.stringify(items)
+    );
+
+
+    showItems();
+
+    clearInputsOnly();
+
+}
+
+
+/* =========================================================
+   SHOW ITEMS
+========================================================= */
+
+function showItems(){
+
+    const table =
+        document.getElementById(
+            "itemTable"
+        );
+
+    const search =
+        document
+        .getElementById("searchItem")
+        .value
+        .trim()
+        .toUpperCase();
+
+
+    table.innerHTML = "";
+
+
+    const filtered =
+        items.filter(item => {
+
+            return (
+                item.name
+                .toUpperCase()
+                .includes(search)
+                ||
+                item.unit
+                .toUpperCase()
+                .includes(search)
+            );
+
+        });
+
+
+    filtered.forEach(
+        (item,index) => {
+
+            const realIndex =
+                items.indexOf(item);
+
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    ${item.name}
+                </td>
+
+                <td>
+                    ${item.unit}
+                </td>
+
+                <td>
+                    ₹${Number(item.rate).toFixed(2)}
+                </td>
+
+                <td>
+                    ₹${Number(item.purchaseRate).toFixed(2)}
+                </td>
+
+                <td>
+
+                    <button
+                        class="action-btn edit-btn"
+                        onclick="editItem(${realIndex})">
+
+                        EDIT
+
+                    </button>
+
+                    <button
+                        class="action-btn delete-btn"
+                        onclick="deleteItem(${realIndex})">
+
+                        DELETE
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   EDIT ITEM
+========================================================= */
+
+function editItem(index){
+
+    const item =
+        items[index];
+
+
+    document
+    .getElementById("itemName")
+    .value =
+        item.name;
+
+
+    document
+    .getElementById("itemUnit")
+    .value =
+        item.unit;
+
+
+    document
+    .getElementById("itemRate")
+    .value =
+        item.rate;
+
+
+    document
+    .getElementById("purchaseRate")
+    .value =
+        item.purchaseRate;
+
+
+    editIndex = index;
+
+
+    showMessage(
+        "EDITING ITEM",
+        true
+    );
+
+
+    document
+    .getElementById("itemName")
+    .focus();
+
+}
+
+
+/* =========================================================
+   DELETE ITEM
+========================================================= */
+
+function deleteItem(index){
+
+    const ok =
+        confirm(
+            "DO YOU WANT TO DELETE THIS ITEM?"
+        );
+
+    if(!ok){
+
+        return;
+    }
+
+
+    items.splice(index,1);
+
+
+    localStorage.setItem(
+        "items",
+        JSON.stringify(items)
+    );
+
+
+    showItems();
+
+
+    showMessage(
+        "ITEM DELETED SUCCESSFULLY",
+        true
+    );
+
+}
+
+
+/* =========================================================
+   CLEAR
+========================================================= */
+
+function clearForm(){
+
+    clearInputsOnly();
+
+    editIndex = -1;
+
+    document
+    .getElementById("message")
+    .innerHTML = "";
+
+}
+
+
+function clearInputsOnly(){
+
+    document
+    .getElementById("itemName")
+    .value = "";
+
+    document
+    .getElementById("itemUnit")
+    .value = "";
+
+    document
+    .getElementById("itemRate")
+    .value = "";
+
+    document
+    .getElementById("purchaseRate")
+    .value = "";
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+function showMessage(text,success){
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+    message.innerText =
+        text;
+
+    message.className =
+        success
+        ? "message success"
+        : "message error";
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function goDashboard(){
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+
+/* =========================================================
+   ENTER KEY NAVIGATION
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key !== "Enter"){
+
+            return;
+        }
+
+
+        const fields = [
+
+            document.getElementById(
+                "itemName"
+            ),
+
+            document.getElementById(
+                "itemUnit"
+            ),
+
+            document.getElementById(
+                "itemRate"
+            ),
+
+            document.getElementById(
+                "purchaseRate"
+            )
+
+        ];
+
+
+        const current =
+            document.activeElement;
+
+        const index =
+            fields.indexOf(current);
+
+
+        if(index === -1){
+
+            return;
+        }
+
+
+        event.preventDefault();
+
+
+        if(index < fields.length - 1){
+
+            fields[index + 1].focus();
+
+        }else{
+
+            saveItem();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+showItems();
+
+</script>
+
+
+</body>
+</html>

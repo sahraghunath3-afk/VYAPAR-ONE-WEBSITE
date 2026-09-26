@@ -1,0 +1,3125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>VYAPAR ONE - CUSTOMER LEDGER</title>
+
+<style>
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            #123c59 0%,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 90% 90%,
+            #075b55 0%,
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #031321,
+            #061f36 50%,
+            #052d35
+        );
+
+    min-height:100vh;
+
+    color:#ffffff;
+
+    overflow-x:hidden;
+}
+
+
+/* =====================================================
+   TOP BAR
+===================================================== */
+
+.topbar{
+
+    width:100%;
+
+    min-height:76px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:14px 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #041827,
+            #063b4c
+        );
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.12);
+
+    box-shadow:
+        0 8px 30px
+        rgba(0,0,0,0.30);
+}
+
+.logo{
+
+    width:48px;
+    height:48px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00a6a6,
+            #00d4c7
+        );
+
+    color:#ffffff;
+
+    font-size:25px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,220,210,0.30);
+}
+
+.title-area{
+    flex:1;
+}
+
+.title-area h1{
+
+    font-size:23px;
+
+    font-weight:900;
+
+    letter-spacing:0.5px;
+}
+
+.title-area p{
+
+    margin-top:4px;
+
+    font-size:12px;
+
+    color:#9ed8df;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+}
+
+.dashboard-btn,
+.print-btn{
+
+    border:none;
+
+    padding:12px 18px;
+
+    border-radius:10px;
+
+    color:#ffffff;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:0.2s;
+}
+
+.dashboard-btn{
+
+    background:
+        linear-gradient(
+            135deg,
+            #087f8c,
+            #0aa6a6
+        );
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,180,190,0.25);
+}
+
+.print-btn{
+
+    background:
+        linear-gradient(
+            135deg,
+            #0a8f73,
+            #00b894
+        );
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,200,150,0.25);
+}
+
+.dashboard-btn:hover,
+.print-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,220,210,0.35);
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.container{
+
+    width:100%;
+
+    max-width:1500px;
+
+    margin:auto;
+
+    padding:25px;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.card{
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7,29,53,0.97),
+            rgba(8,45,70,0.97)
+        );
+
+    border:
+        1px solid
+        #164d73;
+
+    border-radius:16px;
+
+    padding:22px;
+
+    margin-bottom:22px;
+
+    box-shadow:
+        0 12px 35px
+        rgba(0,0,0,0.30);
+}
+
+.card-title{
+
+    font-size:18px;
+
+    font-weight:900;
+
+    color:#ffffff;
+
+    margin-bottom:18px;
+
+    letter-spacing:0.4px;
+}
+
+
+/* =====================================================
+   SEARCH AREA
+===================================================== */
+
+.search-row{
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1fr)
+        minmax(280px,1fr)
+        auto;
+
+    gap:16px;
+
+    align-items:end;
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:7px;
+}
+
+.form-group label{
+
+    font-size:13px;
+
+    font-weight:900;
+
+    color:#a9e2e7;
+
+    letter-spacing:0.7px;
+}
+
+input,
+select{
+
+    width:100%;
+
+    height:46px;
+
+    padding:0 14px;
+
+    border-radius:9px;
+
+    border:
+        1px solid
+        #236080;
+
+    outline:none;
+
+    background:#061b2e;
+
+    color:#ffffff;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    transition:0.2s;
+}
+
+input::placeholder{
+
+    color:#6f9aa9;
+
+    text-transform:uppercase;
+}
+
+input:focus,
+select:focus{
+
+    border-color:#00b7b7;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(0,190,190,0.12);
+}
+
+select option{
+
+    background:#061b2e;
+
+    color:#ffffff;
+}
+
+
+/* =====================================================
+   SUMMARY
+===================================================== */
+
+.summary-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:15px;
+
+    margin-top:20px;
+}
+
+.summary-box{
+
+    min-height:100px;
+
+    padding:17px;
+
+    border-radius:13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #071d35,
+            #0b2d4d
+        );
+
+    border:
+        1px solid
+        #164d73;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,0.22);
+}
+
+.summary-label{
+
+    color:#91cfd7;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    letter-spacing:0.8px;
+
+    margin-bottom:10px;
+}
+
+.summary-value{
+
+    font-size:22px;
+
+    font-weight:900;
+
+    color:#ffffff;
+}
+
+.summary-box.closing{
+
+    border-color:#087f8c;
+
+    background:
+        linear-gradient(
+            145deg,
+            #063c4c,
+            #075b55
+        );
+}
+
+
+/* =====================================================
+   TABLE WRAPPER
+===================================================== */
+
+.table-wrapper{
+
+    width:100%;
+
+    overflow-x:auto;
+
+    overflow-y:hidden;
+
+    border-radius:12px;
+
+    border:
+        1px solid
+        #164d73;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+table{
+
+    width:100%;
+
+    min-width:1100px;
+
+    border-collapse:collapse;
+
+    table-layout:fixed;
+}
+
+thead{
+
+    background:
+        linear-gradient(
+            135deg,
+            #087f8c,
+            #075b6a
+        );
+}
+
+th,
+td{
+
+    padding:12px;
+
+    text-align:left;
+
+    vertical-align:middle;
+
+    white-space:nowrap;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,0.08);
+}
+
+th{
+
+    color:#ffffff;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    letter-spacing:0.5px;
+}
+
+td{
+
+    color:#e7f7f8;
+
+    font-size:13px;
+
+    font-weight:700;
+}
+
+tbody tr{
+
+    background:
+        rgba(5,27,46,0.80);
+
+    transition:0.15s;
+}
+
+tbody tr:nth-child(even){
+
+    background:
+        rgba(8,39,61,0.85);
+}
+
+tbody tr:hover{
+
+    background:
+        rgba(8,91,99,0.35);
+}
+
+
+/* =====================================================
+   COLUMN ALIGNMENT
+===================================================== */
+
+th:nth-child(1),
+td:nth-child(1){
+
+    width:50px;
+
+    text-align:center;
+}
+
+th:nth-child(2),
+td:nth-child(2){
+
+    width:120px;
+
+    text-align:left;
+}
+
+th:nth-child(3),
+td:nth-child(3){
+
+    width:110px;
+
+    text-align:left;
+}
+
+th:nth-child(4),
+td:nth-child(4){
+
+    width:140px;
+
+    text-align:left;
+}
+
+th:nth-child(5),
+td:nth-child(5){
+
+    width:200px;
+
+    text-align:left;
+}
+
+th:nth-child(6),
+td:nth-child(6),
+th:nth-child(7),
+td:nth-child(7),
+th:nth-child(8),
+td:nth-child(8){
+
+    width:130px;
+
+    text-align:right;
+}
+
+
+/* =====================================================
+   EMPTY MESSAGE
+===================================================== */
+
+.empty-row{
+
+    text-align:center !important;
+
+    padding:28px !important;
+
+    color:#7da6b3 !important;
+
+    font-size:14px !important;
+}
+
+
+/* =====================================================
+   PRINT AREA
+===================================================== */
+
+.print-report{
+
+    display:none;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:1000px){
+
+    .search-row{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .print-btn{
+
+        grid-column:1 / -1;
+
+        width:100%;
+    }
+
+    .summary-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:600px){
+
+    .topbar{
+
+        padding:12px;
+
+        gap:10px;
+
+        flex-wrap:wrap;
+    }
+
+    .logo{
+
+        width:42px;
+        height:42px;
+
+        font-size:21px;
+    }
+
+    .title-area h1{
+
+        font-size:17px;
+    }
+
+    .title-area p{
+
+        font-size:9px;
+    }
+
+    .dashboard-btn{
+
+        padding:10px 12px;
+
+        font-size:11px;
+    }
+
+    .container{
+
+        padding:14px;
+    }
+
+    .card{
+
+        padding:15px;
+
+        border-radius:13px;
+    }
+
+    .search-row{
+
+        grid-template-columns:1fr;
+    }
+
+    .print-btn{
+
+        grid-column:auto;
+    }
+
+    .summary-grid{
+
+        grid-template-columns:
+            1fr 1fr;
+
+        gap:10px;
+    }
+
+    .summary-box{
+
+        min-height:85px;
+
+        padding:13px;
+    }
+
+    .summary-label{
+
+        font-size:10px;
+    }
+
+    .summary-value{
+
+        font-size:17px;
+    }
+
+}
+
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+
+.table-wrapper::-webkit-scrollbar{
+
+    height:8px;
+}
+
+.table-wrapper::-webkit-scrollbar-track{
+
+    background:#061b2e;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb{
+
+    background:#087f8c;
+
+    border-radius:10px;
+}
+
+
+/* =====================================================
+   PRINT CSS
+===================================================== */
+
+@page{
+
+    size:A4 landscape;
+
+    margin:8mm;
+}
+
+
+@media print{
+
+    html,
+    body{
+
+        background:#ffffff !important;
+
+        color:#111111 !important;
+
+        min-height:auto !important;
+
+        overflow:visible !important;
+    }
+
+
+    body *{
+
+        visibility:hidden !important;
+    }
+
+
+    .print-report,
+    .print-report *{
+
+        visibility:visible !important;
+    }
+
+
+    .print-report{
+
+        display:block !important;
+
+        position:absolute;
+
+        left:0;
+
+        top:0;
+
+        width:100%;
+
+        background:#ffffff !important;
+
+        color:#111111 !important;
+
+        font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
+
+        font-size:10px;
+    }
+
+
+    .print-header{
+
+        width:100%;
+
+        border:1.5px solid #3c626d;
+
+        padding:10px 12px;
+
+        margin-bottom:8px;
+
+        text-align:center;
+
+        page-break-inside:avoid;
+
+        break-inside:avoid;
+    }
+
+
+    .print-business-name{
+
+        font-size:21px;
+
+        font-weight:900;
+
+        color:#073b58;
+
+        text-transform:uppercase;
+    }
+
+
+    .print-owner{
+
+        margin-top:2px;
+
+        font-size:11px;
+
+        font-weight:800;
+
+        color:#315968;
+
+        text-transform:uppercase;
+    }
+
+
+    .print-business-details{
+
+        margin-top:5px;
+
+        display:flex;
+
+        justify-content:center;
+
+        flex-wrap:wrap;
+
+        gap:4px 18px;
+
+        font-size:9.5px;
+
+        font-weight:700;
+
+        color:#274b58;
+    }
+
+
+    .print-title{
+
+        margin-top:7px;
+
+        padding-top:6px;
+
+        border-top:1px solid #91aab1;
+
+        font-size:16px;
+
+        font-weight:900;
+
+        color:#075d68;
+
+        letter-spacing:1px;
+    }
+
+
+    .print-customer-box{
+
+        width:100%;
+
+        display:grid;
+
+        grid-template-columns:
+            1fr 1fr;
+
+        border:1px solid #6c8e97;
+
+        margin-bottom:8px;
+
+        page-break-inside:avoid;
+
+        break-inside:avoid;
+    }
+
+
+    .print-info-cell{
+
+        padding:6px 9px;
+
+        border-right:1px solid #91aab1;
+
+        border-bottom:1px solid #91aab1;
+
+        font-size:10px;
+
+        font-weight:700;
+
+        color:#173b4d;
+    }
+
+
+    .print-info-cell:nth-child(2n){
+
+        border-right:none;
+    }
+
+
+    .print-info-cell:nth-last-child(-n+2){
+
+        border-bottom:none;
+    }
+
+
+    .print-info-label{
+
+        display:inline-block;
+
+        min-width:105px;
+
+        font-weight:900;
+
+        color:#075d68;
+    }
+
+
+    .print-main-box{
+
+        width:100%;
+
+        border:1.5px solid #3c626d;
+
+        margin:0;
+
+        padding:0;
+
+        page-break-inside:auto;
+
+        break-inside:auto;
+    }
+
+
+    .print-table{
+
+        width:100%;
+
+        margin:0;
+
+        border-collapse:collapse;
+
+        table-layout:fixed;
+
+        page-break-inside:auto;
+    }
+
+
+    .print-table thead{
+
+        display:table-header-group;
+
+        background:#dceff2 !important;
+    }
+
+
+    .print-table tr{
+
+        page-break-inside:avoid;
+
+        break-inside:avoid;
+    }
+
+
+    .print-table th{
+
+        background:#dceff2 !important;
+
+        color:#073b58 !important;
+
+        border:1px solid #6c8e97;
+
+        padding:6px 5px;
+
+        font-size:9.5px;
+
+        font-weight:900;
+
+        text-align:center;
+
+        white-space:nowrap;
+    }
+
+
+    .print-table td{
+
+        border:1px solid #91aab1;
+
+        padding:5px 6px;
+
+        font-size:9.5px;
+
+        font-weight:700;
+
+        color:#142d3b !important;
+
+        background:#ffffff !important;
+
+        white-space:normal;
+
+        overflow-wrap:anywhere;
+
+        word-break:break-word;
+
+        vertical-align:top;
+
+        line-height:1.25;
+    }
+
+
+    .print-table th:nth-child(1),
+    .print-table td:nth-child(1){
+
+        width:5%;
+        text-align:center;
+    }
+
+
+    .print-table th:nth-child(2),
+    .print-table td:nth-child(2){
+
+        width:11%;
+    }
+
+
+    .print-table th:nth-child(3),
+    .print-table td:nth-child(3){
+
+        width:11%;
+    }
+
+
+    .print-table th:nth-child(4),
+    .print-table td:nth-child(4){
+
+        width:13%;
+    }
+
+
+    .print-table th:nth-child(5),
+    .print-table td:nth-child(5){
+
+        width:25%;
+    }
+
+
+    .print-table th:nth-child(6),
+    .print-table td:nth-child(6),
+    .print-table th:nth-child(7),
+    .print-table td:nth-child(7),
+    .print-table th:nth-child(8),
+    .print-table td:nth-child(8){
+
+        width:11.666%;
+
+        text-align:right;
+    }
+
+
+    .print-summary{
+
+        width:42%;
+
+        margin-left:auto;
+
+        margin-top:0;
+
+        margin-bottom:0;
+
+        border-left:1px solid #91aab1;
+
+        border-right:1px solid #91aab1;
+
+        border-bottom:1px solid #91aab1;
+
+        page-break-inside:avoid;
+
+        break-inside:avoid;
+    }
+
+
+    .summary-row{
+
+        display:grid;
+
+        grid-template-columns:
+            1fr 110px;
+
+        min-height:26px;
+
+        border-bottom:1px solid #91aab1;
+    }
+
+
+    .summary-row:last-child{
+
+        border-bottom:none;
+    }
+
+
+    .summary-label{
+
+        padding:5px 9px;
+
+        font-size:10px;
+
+        font-weight:900;
+
+        color:#173b4d;
+    }
+
+
+    .summary-value{
+
+        padding:5px 9px;
+
+        border-left:1px solid #91aab1;
+
+        text-align:right;
+
+        font-size:11px;
+
+        font-weight:900;
+
+        color:#173b4d;
+    }
+
+
+    .closing-row{
+
+        background:#e1f2f3 !important;
+    }
+
+
+    .closing-row .summary-label,
+    .closing-row .summary-value{
+
+        color:#075d68;
+
+        font-size:12px;
+
+        font-weight:900;
+    }
+
+
+    .print-footer{
+
+        margin-top:8px;
+
+        display:flex;
+
+        justify-content:space-between;
+
+        align-items:flex-end;
+
+        font-size:9px;
+
+        color:#526d76;
+
+        page-break-inside:avoid;
+
+        break-inside:avoid;
+    }
+
+
+    .print-signature{
+
+        text-align:center;
+
+        min-width:150px;
+
+        padding-top:25px;
+    }
+
+
+    .print-signature-line{
+
+        border-top:1px solid #526d76;
+
+        padding-top:4px;
+
+        font-weight:800;
+
+        color:#274b58;
+    }
+
+}
+
+
+/* =====================================================
+   PRINT COLOR
+===================================================== */
+
+@media print{
+
+    *{
+
+        -webkit-print-color-adjust:exact !important;
+
+        print-color-adjust:exact !important;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOP BAR
+===================================================== -->
+
+<div class="topbar">
+
+    <div class="logo">
+        V
+    </div>
+
+    <div class="title-area">
+
+        <h1>
+            CUSTOMER LEDGER
+        </h1>
+
+        <p>
+            VYAPAR ONE BILLING SOFTWARE
+        </p>
+
+    </div>
+
+
+    <button
+        class="print-btn"
+        onclick="printLedger()"
+    >
+        🖨️ PRINT LEDGER
+    </button>
+
+
+    <button
+        class="dashboard-btn"
+        onclick="goDashboard()"
+    >
+        DASHBOARD
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<div class="container">
+
+
+    <!-- =================================================
+         CUSTOMER SELECTION
+    ================================================== -->
+
+    <div class="card">
+
+        <div class="card-title">
+            CUSTOMER LEDGER
+        </div>
+
+
+        <div class="search-row">
+
+
+            <div class="form-group">
+
+                <label>
+                    SEARCH CUSTOMER
+                </label>
+
+                <input
+                    type="text"
+                    id="ledgerSearch"
+                    placeholder="SEARCH CUSTOMER"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    SELECT CUSTOMER
+                </label>
+
+                <select id="ledgerCustomer">
+
+                    <option value="">
+                        SELECT CUSTOMER
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                class="print-btn"
+                type="button"
+                onclick="printLedger()"
+            >
+                🖨️ PRINT LEDGER
+            </button>
+
+
+        </div>
+
+
+        <!-- =============================================
+             SUMMARY
+        ============================================== -->
+
+        <div class="summary-grid">
+
+
+            <div class="summary-box">
+
+                <div class="summary-label">
+                    INVOICE TOTAL
+                </div>
+
+                <div
+                    class="summary-value"
+                    id="ledgerInvoiceTotal"
+                >
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <div class="summary-label">
+                    PAYMENT TOTAL
+                </div>
+
+                <div
+                    class="summary-value"
+                    id="ledgerPaymentTotal"
+                >
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <div class="summary-label">
+                    DISCOUNT TOTAL
+                </div>
+
+                <div
+                    class="summary-value"
+                    id="ledgerDiscountTotal"
+                >
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <div class="summary-box closing">
+
+                <div class="summary-label">
+                    CLOSING BALANCE
+                </div>
+
+                <div
+                    class="summary-value"
+                    id="ledgerClosingBalance"
+                >
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         LEDGER TABLE
+    ================================================== -->
+
+    <div class="card">
+
+        <div class="card-title">
+            TRANSACTION DETAILS
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>DATE</th>
+
+                        <th>TYPE</th>
+
+                        <th>REFERENCE</th>
+
+                        <th>DESCRIPTION</th>
+
+                        <th>DEBIT</th>
+
+                        <th>CREDIT</th>
+
+                        <th>BALANCE</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="ledgerBody">
+
+                    <tr>
+
+                        <td
+                            colspan="8"
+                            class="empty-row"
+                        >
+                            SELECT CUSTOMER TO VIEW LEDGER
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     PRINT REPORT
+===================================================== -->
+
+<div
+    class="print-report"
+    id="printReport"
+>
+
+
+    <!-- BUSINESS HEADER -->
+
+    <div class="print-header">
+
+        <div
+            class="print-business-name"
+            id="printBusinessName"
+        >
+            VYAPAR ONE
+        </div>
+
+
+        <div
+            class="print-owner"
+            id="printOwnerName"
+        >
+            OWNER NAME
+        </div>
+
+
+        <div class="print-business-details">
+
+            <span>
+                ADDRESS:
+                <span id="printBusinessAddress">
+                    -
+                </span>
+            </span>
+
+            <span>
+                MOBILE:
+                <span id="printBusinessMobile">
+                    -
+                </span>
+            </span>
+
+            <span>
+                GSTIN:
+                <span id="printBusinessGST">
+                    -
+                </span>
+            </span>
+
+        </div>
+
+
+        <div class="print-title">
+            CUSTOMER LEDGER
+        </div>
+
+    </div>
+
+
+
+    <!-- CUSTOMER INFORMATION -->
+
+    <div class="print-customer-box">
+
+
+        <div class="print-info-cell">
+
+            <span class="print-info-label">
+                CUSTOMER NAME
+            </span>
+
+            <span id="printCustomerName">
+                -
+            </span>
+
+        </div>
+
+
+        <div class="print-info-cell">
+
+            <span class="print-info-label">
+                REPORT DATE
+            </span>
+
+            <span id="printReportDate">
+                -
+            </span>
+
+        </div>
+
+
+        <div class="print-info-cell">
+
+            <span class="print-info-label">
+                CUSTOMER MOBILE
+            </span>
+
+            <span id="printCustomerMobile">
+                -
+            </span>
+
+        </div>
+
+
+        <div class="print-info-cell">
+
+            <span class="print-info-label">
+                CUSTOMER ADDRESS
+            </span>
+
+            <span id="printCustomerAddress">
+                -
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- MAIN TABLE + SUMMARY -->
+
+    <div class="print-main-box">
+
+
+        <table class="print-table">
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+
+                    <th>DATE</th>
+
+                    <th>TYPE</th>
+
+                    <th>REFERENCE</th>
+
+                    <th>DESCRIPTION</th>
+
+                    <th>DEBIT</th>
+
+                    <th>CREDIT</th>
+
+                    <th>BALANCE</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="printLedgerBody">
+
+            </tbody>
+
+        </table>
+
+
+
+        <!-- PRINT SUMMARY -->
+
+        <div class="print-summary">
+
+
+            <div class="summary-row">
+
+                <div class="summary-label">
+                    TOTAL INVOICE
+                </div>
+
+                <div
+                    class="summary-value"
+                    id="printInvoiceTotal"
+                >
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <div class="summary-label">
+                    TOTAL PAYMENT
+                </div>
+
+                <div
+                    class="summary-value"
+                    id="printPaymentTotal"
+                >
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <div class="summary-label">
+                    TOTAL DISCOUNT
+                </div>
+
+                <div
+                    class="summary-value"
+                    id="printDiscountTotal"
+                >
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <div class="summary-row closing-row">
+
+                <div class="summary-label">
+                    CLOSING BALANCE
+                </div>
+
+                <div
+                    class="summary-value"
+                    id="printClosingBalance"
+                >
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <div class="print-footer">
+
+
+        <div>
+
+            Generated by
+            <strong>VYAPAR ONE</strong>
+
+        </div>
+
+
+        <div class="print-signature">
+
+            <div class="print-signature-line">
+                AUTHORIZED SIGNATURE
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   LOCAL STORAGE DATA
+===================================================== */
+
+let customers =
+    JSON.parse(
+        localStorage.getItem("customers")
+    ) || [];
+
+
+let invoices =
+    JSON.parse(
+        localStorage.getItem("invoices")
+    ) || [];
+
+
+let payments =
+    JSON.parse(
+        localStorage.getItem("payments")
+    ) || [];
+
+
+/* =====================================================
+   NORMALIZE NAME
+===================================================== */
+
+function normalizeName(name){
+
+    return String(name || "")
+        .trim()
+        .toUpperCase();
+
+}
+
+
+/* =====================================================
+   DATE FORMAT
+===================================================== */
+
+function formatDate(dateValue){
+
+    if(!dateValue){
+
+        return "";
+    }
+
+
+    const dateString =
+        String(dateValue)
+        .trim();
+
+
+    if(
+        /^\d{2}-\d{2}-\d{4}$/
+        .test(dateString)
+    ){
+
+        return dateString;
+    }
+
+
+    const parts =
+        dateString.split("-");
+
+
+    if(
+        parts.length === 3 &&
+        parts[0].length === 4
+    ){
+
+        return (
+            parts[2] +
+            "-" +
+            parts[1] +
+            "-" +
+            parts[0]
+        );
+
+    }
+
+
+    if(dateString.includes("T")){
+
+        const onlyDate =
+            dateString.split("T")[0];
+
+        const dateParts =
+            onlyDate.split("-");
+
+
+        if(
+            dateParts.length === 3 &&
+            dateParts[0].length === 4
+        ){
+
+            return (
+                dateParts[2] +
+                "-" +
+                dateParts[1] +
+                "-" +
+                dateParts[0]
+            );
+
+        }
+
+    }
+
+
+    return dateString;
+
+}
+
+
+/* =====================================================
+   LOAD CUSTOMERS
+===================================================== */
+
+function loadLedgerCustomers(){
+
+    const select =
+        document.getElementById(
+            "ledgerCustomer"
+        );
+
+
+    select.innerHTML =
+        `
+        <option value="">
+            SELECT CUSTOMER
+        </option>
+        `;
+
+
+    customers.forEach(
+        function(customer,index){
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                index;
+
+
+            option.textContent =
+                customer.name || "";
+
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   GET INVOICE CUSTOMER
+===================================================== */
+
+function getInvoiceCustomer(invoice){
+
+    if(!invoice){
+
+        return "";
+    }
+
+
+    if(
+        typeof invoice.customer ===
+        "object"
+    ){
+
+        return (
+            invoice.customer.name ||
+            ""
+        );
+
+    }
+
+
+    return invoice.customer || "";
+
+}
+
+
+/* =====================================================
+   GET INVOICE TOTAL
+===================================================== */
+
+function getInvoiceTotal(invoice){
+
+    if(!invoice){
+
+        return 0;
+    }
+
+
+    let total =
+        Number(invoice.total);
+
+
+    if(
+        !isNaN(total) &&
+        total > 0
+    ){
+
+        return total;
+    }
+
+
+    if(
+        Array.isArray(invoice.items)
+    ){
+
+        total =
+            invoice.items.reduce(
+                function(sum,item){
+
+                    return (
+                        sum +
+                        (
+                            Number(
+                                item.amount
+                            ) || 0
+                        )
+                    );
+
+                },
+                0
+            );
+
+    }
+
+
+    return total || 0;
+
+}
+
+
+/* =====================================================
+   GET PAYMENT CUSTOMER
+===================================================== */
+
+function getPaymentCustomer(payment){
+
+    if(!payment){
+
+        return "";
+    }
+
+
+    if(
+        typeof payment.customer ===
+        "object"
+    ){
+
+        return (
+            payment.customer.name ||
+            ""
+        );
+
+    }
+
+
+    return payment.customer || "";
+
+}
+
+
+/* =====================================================
+   GET SELECTED CUSTOMER
+===================================================== */
+
+function getSelectedCustomer(){
+
+    const select =
+        document.getElementById(
+            "ledgerCustomer"
+        );
+
+
+    const index =
+        select.value;
+
+
+    if(
+        index === "" ||
+        index === null ||
+        index === undefined
+    ){
+
+        return null;
+    }
+
+
+    return customers[
+        Number(index)
+    ] || null;
+
+}
+
+
+/* =====================================================
+   BUILD TRANSACTIONS
+===================================================== */
+
+function getCustomerTransactions(customer){
+
+    if(!customer){
+
+        return [];
+    }
+
+
+    const customerName =
+        normalizeName(
+            customer.name
+        );
+
+
+    let transactions = [];
+
+
+    /* =============================================
+       INVOICES
+    ============================================== */
+
+    invoices.forEach(
+        function(invoice){
+
+            const invoiceCustomer =
+                normalizeName(
+                    getInvoiceCustomer(
+                        invoice
+                    )
+                );
+
+
+            if(
+                invoiceCustomer ===
+                customerName
+            ){
+
+                const total =
+                    getInvoiceTotal(
+                        invoice
+                    );
+
+
+                transactions.push({
+
+                    date:
+                        formatDate(
+                            invoice.date ||
+                            invoice.invoiceDate ||
+                            ""
+                        ),
+
+                    sortDate:
+                        invoice.date ||
+                        invoice.invoiceDate ||
+                        "",
+
+                    type:
+                        "INVOICE",
+
+                    reference:
+                        invoice.number ||
+                        invoice.invoiceNumber ||
+                        "",
+
+                    description:
+                        "INVOICE",
+
+                    debit:
+                        total,
+
+                    credit:
+                        0
+
+                });
+
+            }
+
+        }
+    );
+
+
+    /* =============================================
+       PAYMENTS
+    ============================================== */
+
+    payments.forEach(
+        function(payment){
+
+            const paymentCustomer =
+                normalizeName(
+                    getPaymentCustomer(
+                        payment
+                    )
+                );
+
+
+            if(
+                paymentCustomer ===
+                customerName
+            ){
+
+                const paymentNumber =
+                    payment.paymentNumber ||
+                    payment.number ||
+                    "";
+
+
+                const paymentAmount =
+                    Number(
+                        payment.amount
+                    ) || 0;
+
+
+                const discountAmount =
+                    Number(
+                        payment.discount
+                    ) || 0;
+
+
+                if(paymentAmount > 0){
+
+                    transactions.push({
+
+                        date:
+                            formatDate(
+                                payment.date ||
+                                ""
+                            ),
+
+                        sortDate:
+                            payment.date ||
+                            "",
+
+                        type:
+                            "PAYMENT",
+
+                        reference:
+                            paymentNumber,
+
+                        description:
+                            "PAYMENT - " +
+                            (
+                                payment.mode ||
+                                ""
+                            ),
+
+                        debit:
+                            0,
+
+                        credit:
+                            paymentAmount
+
+                    });
+
+                }
+
+
+                if(discountAmount > 0){
+
+                    transactions.push({
+
+                        date:
+                            formatDate(
+                                payment.date ||
+                                ""
+                            ),
+
+                        sortDate:
+                            payment.date ||
+                            "",
+
+                        type:
+                            "DISCOUNT",
+
+                        reference:
+                            paymentNumber,
+
+                        description:
+                            "PAYMENT DISCOUNT",
+
+                        debit:
+                            0,
+
+                        credit:
+                            discountAmount
+
+                    });
+
+                }
+
+            }
+
+        }
+    );
+
+
+    /* =============================================
+       SORT BY DATE
+    ============================================== */
+
+    transactions.sort(
+        function(a,b){
+
+            const dateA =
+                String(
+                    a.sortDate || ""
+                );
+
+            const dateB =
+                String(
+                    b.sortDate || ""
+                );
+
+
+            return dateA.localeCompare(
+                dateB
+            );
+
+        }
+    );
+
+
+    return transactions;
+
+}
+
+
+/* =====================================================
+   SHOW LEDGER
+===================================================== */
+
+function showLedger(customerIndex){
+
+    const tbody =
+        document.getElementById(
+            "ledgerBody"
+        );
+
+
+    if(
+        customerIndex === "" ||
+        customerIndex === null ||
+        customerIndex === undefined
+    ){
+
+        resetLedger();
+
+        return;
+    }
+
+
+    const customer =
+        customers[
+            Number(customerIndex)
+        ];
+
+
+    if(!customer){
+
+        resetLedger();
+
+        return;
+    }
+
+
+    const transactions =
+        getCustomerTransactions(
+            customer
+        );
+
+
+    let invoiceTotal = 0;
+
+    let paymentTotal = 0;
+
+    let discountTotal = 0;
+
+
+    transactions.forEach(
+        function(transaction){
+
+            invoiceTotal +=
+                Number(
+                    transaction.debit
+                ) || 0;
+
+
+            if(
+                transaction.type ===
+                "PAYMENT"
+            ){
+
+                paymentTotal +=
+                    Number(
+                        transaction.credit
+                    ) || 0;
+
+            }
+
+
+            if(
+                transaction.type ===
+                "DISCOUNT"
+            ){
+
+                discountTotal +=
+                    Number(
+                        transaction.credit
+                    ) || 0;
+
+            }
+
+        }
+    );
+
+
+    const closingBalance =
+        invoiceTotal -
+        paymentTotal -
+        discountTotal;
+
+
+    document.getElementById(
+        "ledgerInvoiceTotal"
+    ).textContent =
+        "₹" +
+        invoiceTotal.toFixed(2);
+
+
+    document.getElementById(
+        "ledgerPaymentTotal"
+    ).textContent =
+        "₹" +
+        paymentTotal.toFixed(2);
+
+
+    document.getElementById(
+        "ledgerDiscountTotal"
+    ).textContent =
+        "₹" +
+        discountTotal.toFixed(2);
+
+
+    document.getElementById(
+        "ledgerClosingBalance"
+    ).textContent =
+        "₹" +
+        closingBalance.toFixed(2);
+
+
+    tbody.innerHTML = "";
+
+
+    if(transactions.length === 0){
+
+        tbody.innerHTML =
+            `
+            <tr>
+
+                <td
+                    colspan="8"
+                    class="empty-row"
+                >
+                    NO TRANSACTION FOUND
+                </td>
+
+            </tr>
+            `;
+
+        return;
+    }
+
+
+    let runningBalance = 0;
+
+
+    transactions.forEach(
+        function(transaction,index){
+
+            runningBalance +=
+                (
+                    Number(
+                        transaction.debit
+                    ) || 0
+                ) -
+                (
+                    Number(
+                        transaction.credit
+                    ) || 0
+                );
+
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+
+            const debit =
+                Number(
+                    transaction.debit
+                ) || 0;
+
+
+            const credit =
+                Number(
+                    transaction.credit
+                ) || 0;
+
+
+            tr.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    ${transaction.date || ""}
+                </td>
+
+                <td>
+                    ${transaction.type || ""}
+                </td>
+
+                <td>
+                    ${transaction.reference || ""}
+                </td>
+
+                <td>
+                    ${transaction.description || ""}
+                </td>
+
+                <td>
+                    ${
+                        debit > 0
+                        ? "₹" + debit.toFixed(2)
+                        : "-"
+                    }
+                </td>
+
+                <td>
+                    ${
+                        credit > 0
+                        ? "₹" + credit.toFixed(2)
+                        : "-"
+                    }
+                </td>
+
+                <td>
+                    ₹${runningBalance.toFixed(2)}
+                </td>
+
+            `;
+
+
+            tbody.appendChild(
+                tr
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   RESET LEDGER
+===================================================== */
+
+function resetLedger(){
+
+    document.getElementById(
+        "ledgerInvoiceTotal"
+    ).textContent =
+        "₹0.00";
+
+
+    document.getElementById(
+        "ledgerPaymentTotal"
+    ).textContent =
+        "₹0.00";
+
+
+    document.getElementById(
+        "ledgerDiscountTotal"
+    ).textContent =
+        "₹0.00";
+
+
+    document.getElementById(
+        "ledgerClosingBalance"
+    ).textContent =
+        "₹0.00";
+
+
+    document.getElementById(
+        "ledgerBody"
+    ).innerHTML =
+        `
+        <tr>
+
+            <td
+                colspan="8"
+                class="empty-row"
+            >
+                SELECT CUSTOMER TO VIEW LEDGER
+            </td>
+
+        </tr>
+        `;
+
+}
+
+
+/* =====================================================
+   CUSTOMER SEARCH
+===================================================== */
+
+document
+.getElementById("ledgerSearch")
+.addEventListener(
+    "input",
+    function(){
+
+        const search =
+            normalizeName(
+                this.value
+            );
+
+
+        const select =
+            document.getElementById(
+                "ledgerCustomer"
+            );
+
+
+        select.innerHTML =
+            `
+            <option value="">
+                SELECT CUSTOMER
+            </option>
+            `;
+
+
+        let matchedIndexes = [];
+
+
+        customers.forEach(
+            function(customer,index){
+
+                const customerName =
+                    normalizeName(
+                        customer.name
+                    );
+
+
+                if(
+                    customerName.includes(
+                        search
+                    )
+                ){
+
+                    matchedIndexes.push(
+                        index
+                    );
+
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+
+                    option.value =
+                        index;
+
+
+                    option.textContent =
+                        customer.name || "";
+
+
+                    select.appendChild(
+                        option
+                    );
+
+                }
+
+            }
+        );
+
+
+        if(
+            matchedIndexes.length === 1
+        ){
+
+            select.value =
+                matchedIndexes[0];
+
+
+            showLedger(
+                matchedIndexes[0]
+            );
+
+        }
+        else{
+
+            select.value = "";
+
+            resetLedger();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   CUSTOMER CHANGE
+===================================================== */
+
+document
+.getElementById("ledgerCustomer")
+.addEventListener(
+    "change",
+    function(){
+
+        showLedger(
+            this.value
+        );
+
+    }
+);
+
+
+/* =====================================================
+   BUSINESS PROFILE
+===================================================== */
+
+function loadBusinessProfileForPrint(){
+
+    const savedProfile =
+        localStorage.getItem(
+            "businessProfile"
+        );
+
+
+    if(!savedProfile){
+
+        document.getElementById(
+            "printBusinessName"
+        ).textContent =
+            "VYAPAR ONE";
+
+        document.getElementById(
+            "printOwnerName"
+        ).textContent =
+            "OWNER NAME";
+
+        document.getElementById(
+            "printBusinessAddress"
+        ).textContent =
+            "-";
+
+        document.getElementById(
+            "printBusinessMobile"
+        ).textContent =
+            "-";
+
+        document.getElementById(
+            "printBusinessGST"
+        ).textContent =
+            "-";
+
+        return;
+    }
+
+
+    const profile =
+        JSON.parse(
+            savedProfile
+        );
+
+
+    document.getElementById(
+        "printBusinessName"
+    ).textContent =
+        profile.businessName ||
+        "VYAPAR ONE";
+
+
+    document.getElementById(
+        "printOwnerName"
+    ).textContent =
+        profile.ownerName ||
+        "OWNER NAME";
+
+
+    document.getElementById(
+        "printBusinessAddress"
+    ).textContent =
+        profile.address ||
+        "-";
+
+
+    document.getElementById(
+        "printBusinessMobile"
+    ).textContent =
+        profile.mobileNumber ||
+        "-";
+
+
+    document.getElementById(
+        "printBusinessGST"
+    ).textContent =
+        profile.gstNumber ||
+        "-";
+
+}
+
+
+/* =====================================================
+   PREPARE PRINT LEDGER
+===================================================== */
+
+function preparePrintLedger(){
+
+    const customer =
+        getSelectedCustomer();
+
+
+    if(!customer){
+
+        alert(
+            "PLEASE SELECT CUSTOMER FIRST"
+        );
+
+        return false;
+    }
+
+
+    loadBusinessProfileForPrint();
+
+
+    /* =============================================
+       CUSTOMER DETAILS
+    ============================================== */
+
+    document.getElementById(
+        "printCustomerName"
+    ).textContent =
+        customer.name ||
+        "-";
+
+
+    document.getElementById(
+        "printCustomerMobile"
+    ).textContent =
+        customer.mobile ||
+        customer.mobileNumber ||
+        "-";
+
+
+    document.getElementById(
+        "printCustomerAddress"
+    ).textContent =
+        customer.address ||
+        "-";
+
+
+    const today =
+        new Date();
+
+
+    const todayText =
+        String(
+            today.getDate()
+        ).padStart(2,"0") +
+        "-" +
+        String(
+            today.getMonth() + 1
+        ).padStart(2,"0") +
+        "-" +
+        today.getFullYear();
+
+
+    document.getElementById(
+        "printReportDate"
+    ).textContent =
+        todayText;
+
+
+    /* =============================================
+       TRANSACTIONS
+    ============================================== */
+
+    const transactions =
+        getCustomerTransactions(
+            customer
+        );
+
+
+    const printBody =
+        document.getElementById(
+            "printLedgerBody"
+        );
+
+
+    printBody.innerHTML = "";
+
+
+    let invoiceTotal = 0;
+
+    let paymentTotal = 0;
+
+    let discountTotal = 0;
+
+    let runningBalance = 0;
+
+
+    transactions.forEach(
+        function(transaction,index){
+
+            const debit =
+                Number(
+                    transaction.debit
+                ) || 0;
+
+
+            const credit =
+                Number(
+                    transaction.credit
+                ) || 0;
+
+
+            invoiceTotal +=
+                debit;
+
+
+            if(
+                transaction.type ===
+                "PAYMENT"
+            ){
+
+                paymentTotal +=
+                    credit;
+
+            }
+
+
+            if(
+                transaction.type ===
+                "DISCOUNT"
+            ){
+
+                discountTotal +=
+                    credit;
+
+            }
+
+
+            runningBalance +=
+                debit -
+                credit;
+
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+
+            tr.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    ${transaction.date || ""}
+                </td>
+
+                <td>
+                    ${transaction.type || ""}
+                </td>
+
+                <td>
+                    ${transaction.reference || ""}
+                </td>
+
+                <td>
+                    ${transaction.description || ""}
+                </td>
+
+                <td>
+                    ${
+                        debit > 0
+                        ? "₹" + debit.toFixed(2)
+                        : "-"
+                    }
+                </td>
+
+                <td>
+                    ${
+                        credit > 0
+                        ? "₹" + credit.toFixed(2)
+                        : "-"
+                    }
+                </td>
+
+                <td>
+                    ₹${runningBalance.toFixed(2)}
+                </td>
+
+            `;
+
+
+            printBody.appendChild(
+                tr
+            );
+
+        }
+    );
+
+
+    if(transactions.length === 0){
+
+        printBody.innerHTML =
+            `
+            <tr>
+
+                <td
+                    colspan="8"
+                    style="
+                        text-align:center;
+                        padding:12px;
+                        color:#526d76;
+                    "
+                >
+                    NO TRANSACTION FOUND
+                </td>
+
+            </tr>
+            `;
+
+    }
+
+
+    const closingBalance =
+        invoiceTotal -
+        paymentTotal -
+        discountTotal;
+
+
+    /* =============================================
+       PRINT SUMMARY
+    ============================================== */
+
+    document.getElementById(
+        "printInvoiceTotal"
+    ).textContent =
+        "₹" +
+        invoiceTotal.toFixed(2);
+
+
+    document.getElementById(
+        "printPaymentTotal"
+    ).textContent =
+        "₹" +
+        paymentTotal.toFixed(2);
+
+
+    document.getElementById(
+        "printDiscountTotal"
+    ).textContent =
+        "₹" +
+        discountTotal.toFixed(2);
+
+
+    document.getElementById(
+        "printClosingBalance"
+    ).textContent =
+        "₹" +
+        closingBalance.toFixed(2);
+
+
+    return true;
+
+}
+
+
+/* =====================================================
+   PRINT LEDGER
+===================================================== */
+
+function printLedger(){
+
+    const ready =
+        preparePrintLedger();
+
+
+    if(!ready){
+
+        return;
+    }
+
+
+    window.print();
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+function goDashboard(){
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+loadLedgerCustomers();
+
+resetLedger();
+
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>VYAPAR ONE BILLING</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #063b4c,
+            #087f8c
+        );
+
+    padding: 20px;
+}
+
+
+/* =========================================================
+   LOGIN CARD
+========================================================= */
+
+.login-card {
+
+    width: 100%;
+    max-width: 430px;
+
+    background: white;
+
+    border-radius: 22px;
+
+    padding: 38px 32px;
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,0.22);
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo-icon {
+
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: #084c61;
+
+    color: white;
+
+    font-size: 38px;
+
+    font-weight: 900;
+}
+
+
+.login-card h1 {
+
+    color: #073b4c;
+
+    font-size: 27px;
+
+    margin-bottom: 5px;
+}
+
+
+.subtitle {
+
+    color: #087f8c;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-group {
+
+    text-align: left;
+
+    margin-bottom: 18px;
+}
+
+
+.form-group label {
+
+    display: block;
+
+    color: #355762;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    margin-bottom: 7px;
+}
+
+
+.form-group input {
+
+    width: 100%;
+
+    height: 52px;
+
+    padding: 0 15px;
+
+    border: 1px solid #ccdce1;
+
+    border-radius: 9px;
+
+    outline: none;
+
+    font-size: 16px;
+
+    color: #17323d;
+
+    background: #fafdfe;
+}
+
+
+.form-group input:focus {
+
+    border-color: #087f8c;
+
+    box-shadow:
+        0 0 0 3px rgba(8,127,140,0.10);
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.login-btn {
+
+    width: 100%;
+
+    height: 52px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #084c61;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+
+.login-btn:hover {
+
+    background: #06394a;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.message {
+
+    display: none;
+
+    margin-top: 18px;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    background: #e3f6e9;
+
+    color: #18733b;
+
+    font-size: 13px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.login-footer {
+
+    margin-top: 25px;
+
+    color: #7a8c92;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .login-card {
+
+        padding: 32px 22px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     LOGIN CARD
+======================================================= -->
+
+<div class="login-card">
+
+
+    <!-- LOGO -->
+
+    <div class="logo-icon">
+        V
+    </div>
+
+
+    <!-- TITLE -->
+
+    <h1>
+        VYAPAR ONE
+    </h1>
+
+
+    <div class="subtitle">
+        SMART BUSINESS BILLING
+    </div>
+
+
+    <!-- LOGIN FORM -->
+
+    <form onsubmit="login(event)">
+
+
+        <div class="form-group">
+
+            <label for="mobile">
+                MOBILE NUMBER
+            </label>
+
+            <input
+                type="tel"
+                id="mobile"
+                placeholder="ENTER MOBILE NUMBER"
+                maxlength="10"
+                inputmode="numeric"
+                autocomplete="tel"
+                required
+            >
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="login-btn"
+        >
+            LOGIN
+        </button>
+
+
+    </form>
+
+
+    <!-- SUCCESS MESSAGE -->
+
+    <div
+        id="message"
+        class="message"
+    >
+        LOGIN SUCCESSFUL
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="login-footer">
+
+        VYAPAR ONE
+        •
+        SMART
+        •
+        SIMPLE
+        •
+        PROFESSIONAL
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+function login(event) {
+
+    event.preventDefault();
+
+
+    const mobile =
+        document.getElementById("mobile")
+        .value
+        .trim();
+
+
+    /* ONLY NUMBERS */
+
+    if (!/^\d{10}$/.test(mobile)) {
+
+        alert(
+            "PLEASE ENTER A VALID 10 DIGIT MOBILE NUMBER"
+        );
+
+        document
+            .getElementById("mobile")
+            .focus();
+
+        return;
+    }
+
+
+    /* SUCCESS MESSAGE */
+
+    const message =
+        document.getElementById("message");
+
+    message.style.display = "block";
+
+
+    /*
+       DEMO LOGIN
+
+       Dashboard अभी अगले step में बनेगा.
+    */
+
+    setTimeout(function() {
+
+        window.location.href =
+            "dashboard.html";
+
+    }, 800);
+
+}
+
+
+/* =========================================================
+   ENTER KEY
+========================================================= */
+
+document
+    .getElementById("mobile")
+    .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+
+            event.preventDefault();
+
+            document
+                .querySelector(".login-btn")
+                .click();
+        }
+
+    });
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,2661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>VYAPAR ONE - PAYMENT</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial, sans-serif;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body{
+
+    min-height:100vh;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            #123c59 0%,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 90% 90%,
+            #075b55 0%,
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #031321,
+            #061f36 50%,
+            #052d35
+        );
+
+    color:#ffffff;
+
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.topbar{
+
+    width:100%;
+
+    min-height:70px;
+
+    padding:12px 22px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #061a2f,
+            #084c61
+        );
+
+    border-bottom:1px solid #17627b;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,0.30);
+
+}
+
+
+.logo-area{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+.logo{
+
+    width:45px;
+
+    height:45px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0aa6a6,
+            #087f8c
+        );
+
+    color:#ffffff;
+
+    font-size:24px;
+
+    font-weight:900;
+
+}
+
+
+.title-area h1{
+
+    font-size:21px;
+
+    letter-spacing:1px;
+
+}
+
+
+.title-area span{
+
+    display:block;
+
+    margin-top:3px;
+
+    color:#9edee6;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+}
+
+
+.dashboard-btn{
+
+    border:none;
+
+    padding:11px 18px;
+
+    border-radius:9px;
+
+    background:#0aa6a6;
+
+    color:#ffffff;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+}
+
+
+.dashboard-btn:hover{
+
+    background:#0cc1c1;
+
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.container{
+
+    width:100%;
+
+    max-width:1400px;
+
+    margin:auto;
+
+    padding:25px;
+
+}
+
+
+/* =========================================================
+   SECTION CARD
+========================================================= */
+
+.card{
+
+    background:
+        linear-gradient(
+            145deg,
+            #071d35,
+            #0b2d4d
+        );
+
+    border:1px solid #164d73;
+
+    border-radius:16px;
+
+    padding:22px;
+
+    margin-bottom:22px;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.25);
+
+}
+
+
+.card-title{
+
+    font-size:18px;
+
+    font-weight:800;
+
+    margin-bottom:20px;
+
+    color:#ffffff;
+
+}
+
+
+/* =========================================================
+   FORM GRID
+========================================================= */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4, minmax(180px,1fr));
+
+    gap:18px;
+
+}
+
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+.form-group label{
+
+    margin-bottom:7px;
+
+    color:#bceaf0;
+
+    font-size:13px;
+
+    font-weight:800;
+
+    letter-spacing:.5px;
+
+}
+
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    border:1px solid #28617d;
+
+    border-radius:9px;
+
+    background:#061a2f;
+
+    color:#ffffff;
+
+    padding:12px 13px;
+
+    outline:none;
+
+    font-size:15px;
+
+    font-weight:700;
+
+}
+
+
+input,
+textarea{
+
+    text-transform:uppercase;
+
+}
+
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    border-color:#0bb5b5;
+
+    box-shadow:
+        0 0 0 2px rgba(11,181,181,.15);
+
+}
+
+
+select{
+
+    cursor:pointer;
+
+}
+
+
+textarea{
+
+    min-height:45px;
+
+    resize:vertical;
+
+}
+
+
+/* =========================================================
+   BALANCE BOX
+========================================================= */
+
+.balance-box{
+
+    min-height:45px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:11px 13px;
+
+    border-radius:9px;
+
+    border:1px solid #28617d;
+
+    background:
+        linear-gradient(
+            135deg,
+            #08263e,
+            #063c49
+        );
+
+}
+
+
+.balance-label{
+
+    color:#a9dce4;
+
+    font-size:12px;
+
+    font-weight:700;
+
+}
+
+
+.balance-value{
+
+    color:#7fffd4;
+
+    font-size:17px;
+
+    font-weight:900;
+
+}
+
+
+/* =========================================================
+   BUTTON AREA
+========================================================= */
+
+.button-area{
+
+    margin-top:22px;
+
+    display:flex;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+}
+
+
+.btn{
+
+    border:none;
+
+    border-radius:9px;
+
+    padding:12px 20px;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+}
+
+
+.save-btn{
+
+    background:
+        linear-gradient(
+            135deg,
+            #0a9f78,
+            #087f68
+        );
+
+    color:#ffffff;
+
+}
+
+
+.save-btn:hover{
+
+    background:
+        linear-gradient(
+            135deg,
+            #0dbc8e,
+            #099477
+        );
+
+}
+
+
+.clear-btn{
+
+    background:#30465a;
+
+    color:#ffffff;
+
+}
+
+
+.clear-btn:hover{
+
+    background:#405d73;
+
+}
+
+
+/* =========================================================
+   PAYMENT SUMMARY
+========================================================= */
+
+.summary{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:14px;
+
+}
+
+
+.summary-box{
+
+    padding:15px;
+
+    border-radius:10px;
+
+    background:#061a2f;
+
+    border:1px solid #1d536e;
+
+}
+
+
+.summary-box span{
+
+    display:block;
+
+    color:#a9dce4;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    margin-bottom:5px;
+
+}
+
+
+.summary-box strong{
+
+    color:#ffffff;
+
+    font-size:19px;
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+    .form-grid{
+
+        grid-template-columns:
+            repeat(2,minmax(160px,1fr));
+
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .topbar{
+
+        padding:10px 12px;
+
+    }
+
+
+    .title-area h1{
+
+        font-size:17px;
+
+    }
+
+
+    .title-area span{
+
+        font-size:9px;
+
+    }
+
+
+    .dashboard-btn{
+
+        padding:9px 12px;
+
+        font-size:12px;
+
+    }
+
+
+    .container{
+
+        padding:12px;
+
+    }
+
+
+    .card{
+
+        padding:15px;
+
+        border-radius:13px;
+
+    }
+
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+        gap:14px;
+
+    }
+
+
+    .summary{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+/* =========================================================
+   PAYMENT LIST
+========================================================= */
+
+.search-box{
+    margin-bottom:18px;
+}
+
+
+.search-box input{
+    width:100%;
+    box-sizing:border-box;
+    padding:13px 16px;
+    border-radius:10px;
+    border:1px solid #315875;
+    background:#071d32;
+    color:#ffffff;
+    font-size:16px;
+    font-weight:600;
+    outline:none;
+}
+
+
+.search-box input::placeholder{
+    color:#9bb4c8;
+}
+
+
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+    border-radius:12px;
+}
+
+
+table{
+    width:100%;
+    min-width:1100px;
+    border-collapse:collapse;
+}
+
+
+thead{
+    background:
+        linear-gradient(
+            135deg,
+            #084c61,
+            #087f8c
+        );
+}
+
+
+th{
+    padding:13px 12px;
+    color:#ffffff;
+    font-size:13px;
+    font-weight:800;
+    text-transform:uppercase;
+    white-space:nowrap;
+}
+
+
+td{
+    padding:12px;
+    color:#e7f4fb;
+    font-size:14px;
+    font-weight:600;
+    border-bottom:1px solid #23465f;
+    white-space:nowrap;
+}
+
+
+tbody tr{
+    background:#071d32;
+    transition:0.2s ease;
+}
+
+
+tbody tr:hover{
+    background:#0b2d47;
+}
+
+
+/* =========================================================
+   PAYMENT ACTION BUTTONS
+========================================================= */
+
+.edit-payment-btn,
+.delete-payment-btn{
+    border:none;
+    border-radius:8px;
+    padding:7px 12px;
+    margin:2px;
+    font-size:12px;
+    font-weight:800;
+    cursor:pointer;
+    color:#ffffff;
+    transition:0.2s ease;
+}
+
+
+.edit-payment-btn{
+    background:
+        linear-gradient(
+            135deg,
+            #087f8c,
+            #0aa6a6
+        );
+}
+
+
+.edit-payment-btn:hover{
+    transform:translateY(-1px);
+}
+
+
+.delete-payment-btn{
+    background:
+        linear-gradient(
+            135deg,
+            #b91c1c,
+            #dc2626
+        );
+}
+
+
+.delete-payment-btn:hover{
+    transform:translateY(-1px);
+}
+
+
+.edit-payment-btn:active,
+.delete-payment-btn:active{
+    transform:scale(.96);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:700px){
+
+    .table-wrapper{
+        overflow-x:auto;
+    }
+
+    table{
+        min-width:1100px;
+    }
+
+    th{
+        font-size:12px;
+    }
+
+    td{
+        font-size:13px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     TOP BAR
+======================================================= -->
+
+<div class="topbar">
+
+    <div class="logo-area">
+
+        <div class="logo">
+            V
+        </div>
+
+        <div class="title-area">
+
+            <h1>PAYMENT</h1>
+
+            <span>
+                VYAPAR ONE BILLING SOFTWARE
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <button
+        class="dashboard-btn"
+        onclick="goDashboard()">
+
+        DASHBOARD
+
+    </button>
+
+</div>
+
+
+
+<!-- =======================================================
+     MAIN CONTAINER
+======================================================= -->
+
+<div class="container">
+
+
+    <!-- ===================================================
+         PAYMENT INFORMATION
+    ==================================================== -->
+
+    <div class="card">
+
+        <div class="card-title">
+            PAYMENT INFORMATION
+        </div>
+
+
+        <div class="form-grid">
+
+
+            <!-- PAYMENT DATE -->
+
+            <div class="form-group">
+
+                <label>
+                    PAYMENT DATE
+                </label>
+
+                <input
+                    type="date"
+                    id="paymentDate">
+
+            </div>
+
+
+
+            <!-- CUSTOMER -->
+
+            <div class="form-group">
+
+                <label>
+                    CUSTOMER
+                </label>
+
+                <select id="paymentCustomer">
+
+                    <option value="">
+                        SELECT CUSTOMER
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- CURRENT BALANCE -->
+
+            <div class="form-group">
+
+                <label>
+                    CURRENT BALANCE
+                </label>
+
+                <div class="balance-box">
+
+                    <span class="balance-label">
+                        BALANCE
+                    </span>
+
+                    <span
+                        class="balance-value"
+                        id="currentBalance">
+
+                        ₹0.00
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PAYMENT MODE -->
+
+            <div class="form-group">
+
+                <label>
+                    PAYMENT MODE
+                </label>
+
+                <select id="paymentMode">
+
+                    <option value="">
+                        SELECT MODE
+                    </option>
+
+                    <option value="CASH">
+                        CASH
+                    </option>
+
+                    <option value="UPI">
+                        UPI
+                    </option>
+
+                    <option value="BANK">
+                        BANK
+                    </option>
+
+                    <option value="CHEQUE">
+                        CHEQUE
+                    </option>
+
+                    <option value="OTHER">
+                        OTHER
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- PAYMENT AMOUNT -->
+
+            <div class="form-group">
+
+                <label>
+                    PAYMENT AMOUNT
+                </label>
+
+                <input
+                    type="number"
+                    id="paymentAmount"
+                    placeholder="ENTER PAYMENT AMOUNT"
+                    min="0"
+                    step="0.01">
+
+            </div>
+
+
+
+            <!-- DISCOUNT -->
+
+            <div class="form-group">
+
+                <label>
+                    DISCOUNT AMOUNT
+                </label>
+
+                <input
+                    type="number"
+                    id="discountAmount"
+                    placeholder="ENTER DISCOUNT"
+                    min="0"
+                    step="0.01">
+
+            </div>
+
+
+
+            <!-- REFERENCE -->
+
+            <div class="form-group">
+
+                <label>
+                    REFERENCE
+                </label>
+
+                <input
+                    type="text"
+                    id="paymentReference"
+                    placeholder="REFERENCE NUMBER">
+
+            </div>
+
+
+
+            <!-- REMARK -->
+
+            <div class="form-group">
+
+                <label>
+                    REMARK
+                </label>
+
+                <input
+                    type="text"
+                    id="paymentRemark"
+                    placeholder="PAYMENT REMARK">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- BUTTONS -->
+
+        <div class="button-area">
+
+            <button
+                class="btn save-btn"
+                id="savePaymentBtn">
+
+                SAVE PAYMENT
+
+            </button>
+
+
+            <button
+                class="btn clear-btn"
+                id="clearPaymentBtn">
+
+                CLEAR
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ===================================================
+         PAYMENT SUMMARY
+    ==================================================== -->
+
+    <div class="card">
+
+        <div class="card-title">
+            PAYMENT SUMMARY
+        </div>
+
+
+        <div class="summary">
+
+
+            <div class="summary-box">
+
+                <span>
+                    CURRENT BALANCE
+                </span>
+
+                <strong id="summaryBalance">
+                    ₹0.00
+                </strong>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <span>
+                    PAYMENT AMOUNT
+                </span>
+
+                <strong id="summaryPayment">
+                    ₹0.00
+                </strong>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <span>
+                    CLOSING BALANCE
+                </span>
+
+                <strong id="summaryClosing">
+                    ₹0.00
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+   <!-- =========================================================
+     PAYMENT LIST
+========================================================= -->
+
+<section class="card">
+
+    <div class="section-title">
+        PAYMENT LIST
+    </div>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="paymentSearch"
+            placeholder="SEARCH PAYMENT / CUSTOMER"
+            autocomplete="off"
+        >
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+                    <th>PAYMENT NO.</th>
+                    <th>DATE</th>
+                    <th>CUSTOMER</th>
+                    <th>MODE</th>
+                    <th>AMOUNT</th>
+                    <th>DISCOUNT</th>
+                    <th>REFERENCE</th>
+                    <th>REMARK</th>
+                    <th>ACTION</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="paymentListBody">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   PAYMENT MODULE
+   VYAPAR ONE BILLING SOFTWARE
+========================================================= */
+
+
+/* =========================================================
+   EDIT PAYMENT INDEX
+========================================================= */
+
+let editPaymentIndex = -1;
+
+
+
+/* =========================================================
+   DEFAULT DATE
+========================================================= */
+
+document.getElementById(
+    "paymentDate"
+).value =
+    new Date()
+    .toISOString()
+    .split("T")[0];
+
+
+
+/* =========================================================
+   LOAD CUSTOMERS
+========================================================= */
+
+function loadCustomers(){
+
+    const customers =
+        JSON.parse(
+            localStorage.getItem("customers")
+        ) || [];
+
+
+    const select =
+        document.getElementById(
+            "paymentCustomer"
+        );
+
+
+    select.innerHTML = `
+        <option value="">
+            SELECT CUSTOMER
+        </option>
+    `;
+
+
+    customers.forEach(
+        function(customer,index){
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                index;
+
+
+            option.textContent =
+                customer.name;
+
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   CUSTOMER CHANGE
+========================================================= */
+
+document.getElementById(
+    "paymentCustomer"
+).addEventListener(
+    "change",
+    function(){
+
+        calculatePaymentSummary();
+
+    }
+);
+
+
+
+/* =========================================================
+   PAYMENT AMOUNT CHANGE
+========================================================= */
+
+document.getElementById(
+    "paymentAmount"
+).addEventListener(
+    "input",
+    function(){
+
+        calculatePaymentSummary();
+
+    }
+);
+
+
+
+/* =========================================================
+   DISCOUNT AMOUNT CHANGE
+========================================================= */
+
+document.getElementById(
+    "discountAmount"
+).addEventListener(
+    "input",
+    function(){
+
+        calculatePaymentSummary();
+
+    }
+);
+
+
+
+/* =========================================================
+   CALCULATE PAYMENT SUMMARY
+========================================================= */
+
+function calculatePaymentSummary(){
+
+    const customerSelect =
+        document.getElementById(
+            "paymentCustomer"
+        );
+
+
+    const customerIndex =
+        customerSelect.value;
+
+
+
+    /* =====================================================
+       NO CUSTOMER
+    ===================================================== */
+
+    if(customerIndex === ""){
+
+        resetPaymentSummary();
+
+        return;
+
+    }
+
+
+
+    /* =====================================================
+       LOAD DATA
+    ===================================================== */
+
+    const customers =
+        JSON.parse(
+            localStorage.getItem("customers")
+        ) || [];
+
+
+    const invoices =
+        JSON.parse(
+            localStorage.getItem("invoices")
+        ) || [];
+
+
+    const payments =
+        JSON.parse(
+            localStorage.getItem("payments")
+        ) || [];
+
+
+    const customer =
+        customers[
+            Number(customerIndex)
+        ];
+
+
+    if(!customer){
+
+        resetPaymentSummary();
+
+        return;
+
+    }
+
+
+
+    /* =====================================================
+       CUSTOMER NAME
+    ===================================================== */
+
+    const customerName =
+        String(
+            customer.name || ""
+        )
+        .trim()
+        .replace(/\s+/g," ")
+        .toUpperCase();
+
+
+
+    /* =====================================================
+       TOTAL INVOICE
+    ===================================================== */
+
+    let totalInvoiceAmount = 0;
+
+
+    invoices.forEach(
+        function(invoice){
+
+            let invoiceCustomer = "";
+
+
+            if(
+                typeof invoice.customer ===
+                "object"
+            ){
+
+                invoiceCustomer =
+                    invoice.customer.name ||
+                    "";
+
+            }else{
+
+                invoiceCustomer =
+                    invoice.customer ||
+                    "";
+
+            }
+
+
+            invoiceCustomer =
+                String(
+                    invoiceCustomer
+                )
+                .trim()
+                .replace(/\s+/g," ")
+                .toUpperCase();
+
+
+            if(
+                invoiceCustomer ===
+                customerName
+            ){
+
+                let invoiceTotal =
+                    Number(
+                        invoice.total
+                    );
+
+
+                if(
+                    !isFinite(
+                        invoiceTotal
+                    ) ||
+                    invoiceTotal <= 0
+                ){
+
+                    invoiceTotal = 0;
+
+
+                    if(
+                        Array.isArray(
+                            invoice.items
+                        )
+                    ){
+
+                        invoice.items.forEach(
+                            function(item){
+
+                                invoiceTotal +=
+                                    Number(
+                                        item.amount
+                                    ) || 0;
+
+                            }
+                        );
+
+                    }
+
+                }
+
+
+                totalInvoiceAmount +=
+                    invoiceTotal;
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       PREVIOUS PAYMENTS
+    ===================================================== */
+
+    let totalPayment = 0;
+
+    let totalDiscount = 0;
+
+
+    payments.forEach(
+        function(payment,index){
+
+            /*
+               EDIT MODE में current payment को
+               दोबारा balance में नहीं गिनेंगे
+            */
+
+            if(
+                editPaymentIndex !== -1 &&
+                index === editPaymentIndex
+            ){
+
+                return;
+
+            }
+
+
+            let paymentCustomer = "";
+
+
+            if(
+                typeof payment.customer ===
+                "object"
+            ){
+
+                paymentCustomer =
+                    payment.customer.name ||
+                    "";
+
+            }else{
+
+                paymentCustomer =
+                    payment.customer ||
+                    "";
+
+            }
+
+
+            paymentCustomer =
+                String(
+                    paymentCustomer
+                )
+                .trim()
+                .replace(/\s+/g," ")
+                .toUpperCase();
+
+
+            if(
+                paymentCustomer ===
+                customerName
+            ){
+
+                totalPayment +=
+                    Number(
+                        payment.amount
+                    ) || 0;
+
+
+                totalDiscount +=
+                    Number(
+                        payment.discount
+                    ) || 0;
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       CURRENT BALANCE
+    ===================================================== */
+
+    const currentBalance =
+        Math.max(
+            0,
+            totalInvoiceAmount
+            - totalPayment
+            - totalDiscount
+        );
+
+
+
+    /* =====================================================
+       CURRENT PAYMENT
+    ===================================================== */
+
+    const paymentAmount =
+        Number(
+            document.getElementById(
+                "paymentAmount"
+            ).value
+        ) || 0;
+
+
+
+    /* =====================================================
+       CURRENT DISCOUNT
+    ===================================================== */
+
+    const discountAmount =
+        Number(
+            document.getElementById(
+                "discountAmount"
+            ).value
+        ) || 0;
+
+
+
+    /* =====================================================
+       CLOSING BALANCE
+    ===================================================== */
+
+    const closingBalance =
+        Math.max(
+            0,
+            currentBalance
+            - paymentAmount
+            - discountAmount
+        );
+
+
+
+    /* =====================================================
+       DISPLAY
+    ===================================================== */
+
+    document.getElementById(
+        "currentBalance"
+    ).textContent =
+        "₹" +
+        currentBalance.toFixed(2);
+
+
+    document.getElementById(
+        "summaryBalance"
+    ).textContent =
+        "₹" +
+        currentBalance.toFixed(2);
+
+
+    document.getElementById(
+        "summaryPayment"
+    ).textContent =
+        "₹" +
+        paymentAmount.toFixed(2);
+
+
+    document.getElementById(
+        "summaryClosing"
+    ).textContent =
+        "₹" +
+        closingBalance.toFixed(2);
+
+}
+
+
+
+/* =========================================================
+   RESET SUMMARY
+========================================================= */
+
+function resetPaymentSummary(){
+
+    document.getElementById(
+        "currentBalance"
+    ).textContent =
+        "₹0.00";
+
+
+    document.getElementById(
+        "summaryBalance"
+    ).textContent =
+        "₹0.00";
+
+
+    document.getElementById(
+        "summaryPayment"
+    ).textContent =
+        "₹0.00";
+
+
+    document.getElementById(
+        "summaryClosing"
+    ).textContent =
+        "₹0.00";
+
+}
+
+
+
+/* =========================================================
+   GET NEXT PAYMENT NUMBER
+========================================================= */
+
+function getNextPaymentNumber(){
+
+    const payments =
+        JSON.parse(
+            localStorage.getItem("payments")
+        ) || [];
+
+
+    if(
+        payments.length === 0
+    ){
+
+        return "PAY-0001";
+
+    }
+
+
+    let maxNumber = 0;
+
+
+    payments.forEach(
+        function(payment){
+
+            const number =
+                parseInt(
+                    String(
+                        payment.paymentNumber ||
+                        ""
+                    )
+                    .replace(
+                        "PAY-",
+                        ""
+                    ),
+                    10
+                );
+
+
+            if(
+                !isNaN(number) &&
+                number > maxNumber
+            ){
+
+                maxNumber =
+                    number;
+
+            }
+
+        }
+    );
+
+
+    return "PAY-" +
+        String(
+            maxNumber + 1
+        )
+        .padStart(
+            4,
+            "0"
+        );
+
+}
+
+
+
+/* =========================================================
+   SAVE / UPDATE PAYMENT
+========================================================= */
+
+function savePayment(){
+
+    const paymentDate =
+        document.getElementById(
+            "paymentDate"
+        ).value;
+
+
+    const customerSelect =
+        document.getElementById(
+            "paymentCustomer"
+        );
+
+
+    const customerIndex =
+        customerSelect.value;
+
+
+    const paymentMode =
+        document.getElementById(
+            "paymentMode"
+        ).value;
+
+
+    const paymentAmount =
+        Number(
+            document.getElementById(
+                "paymentAmount"
+            ).value
+        ) || 0;
+
+
+    const discountAmount =
+        Number(
+            document.getElementById(
+                "discountAmount"
+            ).value
+        ) || 0;
+
+
+    const reference =
+        document.getElementById(
+            "paymentReference"
+        ).value
+        .trim()
+        .toUpperCase();
+
+
+    const remark =
+        document.getElementById(
+            "paymentRemark"
+        ).value
+        .trim()
+        .toUpperCase();
+
+
+
+    /* =====================================================
+       VALIDATION
+    ===================================================== */
+
+    if(!paymentDate){
+
+        alert(
+            "PLEASE SELECT PAYMENT DATE"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        customerIndex === ""
+    ){
+
+        alert(
+            "PLEASE SELECT CUSTOMER"
+        );
+
+        customerSelect.focus();
+
+        return;
+
+    }
+
+
+    if(
+        paymentAmount <= 0
+    ){
+
+        alert(
+            "PLEASE ENTER PAYMENT AMOUNT"
+        );
+
+        document
+        .getElementById(
+            "paymentAmount"
+        )
+        .focus();
+
+        return;
+
+    }
+
+
+
+    /* =====================================================
+       LOAD CUSTOMERS
+    ===================================================== */
+
+    const customers =
+        JSON.parse(
+            localStorage.getItem("customers")
+        ) || [];
+
+
+    const customer =
+        customers[
+            Number(customerIndex)
+        ];
+
+
+    if(!customer){
+
+        alert(
+            "CUSTOMER NOT FOUND"
+        );
+
+        return;
+
+    }
+
+
+
+    /* =====================================================
+       LOAD PAYMENTS
+    ===================================================== */
+
+    const payments =
+        JSON.parse(
+            localStorage.getItem("payments")
+        ) || [];
+
+
+
+    /* =====================================================
+       EDIT PAYMENT
+    ===================================================== */
+
+    if(
+        editPaymentIndex !== -1
+    ){
+
+        const oldPayment =
+            payments[
+                editPaymentIndex
+            ];
+
+
+        if(!oldPayment){
+
+            editPaymentIndex = -1;
+
+            return;
+
+        }
+
+
+        payments[
+            editPaymentIndex
+        ] = {
+
+            paymentNumber:
+                oldPayment.paymentNumber,
+
+            date:
+                paymentDate,
+
+            customer:
+                customer.name || "",
+
+            mode:
+                paymentMode || "",
+
+            amount:
+                paymentAmount,
+
+            discount:
+                discountAmount,
+
+            reference:
+                reference,
+
+            remark:
+                remark
+
+        };
+
+
+        localStorage.setItem(
+            "payments",
+            JSON.stringify(
+                payments
+            )
+        );
+
+
+        alert(
+            oldPayment.paymentNumber +
+            " PAYMENT UPDATED SUCCESSFULLY"
+        );
+
+
+        editPaymentIndex = -1;
+
+    }
+
+
+
+    /* =====================================================
+       NEW PAYMENT
+    ===================================================== */
+
+    else{
+
+        const paymentNumber =
+            getNextPaymentNumber();
+
+
+        const payment = {
+
+            paymentNumber:
+                paymentNumber,
+
+            date:
+                paymentDate,
+
+            customer:
+                customer.name || "",
+
+            mode:
+                paymentMode || "",
+
+            amount:
+                paymentAmount,
+
+            discount:
+                discountAmount,
+
+            reference:
+                reference,
+
+            remark:
+                remark
+
+        };
+
+
+        payments.push(
+            payment
+        );
+
+
+        localStorage.setItem(
+            "payments",
+            JSON.stringify(
+                payments
+            )
+        );
+
+
+        alert(
+            paymentNumber +
+            " PAYMENT SAVED SUCCESSFULLY"
+        );
+
+    }
+
+
+
+    /* =====================================================
+       RESET EDIT BUTTON
+    ===================================================== */
+
+    document.getElementById(
+        "savePaymentBtn"
+    ).textContent =
+        "SAVE PAYMENT";
+
+
+
+    /* =====================================================
+       CLEAR FORM
+    ===================================================== */
+
+    clearPaymentForm();
+
+
+
+    /* =====================================================
+       REFRESH PAYMENT LIST
+    ===================================================== */
+
+    showPayments();
+
+}
+
+
+
+/* =========================================================
+   SHOW PAYMENTS
+========================================================= */
+
+function showPayments(){
+
+    const tbody =
+        document.getElementById(
+            "paymentListBody"
+        );
+
+
+    if(!tbody){
+
+        return;
+
+    }
+
+
+    const payments =
+        JSON.parse(
+            localStorage.getItem("payments")
+        ) || [];
+
+
+    const searchInput =
+        document.getElementById(
+            "paymentSearch"
+        );
+
+
+    const search =
+        searchInput
+        ? searchInput.value
+            .trim()
+            .toUpperCase()
+        : "";
+
+
+
+    tbody.innerHTML = "";
+
+
+
+    /* =====================================================
+       FILTER PAYMENTS
+    ===================================================== */
+
+    const filteredPayments =
+        payments.filter(
+            function(payment){
+
+                const text =
+                    (
+                        String(
+                            payment.paymentNumber ||
+                            ""
+                        ) +
+                        " " +
+                        String(
+                            payment.customer ||
+                            ""
+                        ) +
+                        " " +
+                        String(
+                            payment.mode ||
+                            ""
+                        ) +
+                        " " +
+                        String(
+                            payment.reference ||
+                            ""
+                        )
+                    )
+                    .toUpperCase();
+
+
+                return text.includes(
+                    search
+                );
+
+            }
+        );
+
+
+
+    /* =====================================================
+       NO PAYMENT
+    ===================================================== */
+
+    if(
+        filteredPayments.length === 0
+    ){
+
+        tbody.innerHTML = `
+            <tr>
+                <td
+                    colspan="10"
+                    style="
+                        text-align:center;
+                        padding:25px;
+                        color:#9bb4c8;
+                    "
+                >
+                    NO PAYMENT FOUND
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+
+    /* =====================================================
+       TABLE ROWS
+    ===================================================== */
+
+    filteredPayments.forEach(
+        function(payment){
+
+            const actualIndex =
+                payments.indexOf(
+                    payment
+                );
+
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+
+            tr.innerHTML = `
+
+                <td>
+                    ${actualIndex + 1}
+                </td>
+
+                <td>
+                    ${payment.paymentNumber || ""}
+                </td>
+
+                <td>
+                    ${payment.date || ""}
+                </td>
+
+                <td>
+                    ${payment.customer || ""}
+                </td>
+
+                <td>
+                    ${payment.mode || ""}
+                </td>
+
+                <td>
+                    ₹${Number(
+                        payment.amount || 0
+                    ).toFixed(2)}
+                </td>
+
+                <td>
+                    ₹${Number(
+                        payment.discount || 0
+                    ).toFixed(2)}
+                </td>
+
+                <td>
+                    ${payment.reference || ""}
+                </td>
+
+                <td>
+                    ${payment.remark || ""}
+                </td>
+
+                <td>
+
+                    <button
+                        type="button"
+                        class="edit-payment-btn"
+                        onclick="
+                            editPayment(
+                                ${actualIndex}
+                            )
+                        "
+                    >
+                        ✏️ EDIT
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="delete-payment-btn"
+                        onclick="
+                            deletePayment(
+                                ${actualIndex}
+                            )
+                        "
+                    >
+                        🗑️ DELETE
+                    </button>
+
+                </td>
+
+            `;
+
+
+            tbody.appendChild(
+                tr
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================================
+   EDIT PAYMENT
+========================================================= */
+
+function editPayment(index){
+
+    const payments =
+        JSON.parse(
+            localStorage.getItem("payments")
+        ) || [];
+
+
+    const payment =
+        payments[index];
+
+
+    if(!payment){
+
+        return;
+
+    }
+
+
+    editPaymentIndex =
+        index;
+
+
+
+    /* =====================================================
+       DATE
+    ===================================================== */
+
+    document.getElementById(
+        "paymentDate"
+    ).value =
+        payment.date || "";
+
+
+
+    /* =====================================================
+       CUSTOMER
+    ===================================================== */
+
+    const customers =
+        JSON.parse(
+            localStorage.getItem("customers")
+        ) || [];
+
+
+    const customerIndex =
+        customers.findIndex(
+            function(customer){
+
+                return String(
+                    customer.name || ""
+                )
+                .trim()
+                .toUpperCase()
+                ===
+                String(
+                    payment.customer || ""
+                )
+                .trim()
+                .toUpperCase();
+
+            }
+        );
+
+
+    document.getElementById(
+        "paymentCustomer"
+    ).value =
+        customerIndex !== -1
+        ? customerIndex
+        : "";
+
+
+
+    /* =====================================================
+       OTHER FIELDS
+    ===================================================== */
+
+    document.getElementById(
+        "paymentMode"
+    ).value =
+        payment.mode || "";
+
+
+    document.getElementById(
+        "paymentAmount"
+    ).value =
+        Number(
+            payment.amount || 0
+        );
+
+
+    document.getElementById(
+        "discountAmount"
+    ).value =
+        Number(
+            payment.discount || 0
+        );
+
+
+    document.getElementById(
+        "paymentReference"
+    ).value =
+        payment.reference || "";
+
+
+    document.getElementById(
+        "paymentRemark"
+    ).value =
+        payment.remark || "";
+
+
+
+    /* =====================================================
+       BUTTON
+    ===================================================== */
+
+    document.getElementById(
+        "savePaymentBtn"
+    ).textContent =
+        "UPDATE PAYMENT";
+
+
+
+    /* =====================================================
+       RECALCULATE
+    ===================================================== */
+
+    calculatePaymentSummary();
+
+
+
+    /* =====================================================
+       SCROLL TOP
+    ===================================================== */
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+
+/* =========================================================
+   DELETE PAYMENT
+========================================================= */
+
+function deletePayment(index){
+
+    const payments =
+        JSON.parse(
+            localStorage.getItem("payments")
+        ) || [];
+
+
+    const payment =
+        payments[index];
+
+
+    if(!payment){
+
+        return;
+
+    }
+
+
+
+    const confirmDelete =
+        confirm(
+            "DELETE " +
+            payment.paymentNumber +
+            "?"
+        );
+
+
+    if(!confirmDelete){
+
+        return;
+
+    }
+
+
+
+    payments.splice(
+        index,
+        1
+    );
+
+
+
+    localStorage.setItem(
+        "payments",
+        JSON.stringify(
+            payments
+        )
+    );
+
+
+
+    /* =====================================================
+       IF ALL PAYMENTS DELETED
+    ===================================================== */
+
+    if(
+        payments.length === 0
+    ){
+
+        localStorage.setItem(
+            "lastPaymentNumber",
+            "0"
+        );
+
+    }
+
+
+
+    /* =====================================================
+       CANCEL EDIT MODE
+    ===================================================== */
+
+    editPaymentIndex =
+        -1;
+
+
+    document.getElementById(
+        "savePaymentBtn"
+    ).textContent =
+        "SAVE PAYMENT";
+
+
+
+    /* =====================================================
+       REFRESH
+    ===================================================== */
+
+    showPayments();
+
+
+    resetPaymentSummary();
+
+
+    alert(
+        payment.paymentNumber +
+        " DELETED SUCCESSFULLY"
+    );
+
+}
+
+
+
+/* =========================================================
+   SEARCH PAYMENT
+========================================================= */
+
+document.getElementById(
+    "paymentSearch"
+).addEventListener(
+    "input",
+    function(){
+
+        showPayments();
+
+    }
+);
+
+
+
+/* =========================================================
+   CLEAR PAYMENT FORM
+========================================================= */
+
+function clearPaymentForm(){
+
+    editPaymentIndex =
+        -1;
+
+
+    document.getElementById(
+        "paymentDate"
+    ).value =
+        new Date()
+        .toISOString()
+        .split("T")[0];
+
+
+    document.getElementById(
+        "paymentCustomer"
+    ).value = "";
+
+
+    document.getElementById(
+        "paymentMode"
+    ).value = "";
+
+
+    document.getElementById(
+        "paymentAmount"
+    ).value = "";
+
+
+    document.getElementById(
+        "discountAmount"
+    ).value = "";
+
+
+    document.getElementById(
+        "paymentReference"
+    ).value = "";
+
+
+    document.getElementById(
+        "paymentRemark"
+    ).value = "";
+
+
+    document.getElementById(
+        "savePaymentBtn"
+    ).textContent =
+        "SAVE PAYMENT";
+
+
+    resetPaymentSummary();
+
+}
+
+
+
+/* =========================================================
+   CLEAR BUTTON
+========================================================= */
+
+document.getElementById(
+    "clearPaymentBtn"
+).addEventListener(
+    "click",
+    function(){
+
+        clearPaymentForm();
+
+    }
+);
+
+
+
+/* =========================================================
+   SAVE BUTTON
+========================================================= */
+
+document.getElementById(
+    "savePaymentBtn"
+).addEventListener(
+    "click",
+    function(){
+
+        savePayment();
+
+    }
+);
+
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function goDashboard(){
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+loadCustomers();
+
+showPayments();
+
+</script>
+</body>
+
+</html>

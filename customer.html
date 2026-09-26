@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>VYAPAR ONE — Customer</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#03d6c1;
+    color:#17323d;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+
+    height:75px;
+
+    background:lch(25.82% 25.33 161.04);
+
+    border-bottom:1px solid #dce8ed;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 30px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:10;
+
+    box-shadow:
+        0 4px 18px rgba(7,59,76,.05);
+}
+
+.title-area h1{
+
+    color:hsl(204, 29%, 97%);
+
+    font-size:23px;
+
+    margin-bottom:4px;
+}
+
+.title-area span{
+
+    color:#7b929c;
+
+    font-size:11px;
+}
+
+.back-btn{
+
+    border:none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #071d35,
+            #0b2d4d
+        );
+
+    color:white;
+
+    border:1px solid #164d73;
+
+    border-radius:9px;
+
+    padding:11px 18px;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.back-btn:hover{
+
+    background:
+        linear-gradient(
+            135deg,
+            #087f8c,
+            #075b78
+        );
+
+    transform:translateY(-2px);
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+
+    padding:30px;
+
+    max-width:1250px;
+
+    margin:auto;
+}
+
+
+/* =========================
+   CUSTOMER FORM CARD
+========================= */
+
+.card{
+
+    background:
+        linear-gradient(
+            145deg,
+            #071d35,
+            #0b2d4d
+        );
+
+    border:1px solid #164d73;
+
+    border-radius:18px;
+
+    padding:25px;
+
+    color:white;
+
+    box-shadow:
+        0 14px 35px rgba(4,25,48,.16);
+
+    position:relative;
+
+    overflow:hidden;
+
+    margin-bottom:22px;
+}
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+    right:0;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #4ad0df,
+            transparent
+        );
+}
+
+.card-title{
+
+    font-size:17px;
+
+    margin-bottom:20px;
+
+    color:white;
+}
+
+
+/* =========================
+   FORM GRID
+========================= */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:18px;
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:7px;
+}
+
+.form-group.full{
+
+    grid-column:1/-1;
+}
+
+label{
+
+    color:#a8c0cf;
+
+    font-size:11px;
+
+    font-weight:800;
+
+    letter-spacing:.6px;
+}
+
+input,
+textarea{
+
+    width:100%;
+
+    border:1px solid #2b5875;
+
+    background:#0b2945;
+
+    color:white;
+
+    border-radius:9px;
+
+    padding:13px 14px;
+
+    font-size:18px;
+
+    outline:none;
+
+    transition:.2s;
+}
+
+input{
+
+    height:46px;
+}
+
+textarea{
+
+    min-height:85px;
+
+    resize:vertical;
+}
+
+input::placeholder,
+textarea::placeholder{
+
+    color:#718d9e;
+}
+
+input:focus,
+textarea:focus{
+
+    border-color:#20a5b5;
+
+    box-shadow:
+        0 0 0 3px rgba(32,165,181,.10);
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:20px;
+
+    flex-wrap:wrap;
+}
+
+.btn{
+
+    min-width:120px;
+
+    min-height:43px;
+
+    border-radius:9px;
+
+    padding:0 18px;
+
+    border:1px solid #245777;
+
+    cursor:pointer;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    transition:.25s;
+}
+
+.btn-save{
+
+    background:
+        linear-gradient(
+            135deg,
+            #087f8c,
+            #075b78
+        );
+
+    color:white;
+
+    border-color:#1695a5;
+}
+
+.btn-clear{
+
+    background:#12324e;
+
+    color:#c9dce7;
+}
+
+.btn-save:hover,
+.btn-clear:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,.18);
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message{
+
+    min-height:20px;
+
+    margin-top:13px;
+
+    font-size:12px;
+
+    font-weight:800;
+}
+
+.success{
+
+    color:#4ee09a;
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box{
+
+    margin-bottom:15px;
+}
+
+.search-box input{
+
+    background:#0b2945;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
+
+    width:100%;
+
+    overflow-x:auto;
+}
+
+table{
+
+    width:100%;
+
+    min-width:700px;
+
+    border-collapse:collapse;
+}
+
+thead{
+
+    background:#0b2945;
+}
+
+th{
+
+    color:#8fdce5;
+
+    font-size:10px;
+
+    padding:13px 10px;
+
+    text-align:left;
+
+    border-bottom:1px solid #245777;
+}
+
+td{
+
+    color:#d9e8f0;
+
+    font-size:11px;
+
+    padding:12px 10px;
+
+    border-bottom:1px solid #1b4562;
+}
+
+tbody tr:hover{
+
+    background:#0d3452;
+}
+
+
+/* =========================
+   ACTION BUTTONS
+========================= */
+
+.action-btn{
+
+    border:none;
+
+    border-radius:6px;
+
+    padding:7px 10px;
+
+    cursor:pointer;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    margin-right:4px;
+}
+
+.edit-btn{
+
+    background:#164d73;
+
+    color:white;
+}
+
+.delete-btn{
+
+    background:#642d38;
+
+    color:#ffd9dd;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:700px){
+
+    .topbar{
+
+        padding:0 15px;
+    }
+
+    .title-area h1{
+
+        font-size:18px;
+    }
+
+    .content{
+
+        padding:15px;
+    }
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+
+        grid-column:auto;
+    }
+
+    .card{
+
+        padding:18px;
+    }
+
+    .buttons{
+
+        display:grid;
+
+        grid-template-columns:1fr 1fr;
+    }
+
+    .btn{
+
+        width:100%;
+    }
+}
+input,
+textarea{
+    text-transform:uppercase;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     TOP BAR
+========================= -->
+
+<div class="topbar">
+
+    <div class="title-area">
+
+        <h1>
+            CUSTOMER
+        </h1>
+
+        <span>
+            VYAPAR ONE BILLING SOFTWARE
+        </span>
+
+    </div>
+
+
+    <button
+        class="back-btn"
+        onclick="goDashboard()">
+
+        ← DASHBOARD
+
+    </button>
+
+</div>
+
+
+
+<div class="content">
+
+
+<!-- =========================
+     CUSTOMER FORM
+========================= -->
+
+<div class="card">
+
+    <div class="card-title">
+        CUSTOMER INFORMATION
+    </div>
+
+
+    <div class="form-grid">
+
+
+        <div class="form-group">
+
+            <label>
+                CUSTOMER NAME
+            </label>
+
+            <input
+                id="customerName"
+                type="text"
+                placeholder="ENTER CUSTOMER NAME"
+                autocomplete="off">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                MOBILE NUMBER
+            </label>
+
+            <input
+                id="customerMobile"
+                type="tel"
+                maxlength="10"
+                placeholder="ENTER MOBILE NUMBER"
+                autocomplete="off">
+
+        </div>
+
+
+        <div class="form-group full">
+
+            <label>
+                ADDRESS
+            </label>
+
+            <textarea
+                id="customerAddress"
+                placeholder="ENTER CUSTOMER ADDRESS"></textarea>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="buttons">
+
+        <button
+            class="btn btn-save"
+            onclick="saveCustomer()">
+
+            SAVE CUSTOMER
+
+        </button>
+
+
+        <button
+            class="btn btn-clear"
+            onclick="clearForm()">
+
+            CLEAR
+
+        </button>
+
+    </div>
+
+
+    <div
+        id="message"
+        class="message">
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     CUSTOMER LIST
+========================= -->
+
+<div class="card">
+
+    <div class="card-title">
+        CUSTOMER LIST
+    </div>
+
+
+    <div class="search-box">
+
+        <input
+            id="searchCustomer"
+            type="text"
+            placeholder="SEARCH CUSTOMER..."
+            oninput="showCustomers()">
+
+    </div>
+
+
+    <div class="table-wrap">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        #
+                    </th>
+
+                    <th>
+                        CUSTOMER NAME
+                    </th>
+
+                    <th>
+                        MOBILE
+                    </th>
+
+                    <th>
+                        ADDRESS
+                    </th>
+
+                    <th>
+                        ACTION
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="customerTable">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   CUSTOMER STORAGE
+========================================================= */
+
+let customers =
+    JSON.parse(
+        localStorage.getItem("customers") || "[]"
+    );
+
+let editIndex = -1;
+
+
+/* =========================================================
+   SAVE CUSTOMER
+========================================================= */
+
+function saveCustomer(){
+
+    const name =
+        document
+        .getElementById("customerName")
+        .value
+        .trim()
+        .toUpperCase();
+
+    const mobile =
+        document
+        .getElementById("customerMobile")
+        .value
+        .trim();
+
+    const address =
+        document
+        .getElementById("customerAddress")
+        .value
+        .trim()
+        .toUpperCase();
+
+
+    if(!name){
+
+        showMessage(
+            "PLEASE ENTER CUSTOMER NAME",
+            false
+        );
+
+        document
+        .getElementById("customerName")
+        .focus();
+
+        return;
+    }
+
+
+    if(mobile && !/^\d{10}$/.test(mobile)){
+
+        showMessage(
+            "PLEASE ENTER VALID 10 DIGIT MOBILE NUMBER",
+            false
+        );
+
+        document
+        .getElementById("customerMobile")
+        .focus();
+
+        return;
+    }
+
+
+    /* =====================================================
+       DUPLICATE CUSTOMER NAME CHECK
+    ===================================================== */
+
+    const duplicateIndex =
+        customers.findIndex(function(customer, index){
+
+            // Edit करते समय current customer को ignore करें
+            if(
+                editIndex !== -1 &&
+                index === editIndex
+            ){
+                return false;
+            }
+
+            return String(customer.name || "")
+                .trim()
+                .toUpperCase() === name;
+
+        });
+
+
+    if(duplicateIndex !== -1){
+
+        showMessage(
+            "CUSTOMER ALREADY EXISTS",
+            false
+        );
+
+        document
+        .getElementById("customerName")
+        .focus();
+
+        return;
+    }
+
+
+    const customer = {
+
+        name:name,
+
+        mobile:mobile,
+
+        address:address
+
+    };
+
+
+    if(editIndex === -1){
+
+        customers.push(customer);
+
+        showMessage(
+            "CUSTOMER SAVED SUCCESSFULLY",
+            true
+        );
+
+    }else{
+
+        customers[editIndex] =
+            customer;
+
+        showMessage(
+            "CUSTOMER UPDATED SUCCESSFULLY",
+            true
+        );
+
+        editIndex = -1;
+    }
+
+
+    localStorage.setItem(
+        "customers",
+        JSON.stringify(customers)
+    );
+
+
+    showCustomers();
+
+    clearInputsOnly();
+
+}
+
+
+/* =========================================================
+   SHOW CUSTOMERS
+========================================================= */
+
+function showCustomers(){
+
+    const table =
+        document.getElementById(
+            "customerTable"
+        );
+
+    const search =
+        document
+        .getElementById("searchCustomer")
+        .value
+        .trim()
+        .toUpperCase();
+
+
+    table.innerHTML = "";
+
+
+    const filtered =
+        customers.filter(customer => {
+
+            return (
+                customer.name
+                .toUpperCase()
+                .includes(search)
+                ||
+                customer.mobile
+                .includes(search)
+                ||
+                customer.address
+                .toUpperCase()
+                .includes(search)
+            );
+
+        });
+
+
+    filtered.forEach(
+        (customer,index) => {
+
+            const realIndex =
+                customers.indexOf(customer);
+
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    ${customer.name}
+                </td>
+
+                <td>
+                    ${customer.mobile || "-"}
+                </td>
+
+                <td>
+                    ${customer.address || "-"}
+                </td>
+
+                <td>
+
+                    <button
+                        class="action-btn edit-btn"
+                        onclick="editCustomer(${realIndex})">
+
+                        EDIT
+
+                    </button>
+
+                    <button
+                        class="action-btn delete-btn"
+                        onclick="deleteCustomer(${realIndex})">
+
+                        DELETE
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   EDIT CUSTOMER
+========================================================= */
+
+function editCustomer(index){
+
+    const customer =
+        customers[index];
+
+    document
+    .getElementById("customerName")
+    .value =
+        customer.name;
+
+    document
+    .getElementById("customerMobile")
+    .value =
+        customer.mobile;
+
+    document
+    .getElementById("customerAddress")
+    .value =
+        customer.address;
+
+
+    editIndex = index;
+
+
+    showMessage(
+        "EDITING CUSTOMER",
+        true
+    );
+
+
+    document
+    .getElementById("customerName")
+    .focus();
+
+}
+
+
+/* =========================================================
+   DELETE CUSTOMER
+========================================================= */
+
+function deleteCustomer(index){
+
+    const ok =
+        confirm(
+            "DO YOU WANT TO DELETE THIS CUSTOMER?"
+        );
+
+    if(!ok){
+
+        return;
+    }
+
+
+    customers.splice(index,1);
+
+
+    localStorage.setItem(
+        "customers",
+        JSON.stringify(customers)
+    );
+
+
+    showCustomers();
+
+
+    showMessage(
+        "CUSTOMER DELETED SUCCESSFULLY",
+        true
+    );
+
+}
+
+
+/* =========================================================
+   CLEAR
+========================================================= */
+
+function clearForm(){
+
+    clearInputsOnly();
+
+    editIndex = -1;
+
+    document
+    .getElementById("message")
+    .innerHTML = "";
+
+}
+
+
+function clearInputsOnly(){
+
+    document
+    .getElementById("customerName")
+    .value = "";
+
+    document
+    .getElementById("customerMobile")
+    .value = "";
+
+    document
+    .getElementById("customerAddress")
+    .value = "";
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+function showMessage(text,success){
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+    message.innerText = text;
+
+    message.className =
+        success
+        ? "message success"
+        : "message";
+
+}
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function goDashboard(){
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+
+/* =========================================================
+   ENTER KEY NAVIGATION
+========================================================= */
+
+document
+.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key !== "Enter"){
+
+            return;
+        }
+
+
+        const fields = [
+
+            document.getElementById(
+                "customerName"
+            ),
+
+            document.getElementById(
+                "customerMobile"
+            ),
+
+            document.getElementById(
+                "customerAddress"
+            )
+
+        ];
+
+
+        const current =
+            document.activeElement;
+
+        const index =
+            fields.indexOf(current);
+
+
+        if(index === -1){
+
+            return;
+        }
+
+
+        event.preventDefault();
+
+
+        if(index < fields.length - 1){
+
+            fields[index + 1].focus();
+
+        }else{
+
+            saveCustomer();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+showCustomers();
+
+</script>
+
+
+</body>
+</html>
