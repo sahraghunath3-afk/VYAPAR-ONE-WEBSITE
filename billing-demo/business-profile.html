@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Business Profile - VYAPAR ONE</title>
+
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body{
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    min-height:100vh;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            #123c59 0%,
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 90% 90%,
+            #075b55 0%,
+            transparent 35%
+        ),
+
+        linear-gradient(
+            135deg,
+            #031321,
+            #061f36 50%,
+            #052d35
+        );
+
+    color:#ffffff;
+
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar{
+
+    min-height:72px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+
+    padding:12px 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #061a2f,
+            #083451,
+            #07505a
+        );
+
+    border-bottom:
+        1px solid
+        rgba(0,220,220,0.25);
+
+    box-shadow:
+        0 5px 20px
+        rgba(0,0,0,0.35);
+
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    min-width:180px;
+
+}
+
+
+.logo{
+
+    width:44px;
+    height:44px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #08a6a6,
+            #087f8c
+        );
+
+    font-size:22px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,200,200,0.3);
+
+}
+
+
+.logo-text{
+
+    font-size:20px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.title{
+
+    font-size:21px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    text-align:center;
+
+}
+
+
+/* =========================================================
+   TOP RIGHT
+========================================================= */
+
+.top-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+
+.software-name{
+
+    color:#b9e7ec;
+
+    font-size:13px;
+
+    font-weight:700;
+
+}
+
+
+.dashboard-btn{
+
+    border:none;
+
+    border-radius:9px;
+
+    padding:11px 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #087f8c,
+            #0aa6a6
+        );
+
+    color:#ffffff;
+
+    font-size:13px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0,180,190,0.25);
+
+}
+
+
+.dashboard-btn:hover{
+
+    filter:brightness(1.12);
+
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container{
+
+    width:100%;
+
+    max-width:1050px;
+
+    margin:30px auto;
+
+    padding:0 20px;
+
+}
+
+
+/* =========================================================
+   PROFILE CARD
+========================================================= */
+
+.profile-card{
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7,29,53,0.97),
+            rgba(8,45,65,0.97)
+        );
+
+    border:
+        1px solid
+        #16516f;
+
+    border-radius:16px;
+
+    padding:25px;
+
+    box-shadow:
+        0 15px 40px
+        rgba(0,0,0,0.35);
+
+}
+
+
+/* =========================================================
+   CARD TITLE
+========================================================= */
+
+.card-title{
+
+    font-size:22px;
+
+    font-weight:900;
+
+    margin-bottom:5px;
+
+}
+
+
+.card-subtitle{
+
+    font-size:13px;
+
+    color:#9fd3dc;
+
+    margin-bottom:25px;
+
+}
+
+
+/* =========================================================
+   FORM GRID
+========================================================= */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:20px;
+
+}
+
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+
+.form-group.full{
+
+    grid-column:
+        1 / -1;
+
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+label{
+
+    margin-bottom:8px;
+
+    color:#bce8ed;
+
+    font-size:14px;
+
+    font-weight:900;
+
+    letter-spacing:.5px;
+
+}
+
+
+/* =========================================================
+   INPUT / SELECT / TEXTAREA
+========================================================= */
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    border:
+        1px solid
+        #25627c;
+
+    border-radius:9px;
+
+    background:#071d31;
+
+    color:#ffffff;
+
+    padding:13px 14px;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    outline:none;
+
+    transition:.2s;
+
+}
+
+
+input,
+textarea{
+
+    text-transform:uppercase;
+
+}
+
+
+input::placeholder,
+textarea::placeholder{
+
+    color:#7898a6;
+
+    font-weight:600;
+
+}
+
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    border-color:#0ab7b7;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(0,190,190,0.12);
+
+    background:#09243b;
+
+}
+
+
+select{
+
+    cursor:pointer;
+
+}
+
+
+textarea{
+
+    min-height:90px;
+
+    resize:vertical;
+
+}
+
+
+/* =========================================================
+   BUTTON ROW
+========================================================= */
+
+.button-row{
+
+    display:flex;
+
+    gap:12px;
+
+    margin-top:25px;
+
+}
+
+
+.save-btn,
+.clear-btn{
+
+    border:none;
+
+    border-radius:9px;
+
+    padding:13px 25px;
+
+    font-size:14px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    color:#ffffff;
+
+}
+
+
+.save-btn{
+
+    background:
+        linear-gradient(
+            135deg,
+            #087f8c,
+            #0aa6a6
+        );
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,190,190,0.25);
+
+}
+
+
+.clear-btn{
+
+    background:
+        linear-gradient(
+            135deg,
+            #334155,
+            #475569
+        );
+
+}
+
+
+.save-btn:hover,
+.clear-btn:hover{
+
+    filter:brightness(1.12);
+
+}
+
+
+/* =========================================================
+   SUCCESS MESSAGE
+========================================================= */
+
+.success-message{
+
+    display:none;
+
+    margin-top:18px;
+
+    padding:12px 15px;
+
+    border-radius:8px;
+
+    background:#064e3b;
+
+    border:
+        1px solid
+        #10b981;
+
+    color:#a7f3d0;
+
+    font-size:14px;
+
+    font-weight:900;
+
+}
+
+
+/* =========================================================
+   SAVED PROFILE
+========================================================= */
+
+.preview-card{
+
+    margin-top:22px;
+
+    padding:20px;
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #08243b,
+            #073b45
+        );
+
+    border:
+        1px solid
+        #18546b;
+
+    display:none;
+
+}
+
+
+.preview-title{
+
+    color:#80e5e8;
+
+    font-size:13px;
+
+    font-weight:900;
+
+    margin-bottom:12px;
+
+}
+
+
+.preview-name{
+
+    font-size:22px;
+
+    font-weight:900;
+
+    margin-bottom:10px;
+
+}
+
+
+.preview-line{
+
+    color:#c1dce2;
+
+    font-size:14px;
+
+    margin:6px 0;
+
+    line-height:1.4;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:700px){
+
+    .topbar{
+
+        min-height:72px;
+
+        padding:12px 15px;
+
+        gap:10px;
+
+    }
+
+
+    .logo-box{
+
+        min-width:auto;
+
+    }
+
+
+    .logo-text{
+
+        font-size:17px;
+
+    }
+
+
+    .title{
+
+        font-size:16px;
+
+    }
+
+
+    .software-name{
+
+        display:none;
+
+    }
+
+
+    .dashboard-btn{
+
+        padding:10px 12px;
+
+        font-size:12px;
+
+    }
+
+
+    .container{
+
+        margin:20px auto;
+
+        padding:0 12px;
+
+    }
+
+
+    .profile-card{
+
+        padding:18px;
+
+    }
+
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+        gap:16px;
+
+    }
+
+
+    .form-group.full{
+
+        grid-column:auto;
+
+    }
+
+
+    .button-row{
+
+        flex-direction:column;
+
+    }
+
+
+    .save-btn,
+    .clear-btn{
+
+        width:100%;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     TOPBAR
+========================================================= -->
+
+<div class="topbar">
+
+
+    <div class="logo-box">
+
+        <div class="logo">
+            V
+        </div>
+
+        <div class="logo-text">
+            VYAPAR ONE
+        </div>
+
+    </div>
+
+
+    <div class="title">
+        BUSINESS PROFILE
+    </div>
+
+
+    <div class="top-right">
+
+        <div class="software-name">
+            VYAPAR ONE BILLING SOFTWARE
+        </div>
+
+
+        <button
+            class="dashboard-btn"
+            onclick="goDashboard()">
+
+            DASHBOARD
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<div class="container">
+
+
+    <div class="profile-card">
+
+
+        <div class="card-title">
+            BUSINESS INFORMATION
+        </div>
+
+
+        <div class="card-subtitle">
+            ENTER YOUR BUSINESS DETAILS
+        </div>
+
+
+
+        <div class="form-grid">
+
+
+            <!-- BUSINESS NAME -->
+
+            <div class="form-group full">
+
+                <label>
+                    BUSINESS NAME
+                </label>
+
+                <input
+                    type="text"
+                    id="businessName"
+                    placeholder="ENTER BUSINESS NAME">
+
+            </div>
+
+
+
+            <!-- OWNER NAME -->
+
+            <div class="form-group">
+
+                <label>
+                    OWNER NAME
+                </label>
+
+                <input
+                    type="text"
+                    id="ownerName"
+                    placeholder="ENTER OWNER NAME">
+
+            </div>
+
+
+
+            <!-- BUSINESS TYPE -->
+
+            <div class="form-group">
+
+                <label>
+                    BUSINESS TYPE
+                </label>
+
+                <select id="businessType">
+
+                    <option value="">
+                        SELECT BUSINESS TYPE
+                    </option>
+
+                    <option value="AGRICULTURE">
+                        AGRICULTURE
+                    </option>
+
+                    <option value="TRACTOR">
+                        TRACTOR BUSINESS
+                    </option>
+
+                    <option value="RETAIL">
+                        RETAIL BUSINESS
+                    </option>
+
+                    <option value="WHOLESALE">
+                        WHOLESALE BUSINESS
+                    </option>
+
+                    <option value="GENERAL STORE">
+                        GENERAL STORE
+                    </option>
+
+                    <option value="OTHER">
+                        OTHER
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- MOBILE -->
+
+            <div class="form-group">
+
+                <label>
+                    MOBILE NUMBER
+                </label>
+
+                <input
+                    type="tel"
+                    id="mobileNumber"
+                    maxlength="10"
+                    inputmode="numeric"
+                    placeholder="ENTER MOBILE NUMBER">
+
+            </div>
+
+
+
+            <!-- ALTERNATE MOBILE -->
+
+            <div class="form-group">
+
+                <label>
+                    ALTERNATE MOBILE
+                </label>
+
+                <input
+                    type="tel"
+                    id="alternateMobile"
+                    maxlength="10"
+                    inputmode="numeric"
+                    placeholder="ENTER ALTERNATE MOBILE">
+
+            </div>
+
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group full">
+
+                <label>
+                    EMAIL
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="ENTER EMAIL ADDRESS">
+
+            </div>
+
+
+
+            <!-- GST -->
+
+            <div class="form-group">
+
+                <label>
+                    GST NUMBER
+                </label>
+
+                <input
+                    type="text"
+                    id="gstNumber"
+                    maxlength="15"
+                    placeholder="ENTER GST NUMBER">
+
+            </div>
+
+
+
+            <!-- ADDRESS -->
+
+            <div class="form-group full">
+
+                <label>
+                    ADDRESS
+                </label>
+
+                <textarea
+                    id="address"
+                    placeholder="ENTER BUSINESS ADDRESS"></textarea>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             BUTTONS
+        ================================================= -->
+
+        <div class="button-row">
+
+            <button
+                class="save-btn"
+                id="saveProfileBtn">
+
+                SAVE PROFILE
+
+            </button>
+
+
+            <button
+                class="clear-btn"
+                id="clearProfileBtn">
+
+                CLEAR
+
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SUCCESS
+        ================================================= -->
+
+        <div
+            class="success-message"
+            id="successMessage">
+
+            BUSINESS PROFILE SAVED SUCCESSFULLY
+
+        </div>
+
+
+
+        <!-- =================================================
+             SAVED PROFILE PREVIEW
+        ================================================= -->
+
+        <div
+            class="preview-card"
+            id="previewCard">
+
+
+            <div class="preview-title">
+                SAVED BUSINESS PROFILE
+            </div>
+
+
+            <div
+                class="preview-name"
+                id="previewName">
+            </div>
+
+
+            <div
+                class="preview-line"
+                id="previewOwner">
+            </div>
+
+
+            <div
+                class="preview-line"
+                id="previewBusinessType">
+            </div>
+
+
+            <div
+                class="preview-line"
+                id="previewAddress">
+            </div>
+
+
+            <div
+                class="preview-line"
+                id="previewMobile">
+            </div>
+
+
+            <div
+                class="preview-line"
+                id="previewAlternate">
+            </div>
+
+
+            <div
+                class="preview-line"
+                id="previewEmail">
+            </div>
+
+
+            <div
+                class="preview-line"
+                id="previewGst">
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   GET ELEMENTS
+========================================================= */
+
+const businessName =
+    document.getElementById("businessName");
+
+const ownerName =
+    document.getElementById("ownerName");
+
+const businessType =
+    document.getElementById("businessType");
+
+const mobileNumber =
+    document.getElementById("mobileNumber");
+
+const alternateMobile =
+    document.getElementById("alternateMobile");
+
+const email =
+    document.getElementById("email");
+
+const gstNumber =
+    document.getElementById("gstNumber");
+
+const address =
+    document.getElementById("address");
+
+const successMessage =
+    document.getElementById("successMessage");
+
+const previewCard =
+    document.getElementById("previewCard");
+
+
+/* =========================================================
+   SAVE BUSINESS PROFILE
+========================================================= */
+
+function saveBusinessProfile(){
+
+
+    const name =
+        businessName.value
+        .trim()
+        .toUpperCase();
+
+
+    /* BUSINESS NAME REQUIRED */
+
+    if(name === ""){
+
+        alert(
+            "PLEASE ENTER BUSINESS NAME"
+        );
+
+        businessName.focus();
+
+        return;
+    }
+
+
+
+    /* MOBILE VALIDATION */
+
+    const mobile =
+        mobileNumber.value.trim();
+
+
+    if(
+        mobile !== "" &&
+        !/^\d{10}$/.test(mobile)
+    ){
+
+        alert(
+            "PLEASE ENTER VALID 10 DIGIT MOBILE NUMBER"
+        );
+
+        mobileNumber.focus();
+
+        return;
+    }
+
+
+
+    /* ALTERNATE MOBILE VALIDATION */
+
+    const alternate =
+        alternateMobile.value.trim();
+
+
+    if(
+        alternate !== "" &&
+        !/^\d{10}$/.test(alternate)
+    ){
+
+        alert(
+            "PLEASE ENTER VALID 10 DIGIT ALTERNATE MOBILE"
+        );
+
+        alternateMobile.focus();
+
+        return;
+    }
+
+
+
+    /* CREATE PROFILE OBJECT */
+
+    const profile = {
+
+        businessName:name,
+
+        ownerName:
+            ownerName.value
+            .trim()
+            .toUpperCase(),
+
+        businessType:
+            businessType.value,
+
+        mobileNumber:
+            mobile,
+
+        alternateMobile:
+            alternate,
+
+        email:
+            email.value
+            .trim(),
+
+        gstNumber:
+            gstNumber.value
+            .trim()
+            .toUpperCase(),
+
+        address:
+            address.value
+            .trim()
+            .toUpperCase()
+
+    };
+
+
+
+    /* =====================================================
+       SAVE TO LOCAL STORAGE
+    ===================================================== */
+
+    localStorage.setItem(
+        "businessProfile",
+        JSON.stringify(profile)
+    );
+
+
+
+    /* =====================================================
+       SHOW SUCCESS
+    ===================================================== */
+
+    successMessage.style.display =
+        "block";
+
+
+
+    /* =====================================================
+       SHOW SAVED PROFILE
+    ===================================================== */
+
+    showPreview(profile);
+
+
+
+    /* =====================================================
+       CLEAR FORM
+    ===================================================== */
+
+    businessName.value = "";
+
+    ownerName.value = "";
+
+    businessType.value = "";
+
+    mobileNumber.value = "";
+
+    alternateMobile.value = "";
+
+    email.value = "";
+
+    gstNumber.value = "";
+
+    address.value = "";
+
+
+
+    /* FIRST FIELD FOCUS */
+
+    businessName.focus();
+
+
+
+    /* HIDE SUCCESS AFTER 3 SEC */
+
+    setTimeout(function(){
+
+        successMessage.style.display =
+            "none";
+
+    },3000);
+
+}
+
+
+
+/* =========================================================
+   SHOW SAVED PROFILE
+========================================================= */
+
+function showPreview(profile){
+
+
+    previewCard.style.display =
+        "block";
+
+
+
+    document.getElementById(
+        "previewName"
+    ).textContent =
+        profile.businessName || "";
+
+
+
+    document.getElementById(
+        "previewOwner"
+    ).textContent =
+        profile.ownerName
+        ? "OWNER: " + profile.ownerName
+        : "";
+
+
+
+    document.getElementById(
+        "previewBusinessType"
+    ).textContent =
+        profile.businessType
+        ? "BUSINESS TYPE: " +
+          profile.businessType
+        : "";
+
+
+
+    document.getElementById(
+        "previewAddress"
+    ).textContent =
+        profile.address
+        ? "ADDRESS: " +
+          profile.address
+        : "";
+
+
+
+    document.getElementById(
+        "previewMobile"
+    ).textContent =
+        profile.mobileNumber
+        ? "MOBILE: " +
+          profile.mobileNumber
+        : "";
+
+
+
+    document.getElementById(
+        "previewAlternate"
+    ).textContent =
+        profile.alternateMobile
+        ? "ALTERNATE MOBILE: " +
+          profile.alternateMobile
+        : "";
+
+
+
+    document.getElementById(
+        "previewEmail"
+    ).textContent =
+        profile.email
+        ? "EMAIL: " +
+          profile.email
+        : "";
+
+
+
+    document.getElementById(
+        "previewGst"
+    ).textContent =
+        profile.gstNumber
+        ? "GST: " +
+          profile.gstNumber
+        : "";
+
+}
+
+
+
+/* =========================================================
+   LOAD SAVED PROFILE
+========================================================= */
+
+function loadBusinessProfile(){
+
+
+    const saved =
+        localStorage.getItem(
+            "businessProfile"
+        );
+
+
+    if(!saved){
+
+        return;
+
+    }
+
+
+    try{
+
+        const profile =
+            JSON.parse(saved);
+
+
+        showPreview(profile);
+
+    }
+
+    catch(error){
+
+        console.log(
+            "BUSINESS PROFILE DATA ERROR",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   CLEAR BUTTON
+========================================================= */
+
+function clearProfile(){
+
+
+    businessName.value = "";
+
+    ownerName.value = "";
+
+    businessType.value = "";
+
+    mobileNumber.value = "";
+
+    alternateMobile.value = "";
+
+    email.value = "";
+
+    gstNumber.value = "";
+
+    address.value = "";
+
+
+    successMessage.style.display =
+        "none";
+
+
+    businessName.focus();
+
+}
+
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function goDashboard(){
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+
+
+/* =========================================================
+   SAVE BUTTON
+========================================================= */
+
+document
+    .getElementById("saveProfileBtn")
+    .addEventListener(
+        "click",
+        saveBusinessProfile
+    );
+
+
+
+/* =========================================================
+   CLEAR BUTTON
+========================================================= */
+
+document
+    .getElementById("clearProfileBtn")
+    .addEventListener(
+        "click",
+        clearProfile
+    );
+
+
+
+/* =========================================================
+   MOBILE NUMBER ONLY
+========================================================= */
+
+mobileNumber.addEventListener(
+    "input",
+    function(){
+
+        this.value =
+            this.value
+            .replace(/\D/g,"")
+            .slice(0,10);
+
+    }
+);
+
+
+
+alternateMobile.addEventListener(
+    "input",
+    function(){
+
+        this.value =
+            this.value
+            .replace(/\D/g,"")
+            .slice(0,10);
+
+    }
+);
+
+
+
+/* =========================================================
+   ENTER KEY NAVIGATION
+========================================================= */
+
+const fields = [
+
+    businessName,
+
+    ownerName,
+
+    businessType,
+
+    mobileNumber,
+
+    alternateMobile,
+
+    email,
+
+    gstNumber,
+
+    address
+
+];
+
+
+fields.forEach(
+    function(field,index){
+
+        field.addEventListener(
+            "keydown",
+            function(event){
+
+                if(
+                    event.key !== "Enter"
+                ){
+
+                    return;
+
+                }
+
+
+                event.preventDefault();
+
+
+                if(
+                    index <
+                    fields.length - 1
+                ){
+
+                    fields[
+                        index + 1
+                    ].focus();
+
+                }
+
+                else{
+
+                    document
+                        .getElementById(
+                            "saveProfileBtn"
+                        )
+                        .focus();
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================================
+   PAGE LOAD
+========================================================= */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        loadBusinessProfile();
+
+        businessName.focus();
+
+    }
+);
+
+</script>
+
+
+</body>
+</html>

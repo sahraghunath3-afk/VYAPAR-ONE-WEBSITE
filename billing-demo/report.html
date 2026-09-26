@@ -1,0 +1,3245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>VYAPAR ONE - BUSINESS REPORT</title>
+
+<style>
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            #123c59 0%,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 90% 90%,
+            #075b55 0%,
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            #031321,
+            #061f36 50%,
+            #052d35
+        );
+
+    min-height:100vh;
+
+    color:#ffffff;
+
+    overflow-x:hidden;
+}
+
+
+/* =====================================================
+   TOP BAR
+===================================================== */
+
+.topbar{
+
+    min-height:74px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    padding:12px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #041827,
+            #063b4c
+        );
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.12);
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.30);
+}
+
+
+.logo{
+
+    width:48px;
+    height:48px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00a6a6,
+            #00d4c7
+        );
+
+    color:#fff;
+
+    font-size:25px;
+
+    font-weight:900;
+}
+
+
+.title-area{
+
+    flex:1;
+}
+
+
+.title-area h1{
+
+    font-size:22px;
+
+    font-weight:900;
+}
+
+
+.title-area p{
+
+    margin-top:3px;
+
+    color:#9ed8df;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+}
+
+
+.dashboard-btn{
+
+    border:none;
+
+    padding:11px 17px;
+
+    border-radius:9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #087f8c,
+            #0aa6a6
+        );
+
+    color:#fff;
+
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+
+/* =====================================================
+   SCREEN CONTAINER
+===================================================== */
+
+.container{
+
+    width:100%;
+
+    max-width:1500px;
+
+    margin:auto;
+
+    padding:24px;
+}
+
+
+.card{
+
+    background:
+        linear-gradient(
+            145deg,
+            #071d35,
+            #0b2d4d
+        );
+
+    border:
+        1px solid
+        #164d73;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    margin-bottom:20px;
+
+    box-shadow:
+        0 12px 30px
+        rgba(0,0,0,.25);
+}
+
+
+.card-title{
+
+    font-size:18px;
+
+    font-weight:900;
+
+    margin-bottom:17px;
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+.filter-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:14px;
+}
+
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+}
+
+
+.form-group label{
+
+    color:#a9e2e7;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    letter-spacing:.5px;
+}
+
+
+input,
+select{
+
+    width:100%;
+
+    height:45px;
+
+    padding:0 13px;
+
+    border-radius:8px;
+
+    border:
+        1px solid
+        #236080;
+
+    outline:none;
+
+    background:#061b2e;
+
+    color:#fff;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+}
+
+
+input:focus,
+select:focus{
+
+    border-color:#00b7b7;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(0,190,190,.12);
+}
+
+
+.button-row{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:17px;
+}
+
+
+.btn{
+
+    border:none;
+
+    padding:11px 18px;
+
+    border-radius:8px;
+
+    color:#fff;
+
+    font-size:13px;
+
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+
+.btn-generate{
+
+    background:
+        linear-gradient(
+            135deg,
+            #087f8c,
+            #0aa6a6
+        );
+}
+
+
+.btn-print{
+
+    background:
+        linear-gradient(
+            135deg,
+            #b7791f,
+            #d69e2e
+        );
+}
+
+
+.btn-clear{
+
+    background:
+        linear-gradient(
+            135deg,
+            #475569,
+            #64748b
+        );
+}
+
+
+.report-info{
+
+    margin-top:14px;
+
+    padding:11px 14px;
+
+    border-radius:8px;
+
+    background:
+        rgba(0,180,190,.10);
+
+    border:
+        1px solid
+        rgba(0,190,190,.25);
+
+    color:#a9e2e7;
+
+    font-size:13px;
+
+    font-weight:700;
+}
+
+
+/* =====================================================
+   SUMMARY SCREEN
+===================================================== */
+
+.summary-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:14px;
+}
+
+
+.summary-box{
+
+    padding:16px;
+
+    min-height:95px;
+
+    border-radius:12px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #071d35,
+            #0b2d4d
+        );
+
+    border:
+        1px solid
+        #164d73;
+}
+
+
+.summary-label{
+
+    color:#91cfd7;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    margin-bottom:8px;
+}
+
+
+.summary-value{
+
+    font-size:21px;
+
+    font-weight:900;
+}
+
+
+/* =====================================================
+   SCREEN TABLE
+===================================================== */
+
+.table-wrapper{
+
+    width:100%;
+
+    overflow-x:auto;
+
+    border:
+        1px solid
+        #164d73;
+
+    border-radius:10px;
+}
+
+
+table{
+
+    width:100%;
+
+    min-width:1000px;
+
+    border-collapse:collapse;
+}
+
+
+th,
+td{
+
+    padding:11px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.08);
+
+    white-space:nowrap;
+
+    text-align:left;
+}
+
+
+th{
+
+    background:
+        linear-gradient(
+            135deg,
+            #087f8c,
+            #075b6a
+        );
+
+    color:#fff;
+
+    font-size:13px;
+
+    font-weight:900;
+}
+
+
+td{
+
+    background:#061b2e;
+
+    color:#e7f7f8;
+
+    font-size:13px;
+
+    font-weight:700;
+}
+
+
+tbody tr:nth-child(even) td{
+
+    background:#08243b;
+}
+
+
+.empty-row{
+
+    text-align:center !important;
+
+    padding:30px !important;
+
+    color:#8caeb9 !important;
+}
+
+
+.total-footer{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    margin-top:14px;
+}
+
+
+.total-box{
+
+    min-width:280px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:25px;
+
+    padding:14px 18px;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #063c4c,
+            #075b55
+        );
+
+    font-size:16px;
+
+    font-weight:900;
+}
+
+
+/* =====================================================
+   PRINT REPORT HIDDEN ON SCREEN
+===================================================== */
+
+.print-report{
+
+    display:none;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:900px){
+
+    .filter-grid{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+
+    .summary-grid{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+}
+
+
+@media(max-width:600px){
+
+    .container{
+
+        padding:12px;
+    }
+
+
+    .filter-grid{
+
+        grid-template-columns:1fr;
+    }
+
+
+    .summary-grid{
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+
+    .title-area h1{
+
+        font-size:17px;
+    }
+
+
+    .title-area p{
+
+        font-size:9px;
+    }
+
+}
+
+
+/* =====================================================
+   =====================================================
+   PRINT DESIGN
+   =====================================================
+===================================================== */
+
+@media print{
+
+    /*
+       IMPORTANT:
+       Landscape is used because the report has
+       7 columns and this prevents horizontal cutting.
+    */
+
+    @page{
+
+        size:A4 landscape;
+
+        margin:7mm;
+    }
+
+
+    html,
+    body{
+
+        width:100%;
+
+        height:auto;
+
+        margin:0;
+
+        padding:0;
+
+        background:#fff !important;
+
+        color:#111 !important;
+    }
+
+
+    body{
+
+        overflow:visible !important;
+    }
+
+
+    .topbar,
+    .container{
+
+        display:none !important;
+    }
+
+
+    .print-report{
+
+        display:block !important;
+
+        width:100%;
+
+        background:#fff;
+
+        color:#111;
+
+        font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
+
+        font-size:11px;
+    }
+
+
+    /* =================================================
+       PRINT HEADER
+    ================================================= */
+
+    .print-header{
+
+        width:100%;
+
+        text-align:center;
+
+        padding-bottom:5px;
+
+        border-bottom:
+            2px solid
+            #0b6070;
+
+        margin-bottom:5px;
+    }
+
+
+    .print-brand{
+
+        font-size:24px;
+
+        font-weight:900;
+
+        color:#073b58;
+
+        letter-spacing:.8px;
+    }
+
+
+    .print-title{
+
+        font-size:17px;
+
+        font-weight:900;
+
+        color:#087f8c;
+
+        margin-top:2px;
+    }
+
+
+    .print-company{
+
+        font-size:16px;
+
+        font-weight:900;
+
+        margin-top:5px;
+
+        color:#102f43;
+    }
+
+
+    .print-address{
+
+        font-size:11px;
+
+        font-weight:700;
+
+        margin-top:2px;
+    }
+
+
+    .print-mobile{
+
+        font-size:11px;
+
+        font-weight:700;
+
+        margin-top:1px;
+    }
+
+
+    /* =================================================
+       CUSTOMER INFORMATION
+    ================================================= */
+
+    .print-info{
+
+        width:100%;
+
+        display:grid;
+
+        grid-template-columns:
+            2fr 1fr 1fr;
+
+        border:
+            1px solid
+            #527d89;
+
+        margin-bottom:5px;
+
+        background:#f5fafb;
+    }
+
+
+    .print-info-box{
+
+        min-height:42px;
+
+        padding:6px 9px;
+
+        border-right:
+            1px solid
+            #9ab2b9;
+    }
+
+
+    .print-info-box:last-child{
+
+        border-right:none;
+    }
+
+
+    .print-info-label{
+
+        display:block;
+
+        font-size:9px;
+
+        font-weight:900;
+
+        color:#087f8c;
+
+        margin-bottom:2px;
+    }
+
+
+    .print-info-value{
+
+        display:block;
+
+        font-size:13px;
+
+        font-weight:900;
+
+        color:#102f43;
+
+        /*
+           Important for long customer names
+        */
+
+        overflow-wrap:anywhere;
+
+        word-break:break-word;
+    }
+
+
+    /* =================================================
+       MAIN TABLE
+    ================================================= */
+
+    .print-table{
+
+        width:100%;
+
+        border-collapse:collapse;
+
+        border:
+            1.5px solid
+            #3c626d;
+
+        table-layout:auto;
+
+        /*
+           IMPORTANT:
+           Allows table to continue to next page.
+        */
+
+        page-break-inside:auto;
+
+        break-inside:auto;
+    }
+
+
+    .print-table thead{
+
+        display:table-header-group;
+    }
+
+
+    .print-table tfoot{
+
+        display:table-footer-group;
+    }
+
+
+    .print-table tr{
+
+        page-break-inside:avoid;
+
+        break-inside:avoid;
+    }
+
+
+    .print-table th{
+
+        background:#dceff2 !important;
+
+        color:#073b58 !important;
+
+        border:
+            1px solid
+            #6c8e97;
+
+        padding:6px 5px;
+
+        font-size:11px;
+
+        font-weight:900;
+
+        text-align:center;
+
+        white-space:nowrap;
+    }
+
+
+    .print-table td{
+
+        border:
+            1px solid
+            #91aab1;
+
+        padding:5px 6px;
+
+        font-size:11px;
+
+        font-weight:700;
+
+        color:#142d3b;
+
+        background:#fff !important;
+
+        /*
+           IMPORTANT:
+           Long item names will wrap.
+        */
+
+        white-space:normal;
+
+        overflow-wrap:anywhere;
+
+        word-break:break-word;
+
+        vertical-align:top;
+
+        line-height:1.25;
+
+        height:auto;
+
+        max-height:none;
+    }
+
+
+    /* =================================================
+       COLUMN WIDTH
+    ================================================= */
+
+    .print-table th:nth-child(1),
+    .print-table td:nth-child(1){
+
+        width:6%;
+
+        text-align:center;
+
+        white-space:nowrap;
+    }
+
+
+    .print-table th:nth-child(2),
+    .print-table td:nth-child(2){
+
+        width:13%;
+
+        text-align:center;
+
+        white-space:nowrap;
+    }
+
+
+    .print-table th:nth-child(3),
+    .print-table td:nth-child(3){
+
+        width:30%;
+
+        text-align:left;
+
+        /*
+           Item name gets the largest area.
+        */
+    }
+
+
+    .print-table th:nth-child(4),
+    .print-table td:nth-child(4){
+
+        width:10%;
+
+        text-align:center;
+    }
+
+
+    .print-table th:nth-child(5),
+    .print-table td:nth-child(5){
+
+        width:13%;
+
+        text-align:right;
+
+        white-space:nowrap;
+    }
+
+
+    .print-table th:nth-child(6),
+    .print-table td:nth-child(6){
+
+        width:14%;
+
+        text-align:right;
+
+        white-space:nowrap;
+    }
+
+
+    .print-table th:nth-child(7),
+    .print-table td:nth-child(7){
+
+        width:14%;
+
+        text-align:right;
+
+        white-space:nowrap;
+    }
+
+
+    /* =================================================
+       SUMMARY
+       DIRECTLY ATTACHED TO TABLE
+    ================================================= */
+
+    .print-summary{
+    width:41%;
+    margin-left:auto;
+    margin-top:0;
+
+    border-left:1.5px solid #3c626d;
+    border-right:1.5px solid #3c626d;
+    border-bottom:1.5px solid #3c626d;
+
+    page-break-inside:avoid;
+    break-inside:avoid;
+}
+
+
+.summary-row{
+    display:grid;
+    grid-template-columns:1fr 105px;
+    min-height:27px;
+    border-bottom:1px solid #9ab2b9;
+}
+
+
+.summary-row:last-child{
+
+    border-bottom:none;
+}
+
+
+.summary-label{
+
+    padding:5px 9px;
+
+    font-size:11px;
+
+    font-weight:900;
+
+    color:#173b4d;
+}
+
+
+.summary-value{
+
+    padding:5px 9px;
+
+    border-left:
+        1px solid
+        #9ab2b9;
+
+    text-align:right;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    color:#173b4d;
+}
+
+
+.closing-row{
+
+    background:#e1f2f3;
+}
+
+
+.closing-row
+.summary-label,
+.closing-row
+.summary-value{
+
+    color:#075d68;
+
+    font-size:13px;
+
+    font-weight:900;
+}
+
+
+    /* =================================================
+       AMOUNT WORDS
+    ================================================= */
+
+    .amount-words{
+
+        width:100%;
+
+        margin-top:5px;
+
+        padding:6px 9px;
+
+        border:
+            1px solid
+            #9ab2b9;
+
+        background:#f5fafb;
+
+        page-break-inside:avoid;
+
+        break-inside:avoid;
+    }
+
+
+    .amount-words-label{
+
+        font-size:9px;
+
+        font-weight:900;
+
+        color:#087f8c;
+    }
+
+
+    .amount-words-value{
+
+        margin-top:2px;
+
+        font-size:12px;
+
+        font-weight:900;
+
+        color:#173b4d;
+
+        overflow-wrap:anywhere;
+    }
+
+
+    /* =================================================
+       FOOTER
+    ================================================= */
+
+    .print-footer{
+
+        width:100%;
+
+        display:flex;
+
+        justify-content:space-between;
+
+        align-items:flex-end;
+
+        margin-top:7px;
+
+        min-height:50px;
+
+        page-break-inside:avoid;
+
+        break-inside:avoid;
+    }
+
+
+    .footer-message{
+
+        font-size:10px;
+
+        font-weight:700;
+
+        color:#087f8c;
+    }
+
+
+    .signature{
+
+        width:150px;
+
+        text-align:center;
+
+        border:none !important;
+
+        outline:none !important;
+
+        box-shadow:none !important;
+    }
+
+
+    .signature-space{
+
+        height:25px;
+
+        border:none !important;
+    }
+
+
+    .signature-line{
+
+        width:115px;
+
+        margin:auto;
+
+        border-top:
+            1px solid
+            #243b45;
+    }
+
+
+    .signature-text{
+
+        margin-top:3px;
+
+        font-size:10px;
+
+        font-weight:900;
+
+        color:#173b4d;
+    }
+
+
+    /*
+       IMPORTANT:
+       Browser print colors should remain visible.
+    */
+
+    *{
+
+        -webkit-print-color-adjust:exact !important;
+
+        print-color-adjust:exact !important;
+    }
+
+}
+
+
+/* =====================================================
+   SCREEN ONLY
+===================================================== */
+
+@media screen{
+
+    .print-report{
+
+        display:none;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SCREEN HEADER
+===================================================== -->
+
+<div class="topbar">
+
+    <div class="logo">
+        V
+    </div>
+
+    <div class="title-area">
+
+        <h1>
+            BUSINESS REPORT
+        </h1>
+
+        <p>
+            VYAPAR ONE BILLING SOFTWARE
+        </p>
+
+    </div>
+
+    <button
+        class="dashboard-btn"
+        onclick="goDashboard()"
+    >
+        DASHBOARD
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     SCREEN
+===================================================== -->
+
+<div class="container">
+
+
+    <div class="card">
+
+        <div class="card-title">
+            REPORT FILTER
+        </div>
+
+
+        <div class="filter-grid">
+
+
+            <div class="form-group">
+
+                <label>
+                    REPORT TYPE
+                </label>
+
+                <select id="reportType">
+
+                    <option value="ALL">
+                        ALL TRANSACTIONS
+                    </option>
+
+                    <option value="SALES">
+                        SALES REPORT
+                    </option>
+
+                    <option value="PAYMENT">
+                        PAYMENT REPORT
+                    </option>
+
+                    <option value="DISCOUNT">
+                        DISCOUNT REPORT
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    CUSTOMER
+                </label>
+
+                <select id="reportCustomer">
+
+                    <option value="">
+                        ALL CUSTOMERS
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    FROM DATE
+                </label>
+
+                <input
+                    type="date"
+                    id="fromDate"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    TO DATE
+                </label>
+
+                <input
+                    type="date"
+                    id="toDate"
+                >
+
+            </div>
+
+        </div>
+
+
+        <div class="button-row">
+
+            <button
+                class="btn btn-generate"
+                onclick="generateReport()"
+            >
+                GENERATE REPORT
+            </button>
+
+
+            <button
+                class="btn btn-print"
+                onclick="printReport()"
+            >
+                PRINT / PDF
+            </button>
+
+
+            <button
+                class="btn btn-clear"
+                onclick="clearFilters()"
+            >
+                CLEAR
+            </button>
+
+        </div>
+
+
+        <div
+            class="report-info"
+            id="reportInfo"
+        >
+            SHOWING ALL TRANSACTIONS
+        </div>
+
+    </div>
+
+
+
+    <div class="card">
+
+        <div class="card-title">
+            REPORT SUMMARY
+        </div>
+
+
+        <div class="summary-grid">
+
+
+            <div class="summary-box">
+
+                <div class="summary-label">
+                    TOTAL AMOUNT
+                </div>
+
+                <div
+                    class="summary-value"
+                    id="totalSales"
+                >
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <div class="summary-label">
+                    TOTAL PAYMENT
+                </div>
+
+                <div
+                    class="summary-value"
+                    id="totalPayment"
+                >
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <div class="summary-label">
+                    TOTAL DISCOUNT
+                </div>
+
+                <div
+                    class="summary-value"
+                    id="totalDiscount"
+                >
+                    ₹0.00
+                </div>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <div class="summary-label">
+                    CLOSING BALANCE
+                </div>
+
+                <div
+                    class="summary-value"
+                    id="closingBalance"
+                >
+                    ₹0.00
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="card">
+
+        <div class="card-title">
+            REPORT DETAILS
+        </div>
+
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>S.L.NO</th>
+                        <th>DATE</th>
+                        <th>ITEM NAME</th>
+                        <th>UNIT</th>
+                        <th>RATE</th>
+                        <th>AMOUNT</th>
+                        <th>PAYMENT</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="reportBody">
+
+                    <tr>
+
+                        <td
+                            colspan="7"
+                            class="empty-row"
+                        >
+                            CLICK GENERATE REPORT
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div class="total-footer">
+
+            <div class="total-box">
+
+                <span>
+                    CLOSING BALANCE
+                </span>
+
+                <span id="tableNetBalance">
+                    ₹0.00
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     PRINT REPORT
+===================================================== -->
+
+<div class="print-report">
+
+
+    <div class="print-header">
+
+        <div class="print-brand">
+            VYAPAR ONE
+        </div>
+
+        <div class="print-title">
+            BUSINESS REPORT
+        </div>
+
+        <div class="print-company">
+            RAGHUNATH & SUBHASH SAH BROTHER/S
+        </div>
+
+        <div class="print-address">
+            BAIRIYA KALA
+        </div>
+
+        <div class="print-mobile">
+            MO-8002201662
+        </div>
+
+    </div>
+
+
+    <!-- CUSTOMER INFORMATION -->
+
+    <div class="print-info">
+
+
+        <div class="print-info-box">
+
+            <span class="print-info-label">
+                CUSTOMER NAME
+            </span>
+
+            <span
+                class="print-info-value"
+                id="printCustomerName"
+            >
+                ALL CUSTOMERS
+            </span>
+
+        </div>
+
+
+        <div class="print-info-box">
+
+            <span class="print-info-label">
+                FROM DATE
+            </span>
+
+            <span
+                class="print-info-value"
+                id="printFromDate"
+            >
+                -
+            </span>
+
+        </div>
+
+
+        <div class="print-info-box">
+
+            <span class="print-info-label">
+                TO DATE
+            </span>
+
+            <span
+                class="print-info-value"
+                id="printToDate"
+            >
+                -
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- MAIN PRINT TABLE -->
+
+    <table class="print-table">
+
+        <thead>
+
+            <tr>
+
+                <th>S.L.NO</th>
+
+                <th>DATE</th>
+
+                <th>ITEM NAME</th>
+
+                <th>UNIT</th>
+
+                <th>RATE</th>
+
+                <th>AMOUNT</th>
+
+                <th>PAYMENT</th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody id="printTableBody">
+        </tbody>
+
+    </table>
+
+
+    <!-- SUMMARY -->
+
+    <div class="print-summary">
+
+
+        <div class="summary-row">
+
+            <div class="summary-label">
+                TOTAL AMOUNT
+            </div>
+
+            <div
+                class="summary-value"
+                id="printTotalAmount"
+            >
+                ₹0.00
+            </div>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <div class="summary-label">
+                TOTAL PAYMENT
+            </div>
+
+            <div
+                class="summary-value"
+                id="printTotalPayment"
+            >
+                ₹0.00
+            </div>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <div class="summary-label">
+                TOTAL DISCOUNT
+            </div>
+
+            <div
+                class="summary-value"
+                id="printTotalDiscount"
+            >
+                ₹0.00
+            </div>
+
+        </div>
+
+
+        <div class="
+            summary-row
+            closing-row
+        ">
+
+            <div class="summary-label">
+                CLOSING BALANCE
+            </div>
+
+            <div
+                class="summary-value"
+                id="printClosingBalance"
+            >
+                ₹0.00
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- AMOUNT IN WORDS -->
+
+    <div class="amount-words">
+
+        <div class="amount-words-label">
+            AMOUNT IN WORDS
+        </div>
+
+        <div
+            class="amount-words-value"
+            id="printAmountWords"
+        >
+            Zero Rupees Only
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="print-footer">
+
+
+        <div class="footer-message">
+            THANK YOU FOR YOUR BUSINESS
+        </div>
+
+
+        <div class="signature">
+
+            <div class="signature-space">
+            </div>
+
+            <div class="signature-line">
+            </div>
+
+            <div class="signature-text">
+                SIGNATURE
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   DATA
+===================================================== */
+
+let customers =
+    JSON.parse(
+        localStorage.getItem("customers")
+    ) || [];
+
+
+let invoices =
+    JSON.parse(
+        localStorage.getItem("invoices")
+    ) || [];
+
+
+let payments =
+    JSON.parse(
+        localStorage.getItem("payments")
+    ) || [];
+
+
+let currentReportTransactions = [];
+
+
+/* =====================================================
+   NORMALIZE
+===================================================== */
+
+function normalizeName(name){
+
+    return String(name || "")
+        .trim()
+        .toUpperCase();
+
+}
+
+
+/* =====================================================
+   DATE FORMAT
+===================================================== */
+
+function formatDate(value){
+
+    if(!value){
+        return "";
+    }
+
+
+    let date =
+        String(value)
+        .split("T")[0];
+
+
+    if(
+        /^\d{2}-\d{2}-\d{4}$/
+        .test(date)
+    ){
+
+        return date;
+    }
+
+
+    if(
+        /^\d{4}-\d{2}-\d{2}$/
+        .test(date)
+    ){
+
+        const p =
+            date.split("-");
+
+
+        return (
+            p[2] +
+            "-" +
+            p[1] +
+            "-" +
+            p[0]
+        );
+
+    }
+
+
+    return date;
+
+}
+
+
+/* =====================================================
+   DATE SORT
+===================================================== */
+
+function sortDate(value){
+
+    if(!value){
+        return "";
+    }
+
+
+    let date =
+        String(value)
+        .split("T")[0];
+
+
+    if(
+        /^\d{4}-\d{2}-\d{2}$/
+        .test(date)
+    ){
+
+        return date;
+    }
+
+
+    if(
+        /^\d{2}-\d{2}-\d{4}$/
+        .test(date)
+    ){
+
+        const p =
+            date.split("-");
+
+
+        return (
+            p[2] +
+            "-" +
+            p[1] +
+            "-" +
+            p[0]
+        );
+
+    }
+
+
+    return date;
+
+}
+
+
+/* =====================================================
+   DATE RANGE
+===================================================== */
+
+function isDateInRange(
+    value,
+    fromDate,
+    toDate
+){
+
+    const date =
+        sortDate(value);
+
+
+    if(!date){
+        return false;
+    }
+
+
+    if(
+        fromDate &&
+        date < fromDate
+    ){
+
+        return false;
+    }
+
+
+    if(
+        toDate &&
+        date > toDate
+    ){
+
+        return false;
+    }
+
+
+    return true;
+
+}
+
+
+/* =====================================================
+   LOAD CUSTOMERS
+===================================================== */
+
+function loadCustomers(){
+
+    const select =
+        document.getElementById(
+            "reportCustomer"
+        );
+
+
+    select.innerHTML =
+        `
+        <option value="">
+            ALL CUSTOMERS
+        </option>
+        `;
+
+
+    customers.forEach(
+        function(customer){
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+
+            option.value =
+                customer.name || "";
+
+
+            option.textContent =
+                customer.name || "";
+
+
+            select.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   GET INVOICE CUSTOMER
+===================================================== */
+
+function getInvoiceCustomer(invoice){
+
+    if(!invoice){
+        return "";
+    }
+
+
+    if(
+        typeof invoice.customer ===
+        "object"
+    ){
+
+        return (
+            invoice.customer.name ||
+            ""
+        );
+
+    }
+
+
+    return invoice.customer || "";
+
+}
+
+
+/* =====================================================
+   GET PAYMENT CUSTOMER
+===================================================== */
+
+function getPaymentCustomer(payment){
+
+    if(!payment){
+        return "";
+    }
+
+
+    if(
+        typeof payment.customer ===
+        "object"
+    ){
+
+        return (
+            payment.customer.name ||
+            ""
+        );
+
+    }
+
+
+    return payment.customer || "";
+
+}
+
+
+/* =====================================================
+   INVOICE TOTAL
+===================================================== */
+
+function getInvoiceTotal(invoice){
+
+    if(!invoice){
+        return 0;
+    }
+
+
+    let total =
+        Number(invoice.total);
+
+
+    if(
+        !isNaN(total) &&
+        total > 0
+    ){
+
+        return total;
+    }
+
+
+    if(
+        Array.isArray(invoice.items)
+    ){
+
+        return invoice.items.reduce(
+            function(sum,item){
+
+                return (
+                    sum +
+                    (
+                        Number(
+                            item.amount
+                        ) || 0
+                    )
+                );
+
+            },
+            0
+        );
+
+    }
+
+
+    return 0;
+
+}
+
+
+/* =====================================================
+   GENERATE REPORT
+===================================================== */
+
+function generateReport(){
+
+    customers =
+        JSON.parse(
+            localStorage.getItem("customers")
+        ) || [];
+
+
+    invoices =
+        JSON.parse(
+            localStorage.getItem("invoices")
+        ) || [];
+
+
+    payments =
+        JSON.parse(
+            localStorage.getItem("payments")
+        ) || [];
+
+
+    const reportType =
+        document.getElementById(
+            "reportType"
+        ).value;
+
+
+    const selectedCustomer =
+        normalizeName(
+            document.getElementById(
+                "reportCustomer"
+            ).value
+        );
+
+
+    const fromDate =
+        document.getElementById(
+            "fromDate"
+        ).value;
+
+
+    const toDate =
+        document.getElementById(
+            "toDate"
+        ).value;
+
+
+    if(
+        fromDate &&
+        toDate &&
+        fromDate > toDate
+    ){
+
+        alert(
+            "FROM DATE CANNOT BE GREATER THAN TO DATE"
+        );
+
+        return;
+    }
+
+
+    let transactions = [];
+
+
+    /* =================================================
+       INVOICES
+    ================================================= */
+
+    if(
+        reportType === "ALL" ||
+        reportType === "SALES"
+    ){
+
+        invoices.forEach(
+            function(invoice){
+
+                const customer =
+                    getInvoiceCustomer(
+                        invoice
+                    );
+
+
+                if(
+                    selectedCustomer &&
+                    normalizeName(customer) !==
+                    selectedCustomer
+                ){
+
+                    return;
+                }
+
+
+                const date =
+                    invoice.date ||
+                    invoice.invoiceDate ||
+                    "";
+
+
+                if(
+                    !isDateInRange(
+                        date,
+                        fromDate,
+                        toDate
+                    )
+                ){
+
+                    return;
+                }
+
+
+                if(
+                    Array.isArray(invoice.items) &&
+                    invoice.items.length
+                ){
+
+                    invoice.items.forEach(
+                        function(item){
+
+                            transactions.push({
+
+                                date:date,
+
+                                customer:customer,
+
+                                item:
+                                    item.item ||
+                                    "",
+
+                                unit:
+                                    item.unit ||
+                                    "",
+
+                                rate:
+                                    Number(
+                                        item.rate
+                                    ) || 0,
+
+                                amount:
+                                    Number(
+                                        item.amount
+                                    ) || 0,
+
+                                payment:0,
+
+                                discount:0,
+
+                                reference:
+                                    invoice.number ||
+                                    "",
+
+                                type:"SALES"
+
+                            });
+
+                        }
+                    );
+
+                }else{
+
+                    transactions.push({
+
+                        date:date,
+
+                        customer:customer,
+
+                        item:"INVOICE",
+
+                        unit:"",
+
+                        rate:0,
+
+                        amount:
+                            getInvoiceTotal(
+                                invoice
+                            ),
+
+                        payment:0,
+
+                        discount:0,
+
+                        reference:
+                            invoice.number ||
+                            "",
+
+                        type:"SALES"
+
+                    });
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =================================================
+       PAYMENTS
+    ================================================= */
+
+    if(
+        reportType === "ALL" ||
+        reportType === "PAYMENT" ||
+        reportType === "DISCOUNT"
+    ){
+
+        payments.forEach(
+            function(payment){
+
+                const customer =
+                    getPaymentCustomer(
+                        payment
+                    );
+
+
+                if(
+                    selectedCustomer &&
+                    normalizeName(customer) !==
+                    selectedCustomer
+                ){
+
+                    return;
+                }
+
+
+                const date =
+                    payment.date || "";
+
+
+                if(
+                    !isDateInRange(
+                        date,
+                        fromDate,
+                        toDate
+                    )
+                ){
+
+                    return;
+                }
+
+
+                const amount =
+                    Number(
+                        payment.amount
+                    ) || 0;
+
+
+                const discount =
+                    Number(
+                        payment.discount
+                    ) || 0;
+
+
+                if(
+                    (
+                        reportType === "ALL" ||
+                        reportType === "PAYMENT"
+                    ) &&
+                    amount > 0
+                ){
+
+                    transactions.push({
+
+                        date:date,
+
+                        customer:customer,
+
+                        item:
+                            "PAYMENT" +
+                            (
+                                payment.mode
+                                ? " - " +
+                                  payment.mode
+                                : ""
+                            ),
+
+                        unit:"",
+
+                        rate:0,
+
+                        amount:0,
+
+                        payment:amount,
+
+                        discount:0,
+
+                        reference:
+                            payment.paymentNumber ||
+                            "",
+
+                        type:"PAYMENT"
+
+                    });
+
+                }
+
+
+                if(
+                    (
+                        reportType === "ALL" ||
+                        reportType === "DISCOUNT"
+                    ) &&
+                    discount > 0
+                ){
+
+                    transactions.push({
+
+                        date:date,
+
+                        customer:customer,
+
+                        item:"DISCOUNT",
+
+                        unit:"",
+
+                        rate:0,
+
+                        amount:0,
+
+                        payment:0,
+
+                        discount:discount,
+
+                        reference:
+                            payment.paymentNumber ||
+                            "",
+
+                        type:"DISCOUNT"
+
+                    });
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =================================================
+       SORT
+    ================================================= */
+
+    transactions.sort(
+        function(a,b){
+
+            return String(
+                sortDate(a.date)
+            ).localeCompare(
+                String(
+                    sortDate(b.date)
+                )
+            );
+
+        }
+    );
+
+
+    currentReportTransactions =
+        transactions;
+
+
+    /* =================================================
+       TOTAL
+    ================================================= */
+
+    let totalAmount = 0;
+
+    let totalPayment = 0;
+
+    let totalDiscount = 0;
+
+
+    transactions.forEach(
+        function(row){
+
+            totalAmount +=
+                Number(row.amount) || 0;
+
+
+            totalPayment +=
+                Number(row.payment) || 0;
+
+
+            totalDiscount +=
+                Number(row.discount) || 0;
+
+        }
+    );
+
+
+    const closingBalance =
+        totalAmount -
+        totalPayment -
+        totalDiscount;
+
+
+    /* =================================================
+       SCREEN SUMMARY
+    ================================================= */
+
+    document.getElementById(
+        "totalSales"
+    ).textContent =
+        "₹" +
+        totalAmount.toFixed(2);
+
+
+    document.getElementById(
+        "totalPayment"
+    ).textContent =
+        "₹" +
+        totalPayment.toFixed(2);
+
+
+    document.getElementById(
+        "totalDiscount"
+    ).textContent =
+        "₹" +
+        totalDiscount.toFixed(2);
+
+
+    document.getElementById(
+        "closingBalance"
+    ).textContent =
+        "₹" +
+        closingBalance.toFixed(2);
+
+
+    document.getElementById(
+        "tableNetBalance"
+    ).textContent =
+        "₹" +
+        closingBalance.toFixed(2);
+
+
+    /* =================================================
+       SCREEN TABLE
+    ================================================= */
+
+    const body =
+        document.getElementById(
+            "reportBody"
+        );
+
+
+    body.innerHTML = "";
+
+
+    if(
+        transactions.length === 0
+    ){
+
+        body.innerHTML =
+            `
+            <tr>
+
+                <td
+                    colspan="7"
+                    class="empty-row"
+                >
+                    NO TRANSACTION FOUND
+                </td>
+
+            </tr>
+            `;
+
+    }else{
+
+        transactions.forEach(
+            function(row,index){
+
+                const tr =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                tr.innerHTML = `
+
+                    <td>
+                        ${index + 1}
+                    </td>
+
+                    <td>
+                        ${formatDate(row.date)}
+                    </td>
+
+                    <td>
+                        ${row.item || "-"}
+                    </td>
+
+                    <td>
+                        ${row.unit || "-"}
+                    </td>
+
+                    <td>
+                        ${
+                            row.rate > 0
+                            ? "₹" +
+                              row.rate.toFixed(2)
+                            : "-"
+                        }
+                    </td>
+
+                    <td>
+                        ${
+                            row.amount > 0
+                            ? "₹" +
+                              row.amount.toFixed(2)
+                            : "-"
+                        }
+                    </td>
+
+                    <td>
+                        ${
+                            row.payment > 0
+                            ? "₹" +
+                              row.payment.toFixed(2)
+                            : "-"
+                        }
+                    </td>
+
+                `;
+
+
+                body.appendChild(tr);
+
+            }
+        );
+
+    }
+
+
+    /* =================================================
+       INFO
+    ================================================= */
+
+    document.getElementById(
+        "reportInfo"
+    ).textContent =
+        "SHOWING " +
+        transactions.length +
+        " TRANSACTION" +
+        (
+            transactions.length === 1
+            ? ""
+            : "S"
+        );
+
+
+    /* =================================================
+       PREPARE PRINT
+    ================================================= */
+
+    preparePrint(
+        transactions,
+        selectedCustomer,
+        fromDate,
+        toDate,
+        totalAmount,
+        totalPayment,
+        totalDiscount,
+        closingBalance
+    );
+
+}
+
+
+/* =====================================================
+   PREPARE PRINT
+===================================================== */
+
+function preparePrint(
+    transactions,
+    selectedCustomer,
+    fromDate,
+    toDate,
+    totalAmount,
+    totalPayment,
+    totalDiscount,
+    closingBalance
+){
+
+    document.getElementById(
+        "printCustomerName"
+    ).textContent =
+        selectedCustomer ||
+        "ALL CUSTOMERS";
+
+
+    document.getElementById(
+        "printFromDate"
+    ).textContent =
+        fromDate
+        ? formatDate(fromDate)
+        : "-";
+
+
+    document.getElementById(
+        "printToDate"
+    ).textContent =
+        toDate
+        ? formatDate(toDate)
+        : "-";
+
+
+    document.getElementById(
+        "printTotalAmount"
+    ).textContent =
+        "₹" +
+        totalAmount.toFixed(2);
+
+
+    document.getElementById(
+        "printTotalPayment"
+    ).textContent =
+        "₹" +
+        totalPayment.toFixed(2);
+
+
+    document.getElementById(
+        "printTotalDiscount"
+    ).textContent =
+        "₹" +
+        totalDiscount.toFixed(2);
+
+
+    document.getElementById(
+        "printClosingBalance"
+    ).textContent =
+        "₹" +
+        closingBalance.toFixed(2);
+
+
+    document.getElementById(
+        "printAmountWords"
+    ).textContent =
+        numberToWords(
+            Math.round(
+                closingBalance
+            )
+        ) +
+        " Rupees Only";
+
+
+    const printBody =
+        document.getElementById(
+            "printTableBody"
+        );
+
+
+    printBody.innerHTML = "";
+
+
+    if(
+        transactions.length === 0
+    ){
+
+        printBody.innerHTML =
+            `
+            <tr>
+
+                <td colspan="7"
+                    style="
+                        text-align:center;
+                        padding:20px;
+                    "
+                >
+                    NO TRANSACTION FOUND
+                </td>
+
+            </tr>
+            `;
+
+        return;
+    }
+
+
+    transactions.forEach(
+        function(row,index){
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+
+            /*
+               IMPORTANT:
+               Item name is allowed to wrap.
+               Therefore it will never be clipped.
+            */
+
+            tr.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    ${formatDate(row.date)}
+                </td>
+
+                <td>
+                    ${row.item || "-"}
+                </td>
+
+                <td>
+                    ${row.unit || "-"}
+                </td>
+
+                <td>
+                    ${
+                        row.rate > 0
+                        ? "₹" +
+                          row.rate.toFixed(2)
+                        : "-"
+                    }
+                </td>
+
+                <td>
+                    ${
+                        row.amount > 0
+                        ? "₹" +
+                          row.amount.toFixed(2)
+                        : "-"
+                    }
+                </td>
+
+                <td>
+                    ${
+                        row.payment > 0
+                        ? "₹" +
+                          row.payment.toFixed(2)
+                        : "-"
+                    }
+                </td>
+
+            `;
+
+
+            printBody.appendChild(tr);
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   PRINT
+===================================================== */
+
+function printReport(){
+
+    /*
+       Always generate fresh data before printing.
+       This prevents old report data from appearing.
+    */
+
+    generateReport();
+
+
+    setTimeout(
+        function(){
+
+            window.print();
+
+        },
+        150
+    );
+
+}
+
+
+/* =====================================================
+   CLEAR
+===================================================== */
+
+function clearFilters(){
+
+    document.getElementById(
+        "reportType"
+    ).value =
+        "ALL";
+
+
+    document.getElementById(
+        "reportCustomer"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "fromDate"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "toDate"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "totalSales"
+    ).textContent =
+        "₹0.00";
+
+
+    document.getElementById(
+        "totalPayment"
+    ).textContent =
+        "₹0.00";
+
+
+    document.getElementById(
+        "totalDiscount"
+    ).textContent =
+        "₹0.00";
+
+
+    document.getElementById(
+        "closingBalance"
+    ).textContent =
+        "₹0.00";
+
+
+    document.getElementById(
+        "tableNetBalance"
+    ).textContent =
+        "₹0.00";
+
+
+    document.getElementById(
+        "reportInfo"
+    ).textContent =
+        "SHOWING ALL TRANSACTIONS";
+
+
+    document.getElementById(
+        "reportBody"
+    ).innerHTML =
+        `
+        <tr>
+
+            <td
+                colspan="7"
+                class="empty-row"
+            >
+                CLICK GENERATE REPORT
+            </td>
+
+        </tr>
+        `;
+
+
+    currentReportTransactions = [];
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+function goDashboard(){
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+
+/* =====================================================
+   NUMBER TO WORDS
+===================================================== */
+
+function numberToWords(number){
+
+    number =
+        Number(number) || 0;
+
+
+    if(number === 0){
+
+        return "Zero";
+    }
+
+
+    const ones = [
+
+        "",
+        "One",
+        "Two",
+        "Three",
+        "Four",
+        "Five",
+        "Six",
+        "Seven",
+        "Eight",
+        "Nine",
+        "Ten",
+        "Eleven",
+        "Twelve",
+        "Thirteen",
+        "Fourteen",
+        "Fifteen",
+        "Sixteen",
+        "Seventeen",
+        "Eighteen",
+        "Nineteen"
+
+    ];
+
+
+    const tens = [
+
+        "",
+        "",
+        "Twenty",
+        "Thirty",
+        "Forty",
+        "Fifty",
+        "Sixty",
+        "Seventy",
+        "Eighty",
+        "Ninety"
+
+    ];
+
+
+    function belowThousand(num){
+
+        let result = "";
+
+
+        if(num >= 100){
+
+            result +=
+                ones[
+                    Math.floor(
+                        num / 100
+                    )
+                ] +
+                " Hundred ";
+
+            num %= 100;
+
+        }
+
+
+        if(num >= 20){
+
+            result +=
+                tens[
+                    Math.floor(
+                        num / 10
+                    )
+                ];
+
+
+            if(
+                num % 10
+            ){
+
+                result +=
+                    " " +
+                    ones[
+                        num % 10
+                    ];
+
+            }
+
+        }else if(num > 0){
+
+            result +=
+                ones[num];
+
+        }
+
+
+        return result.trim();
+
+    }
+
+
+    let result = "";
+
+
+    if(number >= 10000000){
+
+        result +=
+            belowThousand(
+                Math.floor(
+                    number / 10000000
+                )
+            ) +
+            " Crore ";
+
+        number %= 10000000;
+
+    }
+
+
+    if(number >= 100000){
+
+        result +=
+            belowThousand(
+                Math.floor(
+                    number / 100000
+                )
+            ) +
+            " Lakh ";
+
+        number %= 100000;
+
+    }
+
+
+    if(number >= 1000){
+
+        result +=
+            belowThousand(
+                Math.floor(
+                    number / 1000
+                )
+            ) +
+            " Thousand ";
+
+        number %= 1000;
+
+    }
+
+
+    if(number > 0){
+
+        result +=
+            belowThousand(
+                number
+            );
+
+    }
+
+
+    return result.trim();
+
+}
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+loadCustomers();
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,2934 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VYAPAR ONE - INVOICE</title>
+
+<style>
+
+/* =========================================================
+   BASIC
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    min-height:100vh;
+
+    background:
+        radial-gradient(circle at 10% 10%, #123c59 0%, transparent 35%),
+        radial-gradient(circle at 90% 90%, #075b55 0%, transparent 35%),
+        linear-gradient(135deg,#031321,#061f36 50%,#052d35);
+
+    color:#ffffff;
+}
+
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.topbar{
+    height:72px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 28px;
+
+    background:rgba(3,19,33,.95);
+
+    border-bottom:1px solid #164d73;
+
+    position:sticky;
+    top:0;
+
+    z-index:100;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:#19d3ae;
+}
+
+.top-title{
+    font-size:22px;
+    font-weight:800;
+}
+
+.back-btn{
+    border:1px solid #19d3ae;
+
+    background:#063b4c;
+
+    color:white;
+
+    padding:11px 20px;
+
+    border-radius:10px;
+
+    font-size:15px;
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.back-btn:hover{
+    background:#19d3ae;
+    color:#031321;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.container{
+    width:96%;
+    max-width:1500px;
+
+    margin:25px auto;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card{
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7,29,53,.96),
+            rgba(11,45,77,.96)
+        );
+
+    border:1px solid #164d73;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    margin-bottom:22px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.25);
+}
+
+.card-title{
+    font-size:20px;
+    font-weight:900;
+
+    margin-bottom:20px;
+
+    color:#19d3ae;
+}
+
+
+/* =========================================================
+   BUSINESS PROFILE HEADER
+========================================================= */
+
+.business-header-card{
+
+    text-align:center;
+
+    padding:24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7,29,53,.98),
+            rgba(8,59,76,.98)
+        );
+
+    border:1px solid #19d3ae;
+}
+
+.business-header-title{
+
+    padding-bottom:14px;
+
+    margin-bottom:14px;
+
+    border-bottom:1px solid #24658e;
+}
+
+#invoiceBusinessName{
+
+    font-size:30px;
+
+    font-weight:900;
+
+    color:#19d3ae;
+
+    letter-spacing:1px;
+}
+
+#invoiceOwnerName{
+
+    margin-top:6px;
+
+    font-size:17px;
+
+    font-weight:800;
+
+    color:#ffffff;
+}
+
+.business-header-details{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:25px;
+
+    color:#bfe7ff;
+
+    font-size:14px;
+
+    font-weight:700;
+}
+
+.business-header-details strong{
+
+    color:#19d3ae;
+}
+
+.business-header-details span{
+
+    color:#ffffff;
+}
+
+
+/* =========================================================
+   FORM GRID
+========================================================= */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        1.5fr
+        1.5fr
+        .8fr
+        1fr
+        .8fr
+        1fr;
+
+    gap:15px;
+
+    align-items:end;
+}
+
+.field label{
+
+    display:block;
+
+    margin-bottom:7px;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    color:#bfe7ff;
+}
+
+input,
+select{
+
+    width:100%;
+
+    height:48px;
+
+    border-radius:9px;
+
+    border:1px solid #24658e;
+
+    background:#061a2f;
+
+    color:#ffffff;
+
+    padding:0 12px;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    outline:none;
+}
+
+input:focus,
+select:focus{
+
+    border-color:#19d3ae;
+
+    box-shadow:
+        0 0 0 2px rgba(25,211,174,.15);
+}
+
+input{
+
+    text-transform:uppercase;
+}
+
+input[type="number"]{
+
+    text-transform:none;
+}
+
+input[type="date"]{
+
+    text-transform:none;
+}
+
+select{
+
+    cursor:pointer;
+}
+
+.readonly{
+
+    background:#09243a;
+
+    color:#8fdccf;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn{
+
+    height:48px;
+
+    border:none;
+
+    border-radius:9px;
+
+    padding:0 18px;
+
+    font-size:15px;
+
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+.add-btn{
+
+    background:#19d3ae;
+
+    color:#031321;
+}
+
+.add-btn:hover{
+
+    background:#27efc5;
+}
+
+.save-btn{
+
+    background:#159447;
+
+    color:white;
+}
+
+.save-btn:hover{
+
+    background:#20b956;
+}
+
+.clear-btn{
+
+    background:#8b2635;
+
+    color:white;
+}
+
+.clear-btn:hover{
+
+    background:#b52d40;
+}
+
+
+/* =========================================================
+   STATUS MESSAGE
+========================================================= */
+
+.message{
+
+    margin-top:15px;
+
+    padding:11px;
+
+    border-radius:8px;
+
+    display:none;
+
+    text-align:center;
+
+    font-size:15px;
+
+    font-weight:900;
+
+    background:#0b6b42;
+
+    color:#ffffff;
+}
+
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.table-wrapper{
+
+    width:100%;
+
+    overflow-x:auto;
+}
+
+table{
+
+    width:100%;
+
+    min-width:800px;
+
+    border-collapse:collapse;
+}
+
+th{
+
+    background:#063b4c;
+
+    color:#9ff5e1;
+
+    padding:13px 10px;
+
+    font-size:14px;
+
+    text-align:left;
+}
+
+td{
+
+    padding:12px 10px;
+
+    border-bottom:1px solid #164d73;
+
+    font-size:15px;
+
+    font-weight:700;
+}
+
+tr:hover td{
+
+    background:rgba(25,211,174,.06);
+}
+
+
+/* =========================================================
+   ITEM DELETE
+========================================================= */
+
+.delete-item{
+
+    background:#8b2635;
+
+    color:white;
+
+    border:none;
+
+    border-radius:6px;
+
+    padding:7px 12px;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.delete-item:hover{
+
+    background:#c83349;
+}
+
+
+/* =========================================================
+   ITEM ACTION BUTTONS
+========================================================= */
+
+.edit-item-btn,
+.delete-item-btn{
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:7px 12px;
+
+    margin:2px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:all .2s ease;
+
+    color:#ffffff;
+}
+
+.edit-item-btn{
+
+    background:
+        linear-gradient(
+            135deg,
+            #087f8c,
+            #0aa6a6
+        );
+
+    box-shadow:
+        0 3px 8px rgba(0,180,190,.25);
+}
+
+.edit-item-btn:hover{
+
+    transform:translateY(-1px);
+
+    box-shadow:
+        0 5px 12px rgba(0,200,210,.40);
+}
+
+.delete-item-btn{
+
+    background:
+        linear-gradient(
+            135deg,
+            #b91c1c,
+            #dc2626
+        );
+
+    box-shadow:
+        0 3px 8px rgba(220,38,38,.25);
+}
+
+.delete-item-btn:hover{
+
+    transform:translateY(-1px);
+
+    box-shadow:
+        0 5px 12px rgba(220,38,38,.40);
+}
+
+.edit-item-btn:active,
+.delete-item-btn:active{
+
+    transform:scale(.96);
+}
+
+
+/* =========================================================
+   TOTAL
+========================================================= */
+
+.total-area{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    margin-top:20px;
+}
+
+.total-box{
+
+    min-width:300px;
+
+    background:#031a2d;
+
+    border:1px solid #19d3ae;
+
+    border-radius:12px;
+
+    padding:18px;
+
+    text-align:right;
+}
+
+.total-label{
+
+    color:#9ccfe3;
+
+    font-size:15px;
+
+    font-weight:800;
+}
+
+.total-value{
+
+    margin-top:5px;
+
+    color:#19d3ae;
+
+    font-size:30px;
+
+    font-weight:900;
+}
+
+
+/* =========================================================
+   ACTION AREA
+========================================================= */
+
+.action-area{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:12px;
+
+    margin-top:20px;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-box{
+
+    margin-bottom:15px;
+
+    position:relative;
+}
+
+.search-box input{
+
+    max-width:500px;
+}
+
+
+/* =========================================================
+   CUSTOMER SUGGESTIONS
+========================================================= */
+
+#customerSuggestions{
+
+    display:none;
+
+    max-width:500px;
+
+    margin-top:5px;
+
+    background:#061a2f;
+
+    border:1px solid #19d3ae;
+
+    border-radius:8px;
+
+    overflow:hidden;
+
+    position:absolute;
+
+    width:100%;
+
+    z-index:50;
+}
+
+.customer-suggestion{
+
+    padding:12px 15px;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    border-bottom:1px solid #164d73;
+}
+
+.customer-suggestion:hover{
+
+    background:#063b4c;
+
+    color:#19d3ae;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1000px){
+
+    .form-grid{
+
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    .topbar{
+
+        height:auto;
+
+        min-height:70px;
+
+        gap:10px;
+
+        flex-wrap:wrap;
+
+        padding:14px;
+    }
+
+    .top-title{
+
+        order:3;
+
+        width:100%;
+
+        font-size:18px;
+    }
+
+    .container{
+
+        width:94%;
+
+        margin:15px auto;
+    }
+
+    .card{
+
+        padding:16px;
+
+        border-radius:14px;
+    }
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .action-area{
+
+        flex-direction:column;
+    }
+
+    .action-area .btn{
+
+        width:100%;
+    }
+
+    .total-box{
+
+        width:100%;
+
+        min-width:0;
+    }
+
+    #invoiceBusinessName{
+
+        font-size:23px;
+    }
+
+    .business-header-details{
+
+        flex-direction:column;
+
+        gap:8px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     TOPBAR
+========================================================= -->
+
+<header class="topbar">
+
+    <div class="logo">
+
+        <span>V</span>YAPAR ONE
+
+    </div>
+
+
+    <div class="top-title">
+
+        INVOICE
+
+    </div>
+
+
+    <button
+        class="back-btn"
+        onclick="goDashboard()">
+
+        DASHBOARD
+
+    </button>
+
+</header>
+
+
+
+<main class="container">
+
+
+<!-- =========================================================
+     BUSINESS PROFILE HEADER
+========================================================= -->
+
+<section class="card business-header-card">
+
+    <div class="business-header-title">
+
+        <div id="invoiceBusinessName">
+            VYAPAR ONE
+        </div>
+
+        <div id="invoiceOwnerName">
+            OWNER NAME
+        </div>
+
+    </div>
+
+
+    <div class="business-header-details">
+
+        <div>
+
+            <strong>ADDRESS:</strong>
+
+            <span id="invoiceBusinessAddress">
+                -
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <strong>MO:</strong>
+
+            <span id="invoiceBusinessMobile">
+                -
+            </span>
+
+        </div>
+
+
+        <div>
+
+            <strong>GSTIN:</strong>
+
+            <span id="invoiceBusinessGST">
+                -
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     INVOICE FORM
+========================================================= -->
+
+<section class="card">
+
+    <div class="card-title">
+
+        🧾 INVOICE INFORMATION
+
+    </div>
+
+
+    <div class="form-grid">
+
+
+        <!-- DATE -->
+
+        <div class="field">
+
+            <label>
+                INVOICE DATE
+            </label>
+
+            <input
+                type="date"
+                id="invoiceDate">
+
+        </div>
+
+
+        <!-- CUSTOMER -->
+
+        <div class="field">
+
+            <label>
+                CUSTOMER
+            </label>
+
+            <select id="invoiceCustomer">
+
+                <option value="">
+                    SELECT CUSTOMER
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- ITEM -->
+
+        <div class="field">
+
+            <label>
+                ITEM
+            </label>
+
+            <select id="invoiceItem">
+
+                <option value="">
+                    SELECT ITEM
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- UNIT -->
+
+        <div class="field">
+
+            <label>
+                UNIT
+            </label>
+
+            <input
+                type="text"
+                id="invoiceUnit"
+                class="readonly"
+                readonly>
+
+        </div>
+
+
+        <!-- RATE -->
+
+        <div class="field">
+
+            <label>
+                RATE
+            </label>
+
+            <input
+                type="number"
+                id="invoiceRate"
+                class="readonly"
+                readonly>
+
+        </div>
+
+
+        <!-- QTY -->
+
+        <div class="field">
+
+            <label>
+                QTY
+            </label>
+
+            <input
+                type="number"
+                id="invoiceQty"
+                min="0"
+                step="any"
+                placeholder="QTY">
+
+        </div>
+
+
+        <!-- ADD -->
+
+        <div class="field">
+
+            <button
+                class="btn add-btn"
+                id="addItemBtn">
+
+                + ADD ITEM
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="message"
+        class="message">
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     INVOICE ITEMS
+========================================================= -->
+
+<section class="card">
+
+    <div class="card-title">
+
+        📦 INVOICE ITEMS
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+
+                    <th>ITEM</th>
+
+                    <th>UNIT</th>
+
+                    <th>QTY</th>
+
+                    <th>RATE</th>
+
+                    <th>AMOUNT</th>
+
+                    <th>ACTION</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="invoiceItemsBody">
+
+                <tr>
+
+                    <td
+                        colspan="7"
+                        style="
+                            text-align:center;
+                            color:#8fb6c9;
+                        ">
+
+                        NO ITEM ADDED
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <div class="total-area">
+
+        <div class="total-box">
+
+            <div class="total-label">
+
+                TOTAL AMOUNT
+
+            </div>
+
+            <div
+                class="total-value"
+                id="totalAmount">
+
+                ₹0.00
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="action-area">
+
+        <button
+            class="btn clear-btn"
+            id="clearInvoiceBtn">
+
+            CLEAR
+
+        </button>
+
+
+        <button
+            class="btn save-btn"
+            id="saveInvoiceBtn">
+
+            SAVE INVOICE
+
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     INVOICE LIST
+========================================================= -->
+
+<section class="card">
+
+    <div class="card-title">
+
+        📋 INVOICE LIST
+
+    </div>
+
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="invoiceSearch"
+            placeholder="SEARCH INVOICE / CUSTOMER"
+            autocomplete="off">
+
+        <div id="customerSuggestions"></div>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+
+                    <th>INVOICE NO</th>
+
+                    <th>DATE</th>
+
+                    <th>CUSTOMER</th>
+
+                    <th>ITEMS</th>
+
+                    <th>TOTAL</th>
+
+                    <th>ACTION</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody id="invoiceListBody">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<script>
+
+
+/* =========================================================
+   GLOBAL DATA
+========================================================= */
+
+let customers =
+    JSON.parse(
+        localStorage.getItem("customers")
+    ) || [];
+
+
+let items =
+    JSON.parse(
+        localStorage.getItem("items")
+    ) || [];
+
+
+let invoices =
+    JSON.parse(
+        localStorage.getItem("invoices")
+    ) || [];
+
+
+let invoiceItems = [];
+
+let editInvoiceIndex = -1;
+
+let editItemIndex = -1;
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const invoiceDate =
+    document.getElementById("invoiceDate");
+
+const invoiceCustomer =
+    document.getElementById("invoiceCustomer");
+
+const invoiceItem =
+    document.getElementById("invoiceItem");
+
+const invoiceUnit =
+    document.getElementById("invoiceUnit");
+
+const invoiceRate =
+    document.getElementById("invoiceRate");
+
+const invoiceQty =
+    document.getElementById("invoiceQty");
+
+const invoiceItemsBody =
+    document.getElementById("invoiceItemsBody");
+
+const totalAmount =
+    document.getElementById("totalAmount");
+
+const message =
+    document.getElementById("message");
+
+const invoiceSearch =
+    document.getElementById("invoiceSearch");
+
+const invoiceListBody =
+    document.getElementById("invoiceListBody");
+
+const customerSuggestions =
+    document.getElementById("customerSuggestions");
+
+
+/* =========================================================
+   PAGE LOAD
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        setToday();
+
+        loadBusinessProfile();
+
+        loadCustomers();
+
+        loadItems();
+
+        showInvoiceItems();
+
+        showInvoices();
+
+    }
+);
+
+
+/* =========================================================
+   BUSINESS PROFILE
+========================================================= */
+
+/* =========================================================
+   BUSINESS PROFILE
+========================================================= */
+
+function loadBusinessProfile(){
+
+    const savedProfile =
+        localStorage.getItem("businessProfile");
+
+
+    /* =====================================================
+       AGAR PROFILE SAVE NAHI HAI
+    ===================================================== */
+
+    if(!savedProfile){
+
+        document.getElementById(
+            "invoiceBusinessName"
+        ).textContent =
+            "VYAPAR ONE";
+
+
+        document.getElementById(
+            "invoiceOwnerName"
+        ).textContent =
+            "OWNER NAME";
+
+
+        document.getElementById(
+            "invoiceBusinessAddress"
+        ).textContent =
+            "-";
+
+
+        document.getElementById(
+            "invoiceBusinessMobile"
+        ).textContent =
+            "-";
+
+
+        document.getElementById(
+            "invoiceBusinessGST"
+        ).textContent =
+            "-";
+
+        return;
+    }
+
+
+    /* =====================================================
+       PROFILE READ
+    ===================================================== */
+
+    const profile =
+        JSON.parse(savedProfile);
+
+
+    /* =====================================================
+       BUSINESS NAME
+    ===================================================== */
+
+    document.getElementById(
+        "invoiceBusinessName"
+    ).textContent =
+        profile.businessName ||
+        "VYAPAR ONE";
+
+
+    /* =====================================================
+       OWNER NAME
+    ===================================================== */
+
+    document.getElementById(
+        "invoiceOwnerName"
+    ).textContent =
+        profile.ownerName ||
+        "OWNER NAME";
+
+
+    /* =====================================================
+       ADDRESS
+    ===================================================== */
+
+    document.getElementById(
+        "invoiceBusinessAddress"
+    ).textContent =
+        profile.address ||
+        "-";
+
+
+    /* =====================================================
+       MOBILE NUMBER
+    ===================================================== */
+
+    document.getElementById(
+        "invoiceBusinessMobile"
+    ).textContent =
+        profile.mobileNumber ||
+        "-";
+
+
+    /* =====================================================
+       GST NUMBER
+    ===================================================== */
+
+    document.getElementById(
+        "invoiceBusinessGST"
+    ).textContent =
+        profile.gstNumber ||
+        "-";
+
+}
+
+
+/* =========================================================
+   TODAY DATE
+========================================================= */
+
+function setToday(){
+
+    const today =
+        new Date()
+        .toISOString()
+        .split("T")[0];
+
+    invoiceDate.value =
+        today;
+
+}
+
+
+/* =========================================================
+   LOAD CUSTOMERS
+========================================================= */
+
+function loadCustomers(){
+
+    invoiceCustomer.innerHTML =
+        '<option value="">SELECT CUSTOMER</option>';
+
+
+    customers.forEach(
+        function(customer,index){
+
+            const option =
+                document.createElement("option");
+
+
+            option.value =
+                index;
+
+
+            option.textContent =
+                customer.name;
+
+
+            invoiceCustomer.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   LOAD ITEMS
+========================================================= */
+
+function loadItems(){
+
+    invoiceItem.innerHTML =
+        '<option value="">SELECT ITEM</option>';
+
+
+    items.forEach(
+        function(item,index){
+
+            const option =
+                document.createElement("option");
+
+
+            option.value =
+                index;
+
+
+            option.textContent =
+                item.name;
+
+
+            invoiceItem.appendChild(
+                option
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   ITEM SELECT
+========================================================= */
+
+invoiceItem.addEventListener(
+    "change",
+    function(){
+
+        const index =
+            Number(this.value);
+
+
+        if(
+            this.value === "" ||
+            !items[index]
+        ){
+
+            invoiceUnit.value =
+                "";
+
+            invoiceRate.value =
+                "";
+
+            return;
+        }
+
+
+        const item =
+            items[index];
+
+
+        invoiceUnit.value =
+            item.unit || "";
+
+
+        const rate =
+            item.sellingRate ??
+            item.rate ??
+            item.sellRate ??
+            item.selling_rate ??
+            0;
+
+
+        invoiceRate.value =
+            Number(rate);
+
+
+        invoiceQty.focus();
+
+    }
+);
+
+
+/* =========================================================
+   ADD / UPDATE INVOICE ITEM
+========================================================= */
+
+function addInvoiceItem(){
+
+    const itemIndex =
+        invoiceItem.value;
+
+
+    const qty =
+        Number(invoiceQty.value);
+
+
+    if(itemIndex === ""){
+
+        showMessage(
+            "PLEASE SELECT ITEM"
+        );
+
+        invoiceItem.focus();
+
+        return;
+    }
+
+
+    if(!qty || qty <= 0){
+
+        showMessage(
+            "PLEASE ENTER VALID QTY"
+        );
+
+        invoiceQty.focus();
+
+        return;
+    }
+
+
+    const item =
+        items[Number(itemIndex)];
+
+
+    if(!item){
+
+        showMessage(
+            "ITEM NOT FOUND"
+        );
+
+        return;
+    }
+
+
+    const rate =
+        Number(invoiceRate.value) || 0;
+
+
+    const amount =
+        qty * rate;
+
+
+    if(editItemIndex !== -1){
+
+        invoiceItems[
+            editItemIndex
+        ] = {
+
+            item:
+                item.name || "",
+
+            unit:
+                invoiceUnit.value ||
+                item.unit ||
+                "",
+
+            qty:
+                qty,
+
+            rate:
+                rate,
+
+            amount:
+                amount
+
+        };
+
+
+        editItemIndex =
+            -1;
+
+
+        document.getElementById(
+            "addItemBtn"
+        ).textContent =
+            "+ ADD ITEM";
+
+    }
+    else{
+
+        invoiceItems.push({
+
+            item:
+                item.name || "",
+
+            unit:
+                invoiceUnit.value ||
+                item.unit ||
+                "",
+
+            qty:
+                qty,
+
+            rate:
+                rate,
+
+            amount:
+                amount
+
+        });
+
+    }
+
+
+    showInvoiceItems();
+
+
+    invoiceItem.value =
+        "";
+
+    invoiceUnit.value =
+        "";
+
+    invoiceRate.value =
+        "";
+
+    invoiceQty.value =
+        "";
+
+
+    invoiceItem.focus();
+
+}
+
+
+/* =========================================================
+   ADD ITEM BUTTON
+========================================================= */
+
+document.getElementById(
+    "addItemBtn"
+).addEventListener(
+    "click",
+    addInvoiceItem
+);
+
+
+/* =========================================================
+   SHOW CURRENT ITEMS
+========================================================= */
+
+function showInvoiceItems(){
+
+    const tbody =
+        document.getElementById(
+            "invoiceItemsBody"
+        );
+
+
+    tbody.innerHTML =
+        "";
+
+
+    let total =
+        0;
+
+
+    if(invoiceItems.length === 0){
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="7"
+                    style="
+                        text-align:center;
+                        color:#8fb6c9;
+                    ">
+
+                    NO ITEM ADDED
+
+                </td>
+
+            </tr>
+
+        `;
+
+    }
+
+
+    invoiceItems.forEach(
+        function(item,index){
+
+            total +=
+                Number(item.amount) || 0;
+
+
+            const tr =
+                document.createElement("tr");
+
+
+            tr.innerHTML = `
+
+                <td>
+                    ${index + 1}
+                </td>
+
+                <td>
+                    ${escapeHtml(item.item || "")}
+                </td>
+
+                <td>
+                    ${escapeHtml(item.unit || "")}
+                </td>
+
+                <td>
+                    ${item.qty || 0}
+                </td>
+
+                <td>
+                    ₹${Number(
+                        item.rate || 0
+                    ).toFixed(2)}
+                </td>
+
+                <td>
+                    ₹${Number(
+                        item.amount || 0
+                    ).toFixed(2)}
+                </td>
+
+                <td>
+
+                    <button
+                        type="button"
+                        class="edit-item-btn"
+                        onclick="editInvoiceItem(${index})">
+
+                        ✏️ EDIT
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="delete-item-btn"
+                        onclick="deleteInvoiceItem(${index})">
+
+                        🗑️ DELETE
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            tbody.appendChild(tr);
+
+        }
+    );
+
+
+    totalAmount.textContent =
+        "₹" +
+        total.toFixed(2);
+
+}
+
+
+/* =========================================================
+   EDIT CURRENT ITEM
+========================================================= */
+
+function editInvoiceItem(index){
+
+    if(!invoiceItems[index]){
+
+        return;
+    }
+
+
+    const item =
+        invoiceItems[index];
+
+
+    editItemIndex =
+        index;
+
+
+    const itemIndex =
+        items.findIndex(
+            function(masterItem){
+
+                return String(
+                    masterItem.name
+                ).toUpperCase()
+                ===
+                String(
+                    item.item
+                ).toUpperCase();
+
+            }
+        );
+
+
+    if(itemIndex !== -1){
+
+        invoiceItem.value =
+            itemIndex;
+
+
+        invoiceUnit.value =
+            item.unit ||
+            items[itemIndex].unit ||
+            "";
+
+
+        invoiceRate.value =
+            Number(item.rate) || 0;
+
+
+        invoiceQty.value =
+            Number(item.qty) || 0;
+
+    }
+
+
+    document.getElementById(
+        "addItemBtn"
+    ).textContent =
+        "UPDATE ITEM";
+
+
+    invoiceQty.focus();
+
+}
+
+
+/* =========================================================
+   DELETE CURRENT ITEM
+========================================================= */
+
+function deleteInvoiceItem(index){
+
+    if(!invoiceItems[index]){
+
+        return;
+    }
+
+
+    const itemName =
+        invoiceItems[index].item;
+
+
+    const confirmDelete =
+        confirm(
+            "DELETE " +
+            itemName +
+            "?"
+        );
+
+
+    if(!confirmDelete){
+
+        return;
+    }
+
+
+    invoiceItems.splice(
+        index,
+        1
+    );
+
+
+    editItemIndex =
+        -1;
+
+
+    document.getElementById(
+        "addItemBtn"
+    ).textContent =
+        "+ ADD ITEM";
+
+
+    showInvoiceItems();
+
+
+    showMessage(
+        itemName +
+        " DELETED SUCCESSFULLY"
+    );
+
+}
+
+
+/* =========================================================
+   TOTAL
+========================================================= */
+
+function getInvoiceTotal(){
+
+    return invoiceItems.reduce(
+        function(total,item){
+
+            return total +
+                Number(
+                    item.amount || 0
+                );
+
+        },
+        0
+    );
+
+}
+
+
+/* =========================================================
+   NEXT INVOICE NUMBER
+========================================================= */
+
+function getNextInvoiceNumber(){
+
+    if(invoices.length === 0){
+
+        return "INV-0001";
+
+    }
+
+
+    let maxNumber =
+        0;
+
+
+    invoices.forEach(
+        function(invoice){
+
+            const number =
+                parseInt(
+                    String(
+                        invoice.number || ""
+                    ).replace(
+                        "INV-",
+                        ""
+                    ),
+                    10
+                );
+
+
+            if(
+                !isNaN(number) &&
+                number > maxNumber
+            ){
+
+                maxNumber =
+                    number;
+
+            }
+
+        }
+    );
+
+
+    return (
+        "INV-" +
+        String(
+            maxNumber + 1
+        ).padStart(
+            4,
+            "0"
+        )
+    );
+
+}
+
+
+/* =========================================================
+   SAVE INVOICE
+========================================================= */
+
+function saveInvoice(){
+
+    if(invoiceCustomer.value === ""){
+
+        showMessage(
+            "PLEASE SELECT CUSTOMER"
+        );
+
+        invoiceCustomer.focus();
+
+        return;
+
+    }
+
+
+    if(invoiceItems.length === 0){
+
+        showMessage(
+            "PLEASE ADD AT LEAST ONE ITEM"
+        );
+
+        invoiceItem.focus();
+
+        return;
+
+    }
+
+
+    const customer =
+        customers[
+            Number(
+                invoiceCustomer.value
+            )
+        ];
+
+
+    if(!customer){
+
+        showMessage(
+            "CUSTOMER NOT FOUND"
+        );
+
+        return;
+    }
+
+
+    const total =
+        getInvoiceTotal();
+
+
+    if(editInvoiceIndex !== -1){
+
+        const oldInvoice =
+            invoices[
+                editInvoiceIndex
+            ];
+
+
+        invoices[
+            editInvoiceIndex
+        ] = {
+
+            number:
+                oldInvoice.number,
+
+            date:
+                invoiceDate.value,
+
+            customer:
+                customer.name,
+
+            items:
+                invoiceItems,
+
+            total:
+                total
+
+        };
+
+
+        localStorage.setItem(
+            "invoices",
+            JSON.stringify(invoices)
+        );
+
+
+        showMessage(
+            "INVOICE UPDATED SUCCESSFULLY"
+        );
+
+    }
+    else{
+
+        const newInvoice = {
+
+            number:
+                getNextInvoiceNumber(),
+
+            date:
+                invoiceDate.value,
+
+            customer:
+                customer.name,
+
+            items:
+                invoiceItems,
+
+            total:
+                total
+
+        };
+
+
+        invoices.push(
+            newInvoice
+        );
+
+
+        localStorage.setItem(
+            "invoices",
+            JSON.stringify(invoices)
+        );
+
+
+        showMessage(
+            "INVOICE SAVED SUCCESSFULLY"
+        );
+
+    }
+
+
+    editInvoiceIndex =
+        -1;
+
+
+    showInvoices();
+
+
+    clearInvoiceForm();
+
+}
+
+
+/* =========================================================
+   SAVE BUTTON
+========================================================= */
+
+document.getElementById(
+    "saveInvoiceBtn"
+).addEventListener(
+    "click",
+    saveInvoice
+);
+
+
+/* =========================================================
+   SHOW INVOICE LIST
+========================================================= */
+
+function showInvoices(){
+
+    const search =
+        invoiceSearch.value
+        .trim()
+        .toUpperCase();
+
+
+    invoiceListBody.innerHTML =
+        "";
+
+
+    const filtered =
+        invoices.filter(
+            function(invoice){
+
+                return (
+
+                    String(
+                        invoice.number
+                    )
+                    .toUpperCase()
+                    .includes(search)
+
+                    ||
+
+                    String(
+                        invoice.customer
+                    )
+                    .toUpperCase()
+                    .includes(search)
+
+                );
+
+            }
+        );
+
+
+    if(filtered.length === 0){
+
+        invoiceListBody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="7"
+                    style="
+                        text-align:center;
+                        color:#8fb6c9;
+                        padding:25px;
+                    ">
+
+                    NO INVOICE FOUND
+
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    filtered.forEach(
+        function(invoice){
+
+            const originalIndex =
+                invoices.indexOf(
+                    invoice
+                );
+
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+
+            tr.innerHTML = `
+
+                <td>
+                    ${originalIndex + 1}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        invoice.number
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        invoice.date
+                    )}
+                </td>
+
+                <td>
+                    ${escapeHtml(
+                        invoice.customer
+                    )}
+                </td>
+
+                <td>
+                    ${(invoice.items || []).length}
+                </td>
+
+                <td>
+                    ₹${Number(
+                        invoice.total || 0
+                    ).toFixed(2)}
+                </td>
+
+                <td>
+
+                    <button
+                        class="btn add-btn"
+                        style="
+                            height:36px;
+                            padding:0 12px;
+                        "
+                        onclick="editInvoice(${originalIndex})">
+
+                        EDIT
+
+                    </button>
+
+
+                    <button
+                        class="delete-item"
+                        onclick="deleteInvoice(${originalIndex})">
+
+                        DELETE
+
+                    </button>
+
+                </td>
+
+            `;
+
+
+            invoiceListBody.appendChild(
+                tr
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+invoiceSearch.addEventListener(
+    "input",
+    function(){
+
+        const text =
+            this.value
+            .trim()
+            .toUpperCase();
+
+
+        showInvoices();
+
+
+        customerSuggestions.innerHTML =
+            "";
+
+
+        if(text === ""){
+
+            customerSuggestions.style.display =
+                "none";
+
+            return;
+        }
+
+
+        const matches =
+            customers.filter(
+                function(customer){
+
+                    return String(
+                        customer.name || ""
+                    )
+                    .toUpperCase()
+                    .includes(text);
+
+                }
+            );
+
+
+        if(matches.length === 0){
+
+            customerSuggestions.style.display =
+                "none";
+
+            return;
+        }
+
+
+        matches.forEach(
+            function(customer){
+
+                const div =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                div.className =
+                    "customer-suggestion";
+
+
+                div.textContent =
+                    customer.name;
+
+
+                div.onclick =
+                    function(){
+
+                        invoiceSearch.value =
+                            customer.name;
+
+
+                        customerSuggestions.style.display =
+                            "none";
+
+
+                        showInvoices();
+
+                    };
+
+
+                customerSuggestions.appendChild(
+                    div
+                );
+
+            }
+        );
+
+
+        customerSuggestions.style.display =
+            "block";
+
+    }
+);
+
+
+/* =========================================================
+   CLICK OUTSIDE SEARCH
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(e){
+
+        if(
+            !e.target.closest(
+                ".search-box"
+            )
+        ){
+
+            customerSuggestions.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   EDIT INVOICE
+========================================================= */
+
+function editInvoice(index){
+
+    const invoice =
+        invoices[index];
+
+
+    if(!invoice){
+
+        return;
+    }
+
+
+    editInvoiceIndex =
+        index;
+
+
+    invoiceDate.value =
+        invoice.date || "";
+
+
+    const customerIndex =
+        customers.findIndex(
+            function(customer){
+
+                return String(
+                    customer.name
+                ).toUpperCase()
+                ===
+                String(
+                    invoice.customer
+                ).toUpperCase();
+
+            }
+        );
+
+
+    if(customerIndex !== -1){
+
+        invoiceCustomer.value =
+            customerIndex;
+
+    }
+    else{
+
+        invoiceCustomer.value =
+            "";
+
+    }
+
+
+    invoiceItems =
+        (invoice.items || [])
+        .map(
+            function(item){
+
+                return {
+
+                    item:
+                        item.item || "",
+
+                    unit:
+                        item.unit || "",
+
+                    qty:
+                        Number(
+                            item.qty
+                        ) || 0,
+
+                    rate:
+                        Number(
+                            item.rate
+                        ) || 0,
+
+                    amount:
+                        Number(
+                            item.amount
+                        ) || 0
+
+                };
+
+            }
+        );
+
+
+    showInvoiceItems();
+
+
+    if(invoiceItems.length > 0){
+
+        editItemIndex =
+            0;
+
+
+        const firstItem =
+            invoiceItems[0];
+
+
+        const itemIndex =
+            items.findIndex(
+                function(item){
+
+                    return String(
+                        item.name
+                    ).toUpperCase()
+                    ===
+                    String(
+                        firstItem.item
+                    ).toUpperCase();
+
+                }
+            );
+
+
+        if(itemIndex !== -1){
+
+            invoiceItem.value =
+                itemIndex;
+
+
+            invoiceUnit.value =
+                firstItem.unit ||
+                items[itemIndex].unit ||
+                "";
+
+
+            invoiceRate.value =
+                Number(
+                    firstItem.rate || 0
+                );
+
+
+            invoiceQty.value =
+                Number(
+                    firstItem.qty || 0
+                );
+
+        }
+
+    }
+
+
+    document.getElementById(
+        "addItemBtn"
+    ).textContent =
+        "UPDATE ITEM";
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+
+    showMessage(
+        invoice.number +
+        " EDIT MODE"
+    );
+
+}
+
+
+/* =========================================================
+   DELETE INVOICE
+========================================================= */
+
+function deleteInvoice(index){
+
+    const invoice =
+        invoices[index];
+
+
+    if(!invoice){
+
+        return;
+    }
+
+
+    const confirmDelete =
+        confirm(
+            "DELETE " +
+            invoice.number +
+            "?"
+        );
+
+
+    if(!confirmDelete){
+
+        return;
+    }
+
+
+    invoices.splice(
+        index,
+        1
+    );
+
+
+    localStorage.setItem(
+        "invoices",
+        JSON.stringify(invoices)
+    );
+
+
+    if(invoices.length === 0){
+
+        localStorage.setItem(
+            "lastInvoiceNumber",
+            "0"
+        );
+
+    }
+
+
+    showInvoices();
+
+
+    showMessage(
+        invoice.number +
+        " DELETED SUCCESSFULLY"
+    );
+
+}
+
+
+/* =========================================================
+   CLEAR FORM
+========================================================= */
+
+function clearInvoiceForm(){
+
+    editInvoiceIndex =
+        -1;
+
+
+    editItemIndex =
+        -1;
+
+
+    invoiceItems =
+        [];
+
+
+    invoiceDate.value =
+        new Date()
+        .toISOString()
+        .split("T")[0];
+
+
+    invoiceCustomer.value =
+        "";
+
+
+    invoiceItem.value =
+        "";
+
+
+    invoiceUnit.value =
+        "";
+
+
+    invoiceRate.value =
+        "";
+
+
+    invoiceQty.value =
+        "";
+
+
+    document.getElementById(
+        "addItemBtn"
+    ).textContent =
+        "+ ADD ITEM";
+
+
+    showInvoiceItems();
+
+}
+
+
+/* =========================================================
+   CLEAR BUTTON
+========================================================= */
+
+document.getElementById(
+    "clearInvoiceBtn"
+).addEventListener(
+    "click",
+    function(){
+
+        clearInvoiceForm();
+
+        showMessage(
+            "FORM CLEARED"
+        );
+
+    }
+);
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+function showMessage(text){
+
+    message.textContent =
+        text;
+
+
+    message.style.display =
+        "block";
+
+
+    setTimeout(
+        function(){
+
+            message.style.display =
+                "none";
+
+        },
+        2500
+    );
+
+}
+
+
+/* =========================================================
+   ENTER KEY NAVIGATION
+========================================================= */
+
+invoiceDate.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Enter"){
+
+            e.preventDefault();
+
+            invoiceCustomer.focus();
+
+        }
+
+    }
+);
+
+
+invoiceCustomer.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Enter"){
+
+            e.preventDefault();
+
+            invoiceItem.focus();
+
+        }
+
+    }
+);
+
+
+invoiceItem.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Enter"){
+
+            e.preventDefault();
+
+            invoiceQty.focus();
+
+        }
+
+    }
+);
+
+
+invoiceQty.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key === "Enter"){
+
+            e.preventDefault();
+
+            addInvoiceItem();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+function goDashboard(){
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
+
+/* =========================================================
+   HTML SAFE TEXT
+========================================================= */
+
+function escapeHtml(value){
+
+    return String(
+        value ?? ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>
