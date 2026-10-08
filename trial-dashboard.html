@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>VYAPAR ONE — TRIAL</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#07111f;
+    color:#e8f5f7;
+    min-height:100vh;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+    background:linear-gradient(
+        135deg,
+        #04101c,
+        #062c3a
+    );
+
+    padding:18px 22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    border-bottom:1px solid #1b3b4c;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+}
+
+.logo span{
+    color:#18c5b5;
+}
+
+.trial-badge{
+    background:#8b7cff;
+    color:white;
+
+    padding:7px 12px;
+
+    border-radius:20px;
+
+    font-size:11px;
+    font-weight:900;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+    padding:22px;
+
+    max-width:1400px;
+
+    margin:auto;
+}
+
+.title{
+    margin-bottom:20px;
+}
+
+.title h1{
+    font-size:25px;
+    margin-bottom:5px;
+}
+
+.title p{
+    color:#8ca7b3;
+    font-size:13px;
+}
+
+
+/* =========================================================
+   STAT CARDS
+========================================================= */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:15px;
+
+    margin-bottom:20px;
+}
+
+.card{
+    background:#0d1c2b;
+
+    border:1px solid #1b3b4c;
+
+    border-radius:14px;
+
+    padding:20px;
+}
+
+.card-label{
+    color:#8ca7b3;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    margin-bottom:10px;
+}
+
+.card-value{
+    font-size:25px;
+
+    font-weight:900;
+}
+
+.sale{
+    color:#18c5b5;
+}
+
+.payment{
+    color:#3f91ff;
+}
+
+.pending{
+    color:#ff9f43;
+}
+
+.customer{
+    color:#8b7cff;
+}
+
+
+/* =========================================================
+   MODULES
+========================================================= */
+
+.modules{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:15px;
+
+    margin-top:20px;
+}
+
+.module{
+    background:#102638;
+
+    border:1px solid #1b3b4c;
+
+    border-radius:14px;
+
+    padding:22px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.module:hover{
+    transform:translateY(-2px);
+
+    border-color:#18c5b5;
+}
+
+.module-icon{
+    font-size:30px;
+
+    margin-bottom:10px;
+}
+
+.module-title{
+    font-size:14px;
+
+    font-weight:900;
+}
+
+
+/* =========================================================
+   TRIAL MESSAGE
+========================================================= */
+
+.trial-box{
+    margin-top:20px;
+
+    padding:18px;
+
+    background:#0d1c2b;
+
+    border:1px solid #8b7cff;
+
+    border-radius:14px;
+
+    text-align:center;
+}
+
+.trial-box h2{
+    font-size:17px;
+
+    margin-bottom:7px;
+}
+
+.trial-box p{
+    color:#8ca7b3;
+
+    font-size:12px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:850px){
+
+    .stats{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+    }
+
+    .modules{
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+    }
+
+}
+
+@media(max-width:520px){
+
+    .header{
+        padding:15px;
+    }
+
+    .main{
+        padding:15px;
+    }
+
+    .logo{
+        font-size:18px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .modules{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     HEADER
+======================================================= -->
+
+<header class="header">
+
+    <div class="logo">
+        VYAPAR <span>ONE</span>
+    </div>
+
+    <div class="trial-badge">
+        TRIAL VERSION
+    </div>
+
+</header>
+
+
+
+<!-- =======================================================
+     MAIN
+======================================================= -->
+
+<main class="main">
+
+
+    <div class="title">
+
+        <h1>
+            DEMO BUSINESS DASHBOARD
+        </h1>
+
+        <p>
+            Explore VYAPAR ONE smart business software
+        </p>
+
+    </div>
+
+
+
+    <!-- ===================================================
+         STAT CARDS
+    =================================================== -->
+
+    <section class="stats">
+
+
+        <div class="card">
+
+            <div class="card-label">
+                TOTAL CUSTOMERS
+            </div>
+
+            <div class="card-value customer">
+                25
+            </div>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-label">
+                TOTAL SALES
+            </div>
+
+            <div class="card-value sale">
+                ₹1,25,000
+            </div>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-label">
+                TOTAL PAYMENT
+            </div>
+
+            <div class="card-value payment">
+                ₹95,000
+            </div>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-label">
+                OUTSTANDING
+            </div>
+
+            <div class="card-value pending">
+                ₹30,000
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ===================================================
+         MODULES
+    =================================================== -->
+
+    <section class="modules">
+
+
+        <div class="module"
+             onclick="demoMessage('CUSTOMER')">
+
+            <div class="module-icon">
+                👥
+            </div>
+
+            <div class="module-title">
+                CUSTOMER
+            </div>
+
+        </div>
+
+
+
+        <div class="module"
+             onclick="demoMessage('ITEM')">
+
+            <div class="module-icon">
+                📦
+            </div>
+
+            <div class="module-title">
+                ITEM MASTER
+            </div>
+
+        </div>
+
+
+
+        <div class="module"
+             onclick="demoMessage('INVOICE')">
+
+            <div class="module-icon">
+                🧾
+            </div>
+
+            <div class="module-title">
+                INVOICE
+            </div>
+
+        </div>
+
+
+
+        <div class="module"
+             onclick="demoMessage('PAYMENT')">
+
+            <div class="module-icon">
+                💰
+            </div>
+
+            <div class="module-title">
+                PAYMENT
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ===================================================
+         TRIAL MESSAGE
+    =================================================== -->
+
+    <div class="trial-box">
+
+        <h2>
+            🚀 THIS IS A DEMO / TRIAL VERSION
+        </h2>
+
+        <p>
+            Sample data is displayed here.
+            Your real business data is protected.
+        </p>
+
+    </div>
+
+
+</main>
+
+
+
+<script>
+
+/* =========================================================
+   DEMO MESSAGE
+========================================================= */
+
+function demoMessage(module){
+
+    alert(
+        module +
+        " MODULE IS AVAILABLE IN VYAPAR ONE."
+    );
+
+}
+
+</script>
+
+
+</body>
+</html>
