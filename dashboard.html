@@ -3,11 +3,11 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>VYAPAR ONE — Dashboard</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
@@ -21,85 +21,79 @@
     box-sizing:border-box;
 }
 
-html,
-body{
+html,body{
     min-height:100%;
 }
 
 body{
     font-family:Arial,Helvetica,sans-serif;
-    background:#f4f7f9;
-    color:#17323d;
+    background:#07111f;
+    color:#e8f5f7;
+    overflow-x:hidden;
 }
 
 
 /* =========================================================
-   MAIN APP
+   APP
 ========================================================= */
 
 .app{
     min-height:100vh;
-    display:flex;
 }
 
 
 /* =========================================================
-   SIDEBAR — NAVY PREMIUM
+   SIDEBAR
 ========================================================= */
 
 .sidebar{
-
-    width:250px;
-    min-height:100vh;
-
-    background:
-        linear-gradient(
-            180deg,
-            #061a2f 0%,
-            #082945 55%,
-            #063b4c 100%
-        );
-
-    color:white;
-
-    padding:20px 15px;
-
     position:fixed;
 
     left:0;
     top:0;
     bottom:0;
 
-    z-index:100;
+    width:250px;
+
+    padding:20px 15px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #04101c 0%,
+            #062638 60%,
+            #063b4c 100%
+        );
 
     border-right:1px solid #164d73;
 
+    z-index:100;
+
+    transition:.3s;
+
     box-shadow:
-        8px 0 30px rgba(4,25,48,.16);
+        8px 0 30px rgba(0,0,0,.35);
 }
 
 
 /* =========================================================
-   SIDEBAR LOGO
+   LOGO
 ========================================================= */
 
 .sidebar-logo{
-
     display:flex;
     align-items:center;
-
     gap:11px;
 
     padding:5px 8px 24px;
 
     border-bottom:
-        1px solid rgba(120,210,225,.14);
+        1px solid rgba(120,210,225,.12);
 
     margin-bottom:22px;
 }
 
 .sidebar-logo-icon{
-
     width:45px;
     height:45px;
 
@@ -120,13 +114,9 @@ body{
 
     font-size:24px;
     font-weight:900;
-
-    box-shadow:
-        0 8px 20px rgba(0,0,0,.18);
 }
 
 .sidebar-logo-text strong{
-
     display:block;
 
     font-size:17px;
@@ -135,7 +125,6 @@ body{
 }
 
 .sidebar-logo-text span{
-
     display:block;
 
     font-size:8px;
@@ -153,11 +142,9 @@ body{
 ========================================================= */
 
 .menu-title{
-
     color:#7294a9;
 
     font-size:10px;
-
     font-weight:800;
 
     padding:0 12px;
@@ -168,13 +155,11 @@ body{
 }
 
 .menu{
-
     display:grid;
     gap:6px;
 }
 
 .menu-btn{
-
     width:100%;
     min-height:46px;
 
@@ -194,7 +179,6 @@ body{
     color:#c2d5e2;
 
     font-size:13px;
-
     font-weight:700;
 
     text-align:left;
@@ -205,9 +189,7 @@ body{
 }
 
 .menu-btn:hover{
-
-    background:
-        rgba(8,127,140,.16);
+    background:rgba(8,127,140,.16);
 
     border-color:
         rgba(22,143,163,.25);
@@ -218,7 +200,6 @@ body{
 }
 
 .menu-btn.active{
-
     background:
         linear-gradient(
             135deg,
@@ -235,7 +216,6 @@ body{
 }
 
 .menu-icon{
-
     width:24px;
 
     text-align:center;
@@ -249,7 +229,6 @@ body{
 ========================================================= */
 
 .logout-btn{
-
     position:absolute;
 
     left:15px;
@@ -268,61 +247,45 @@ body{
     color:#d9e8f0;
 
     font-size:12px;
-
     font-weight:800;
 
     cursor:pointer;
-
-    transition:.25s;
-}
-
-.logout-btn:hover{
-
-    background:
-        rgba(220,70,70,.15);
-
-    border-color:
-        rgba(255,110,110,.35);
-
-    color:white;
 }
 
 
 /* =========================================================
-   MAIN CONTENT
+   MAIN
 ========================================================= */
 
 .main{
-
     width:calc(100% - 250px);
 
     margin-left:250px;
 
     min-height:100vh;
+
+    transition:.3s;
 }
 
 
 /* =========================================================
-   TOP BAR
+   TOPBAR
 ========================================================= */
 
 .topbar{
-
     height:78px;
 
     background:
-        rgba(255,255,255,.96);
+        rgba(11,26,41,.96);
 
     border-bottom:
-        1px solid #dce8ed;
+        1px solid #1b3b4c;
 
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
 
-    padding:0 30px;
+    padding:0 25px;
 
     position:sticky;
 
@@ -330,24 +293,60 @@ body{
 
     z-index:50;
 
-    box-shadow:
-        0 4px 18px rgba(7,59,76,.04);
+    backdrop-filter:blur(10px);
 }
 
-.page-title h1{
+.top-left{
+    display:flex;
 
-    color:#073b4c;
+    align-items:center;
+
+    gap:14px;
+}
+
+
+/* =========================================================
+   SIDEBAR TOGGLE
+========================================================= */
+
+.toggle-btn{
+    width:42px;
+    height:42px;
+
+    border:1px solid #285065;
+
+    border-radius:11px;
+
+    background:#102638;
+
+    color:#dceff3;
+
+    font-size:20px;
+
+    cursor:pointer;
+}
+
+.toggle-btn:hover{
+    background:#15364a;
+
+    border-color:#18c5b5;
+}
+
+
+/* =========================================================
+   PAGE TITLE
+========================================================= */
+
+.page-title h1{
+    color:#e8f5f7;
 
     font-size:23px;
 
     margin-bottom:3px;
-
-    letter-spacing:.3px;
 }
 
 .page-title span{
-
-    color:#7b929c;
+    color:#8ca7b3;
 
     font-size:11px;
 }
@@ -358,62 +357,49 @@ body{
 ========================================================= */
 
 .user-area{
-
     display:flex;
+
     align-items:center;
 
     gap:11px;
 }
 
 .user-info{
-
     text-align:right;
 }
 
 .user-info strong{
-
     display:block;
 
-    color:#073b4c;
+    color:#e8f5f7;
 
     font-size:12px;
 }
 
 .user-info span{
-
-    color:#7a8c92;
+    color:#8ca7b3;
 
     font-size:10px;
 }
 
 .user-avatar{
-
     width:42px;
     height:42px;
 
     border-radius:50%;
 
-    background:
-        linear-gradient(
-            135deg,
-            #dff8fa,
-            #bfeaf0
-        );
+    background:#123448;
 
-    color:#087f8c;
+    color:#7fe0e2;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
     font-size:18px;
 
-    font-weight:900;
-
-    border:2px solid white;
-
-    box-shadow:
-        0 5px 15px rgba(8,127,140,.14);
+    border:1px solid #286075;
 }
 
 
@@ -422,8 +408,7 @@ body{
 ========================================================= */
 
 .content{
-
-    padding:30px;
+    padding:25px;
 }
 
 
@@ -432,7 +417,6 @@ body{
 ========================================================= */
 
 .welcome{
-
     background:
         linear-gradient(
             135deg,
@@ -441,197 +425,124 @@ body{
             #075b78
         );
 
-    color:white;
+    border:1px solid #164d73;
 
-    border-radius:20px;
+    border-radius:18px;
 
-    padding:28px 31px;
+    padding:25px 28px;
 
-    margin-bottom:25px;
+    margin-bottom:20px;
 
     display:flex;
 
     align-items:center;
-
     justify-content:space-between;
 
     gap:20px;
 
-    border:1px solid #164d73;
-
     box-shadow:
-        0 16px 40px rgba(4,25,48,.20);
-
-    position:relative;
+        0 16px 40px rgba(0,0,0,.32);
 
     overflow:hidden;
 }
 
-.welcome::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:0;
-    right:0;
-
-    height:1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #4ad0df,
-            transparent
-        );
-}
-
 .welcome h2{
-
-    font-size:26px;
+    font-size:25px;
 
     margin-bottom:6px;
 }
 
 .welcome p{
-
     color:#bfd3df;
 
     font-size:13px;
 }
 
 .welcome-icon{
-
-    font-size:57px;
-
-    opacity:.9;
-
-    filter:
-        drop-shadow(
-            0 7px 12px rgba(0,0,0,.2)
-        );
+    font-size:52px;
 }
 
 
 /* =========================================================
-   STAT CARDS — NAVY PREMIUM
+   STATS
 ========================================================= */
 
 .stats{
-
     display:grid;
 
     grid-template-columns:
         repeat(4,1fr);
 
-    gap:18px;
+    gap:15px;
 
-    margin-bottom:25px;
+    margin-bottom:20px;
 }
 
 .stat-card{
+    background:#0d1c2b;
 
-    background:
-        linear-gradient(
-            145deg,
-            #071d35,
-            #0b2d4d
-        );
+    border:1px solid #1b3b4c;
 
-    border:
-        1px solid #164d73;
+    border-radius:15px;
 
-    border-radius:17px;
-
-    padding:21px;
-
-    color:white;
-
-    box-shadow:
-        0 12px 30px rgba(4,25,48,.16);
-
-    transition:.3s;
+    padding:18px;
 
     position:relative;
 
     overflow:hidden;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.25);
 }
 
 .stat-card::before{
-
     content:"";
 
     position:absolute;
 
-    top:0;
     left:0;
     right:0;
+    top:0;
 
-    height:1px;
+    height:3px;
 
     background:
         linear-gradient(
             90deg,
-            transparent,
-            rgba(74,205,225,.65),
-            transparent
+            #18c5b5,
+            #3f91ff
         );
-}
-
-.stat-card:hover{
-
-    transform:translateY(-5px);
-
-    border-color:#168fa3;
-
-    box-shadow:
-        0 18px 38px rgba(4,25,48,.25),
-        0 0 20px rgba(8,127,140,.10);
 }
 
 .stat-top{
-
     display:flex;
 
     align-items:center;
-
     justify-content:space-between;
 
-    margin-bottom:16px;
+    margin-bottom:13px;
 }
 
 .stat-icon{
+    width:42px;
+    height:42px;
 
-    width:45px;
-    height:45px;
+    border-radius:11px;
 
-    border-radius:12px;
+    background:#123244;
 
-    background:
-        linear-gradient(
-            135deg,
-            #123b5c,
-            #0b4768
-        );
-
-    border:1px solid #1b567d;
+    border:1px solid #225267;
 
     display:flex;
 
     align-items:center;
     justify-content:center;
 
-    font-size:20px;
-
-    box-shadow:
-        0 7px 16px rgba(0,0,0,.14);
+    font-size:19px;
 }
 
 .stat-label{
-
-    color:#8faabc;
+    color:#8ca7b3;
 
     font-size:10px;
 
@@ -641,10 +552,9 @@ body{
 }
 
 .stat-value{
+    color:#eefcff;
 
-    color:white;
-
-    font-size:27px;
+    font-size:25px;
 
     font-weight:900;
 
@@ -652,12 +562,259 @@ body{
 }
 
 .stat-note{
+    color:#18c5b5;
 
-    color:#42d5e2;
+    font-size:9px;
+
+    font-weight:800;
+}
+
+
+/* =========================================================
+   CHART GRID
+========================================================= */
+
+.chart-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:15px;
+
+    margin-bottom:20px;
+}
+
+
+/* =========================================================
+   CHART CARD
+========================================================= */
+
+.chart-card{
+    background:#0d1c2b;
+
+    border:1px solid #1b3b4c;
+
+    border-radius:16px;
+
+    padding:15px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.25);
+}
+
+.chart-card::before{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    top:0;
+
+    height:3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #18c5b5,
+            #3f91ff
+        );
+}
+
+.chart-heading{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:8px;
+}
+
+.chart-heading h3{
+    font-size:12px;
+
+    color:#e8f5f7;
+}
+
+.chart-heading span{
+    font-size:8px;
+
+    color:#18c5b5;
+
+    font-weight:900;
+}
+
+.chart-box{
+    width:100%;
+
+    height:205px;
+
+    position:relative;
+}
+
+.chart-box canvas{
+    width:100%;
+    height:100%;
+
+    display:block;
+}
+
+.chart-empty{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    color:#66818d;
 
     font-size:10px;
 
     font-weight:700;
+
+    pointer-events:none;
+}
+
+
+/* =========================================================
+   LEGEND
+========================================================= */
+
+.legend{
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin-top:5px;
+}
+
+.legend span{
+    font-size:8px;
+
+    color:#8ca7b3;
+}
+
+.dot{
+    display:inline-block;
+
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    margin-right:3px;
+}
+
+.sale{
+    background:#18c5b5;
+}
+
+.pay{
+    background:#3f91ff;
+}
+
+.out{
+    background:#ff9f43;
+}
+
+
+/* =========================================================
+   CUSTOMER PENDING
+========================================================= */
+
+.pending-card{
+    margin-bottom:20px;
+}
+
+.pending-list{
+    display:grid;
+
+    gap:10px;
+}
+
+.pending-row{
+    display:grid;
+
+    grid-template-columns:
+        minmax(100px,1fr)
+        2fr
+        auto;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+.pending-name{
+    font-size:11px;
+
+    font-weight:800;
+
+    color:#dceff3;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.pending-track{
+    height:12px;
+
+    background:#102838;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    border:1px solid #1b4050;
+}
+
+.pending-bar{
+    height:100%;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #8b7cff,
+            #c06cff
+        );
+
+    min-width:2px;
+}
+
+.pending-value{
+    font-size:11px;
+
+    font-weight:900;
+
+    color:#ffb45c;
+
+    white-space:nowrap;
+}
+
+.no-pending{
+    color:#78929e;
+
+    text-align:center;
+
+    padding:25px;
+
+    font-size:11px;
 }
 
 
@@ -666,94 +823,69 @@ body{
 ========================================================= */
 
 .dashboard-grid{
-
     display:grid;
 
     grid-template-columns:
         1.5fr 1fr;
 
-    gap:20px;
+    gap:18px;
 }
 
-
-/* =========================================================
-   PREMIUM DASHBOARD CARD
-========================================================= */
-
 .dashboard-card{
+    background:#0d1c2b;
 
-    background:
-        linear-gradient(
-            145deg,
-            #071d35,
-            #0b2d4d
-        );
+    border:1px solid #1b3b4c;
 
-    border:
-        1px solid #164d73;
+    border-radius:16px;
 
-    border-radius:18px;
-
-    padding:23px;
-
-    color:white;
-
-    box-shadow:
-        0 12px 30px rgba(4,25,48,.15);
+    padding:21px;
 
     position:relative;
 
-    overflow:hidden;
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.25);
 }
 
 .dashboard-card::before{
-
     content:"";
 
     position:absolute;
 
-    top:0;
     left:0;
     right:0;
+    top:0;
 
-    height:1px;
+    height:3px;
 
     background:
         linear-gradient(
             90deg,
-            transparent,
-            rgba(74,205,225,.65),
-            transparent
+            #18c5b5,
+            #3f91ff
         );
 }
 
 .card-heading{
-
     display:flex;
 
     align-items:center;
-
     justify-content:space-between;
 
-    margin-bottom:20px;
+    margin-bottom:18px;
 }
 
 .card-heading h3{
+    color:#e8f5f7;
 
-    color:white;
-
-    font-size:16px;
+    font-size:15px;
 }
 
 .card-heading span{
+    color:#18c5b5;
 
-    color:#42d5e2;
-
-    font-size:10px;
+    font-size:9px;
 
     font-weight:800;
-
-    letter-spacing:.6px;
 }
 
 
@@ -762,30 +894,27 @@ body{
 ========================================================= */
 
 .quick-actions{
-
     display:grid;
 
     grid-template-columns:
         repeat(3,1fr);
 
-    gap:12px;
+    gap:11px;
 }
 
 .quick-btn{
+    min-height:95px;
 
-    min-height:105px;
-
-    border:
-        1px solid #1b567d;
+    border:1px solid #204455;
 
     background:
         linear-gradient(
             145deg,
-            #0c2945,
-            #103b5d
+            #102333,
+            #0b1a28
         );
 
-    border-radius:13px;
+    border-radius:12px;
 
     cursor:pointer;
 
@@ -794,163 +923,124 @@ body{
     flex-direction:column;
 
     align-items:center;
-
     justify-content:center;
 
-    gap:8px;
+    gap:7px;
 
-    color:#d6e6ef;
+    color:#dceff3;
 
     transition:.25s;
-
-    position:relative;
-
-    overflow:hidden;
-}
-
-.quick-btn::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:0;
-    right:0;
-
-    height:1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(74,205,225,.55),
-            transparent
-        );
 }
 
 .quick-btn:hover{
+    border-color:#18aeb3;
 
-    border-color:#168fa3;
-
-    background:
-        linear-gradient(
-            145deg,
-            #103b5d,
-            #12506f
-        );
-
-    transform:translateY(-4px);
-
-    box-shadow:
-        0 12px 25px rgba(0,0,0,.20);
+    transform:translateY(-2px);
 }
 
 .quick-btn-icon{
-
-    font-size:27px;
+    font-size:25px;
 }
 
 .quick-btn span{
-
-    font-size:10px;
+    font-size:9px;
 
     font-weight:800;
 
-    text-align:center;
+    color:#9eb6c0;
 
-    color:#c9dce7;
+    text-align:center;
 }
 
 
 /* =========================================================
-   RECENT ACTIVITY
+   ACTIVITY
 ========================================================= */
 
 .activity{
-
     display:grid;
 
-    gap:13px;
+    gap:12px;
 }
 
 .activity-row{
-
     display:flex;
 
     align-items:center;
 
-    gap:12px;
+    gap:11px;
 
-    padding-bottom:13px;
+    padding-bottom:12px;
 
     border-bottom:
-        1px solid rgba(125,175,195,.13);
+        1px solid #1a3341;
 }
 
 .activity-row:last-child{
-
     border-bottom:none;
-
-    padding-bottom:0;
 }
 
 .activity-icon{
-
-    width:38px;
-    height:38px;
-
-    flex-shrink:0;
+    width:36px;
+    height:36px;
 
     border-radius:10px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #123b5c,
-            #0b4768
-        );
+    background:#123244;
 
-    border:1px solid #1b567d;
+    border:1px solid #225267;
 
     display:flex;
 
     align-items:center;
     justify-content:center;
-
-    font-size:17px;
 }
 
 .activity-text{
-
     flex:1;
+
+    min-width:0;
 }
 
 .activity-text strong{
-
     display:block;
 
-    color:#e6f1f6;
+    color:#dceff3;
 
-    font-size:11px;
+    font-size:10px;
 
     margin-bottom:3px;
 }
 
 .activity-text span{
+    color:#78929e;
 
-    color:#829cab;
-
-    font-size:10px;
+    font-size:9px;
 }
 
 .activity-amount{
+    color:#18c5b5;
 
-    color:#42d5e2;
+    font-size:11px;
 
-    font-size:12px;
+    font-weight:900;
 
-    font-weight:800;
+    white-space:nowrap;
+}
+
+
+/* =========================================================
+   SIDEBAR HIDDEN
+========================================================= */
+
+body.sidebar-hidden .sidebar{
+    transform:translateX(-100%);
+}
+
+body.sidebar-hidden .main{
+    width:100%;
+
+    margin-left:0;
 }
 
 
@@ -958,173 +1048,128 @@ body{
    RESPONSIVE
 ========================================================= */
 
-@media(max-width:1100px){
+@media(max-width:1250px){
 
-    .stats{
-
+    .chart-grid{
         grid-template-columns:
             repeat(2,1fr);
     }
 
-    .dashboard-grid{
-
-        grid-template-columns:1fr;
+    .stats{
+        grid-template-columns:
+            repeat(2,1fr);
     }
+
 }
 
 
 @media(max-width:800px){
 
     .sidebar{
+        width:220px;
 
-        width:72px;
-
-        padding:15px 10px;
+        transform:translateX(-100%);
     }
 
-    .sidebar-logo{
-
-        justify-content:center;
-
-        padding-left:0;
-        padding-right:0;
-    }
-
-    .sidebar-logo-text,
-    .menu-title,
-    .menu-btn span,
-    .logout-btn span{
-
-        display:none;
-    }
-
-    .menu-btn{
-
-        justify-content:center;
-
-        padding:0;
-    }
-
-    .menu-icon{
-
-        font-size:20px;
-    }
-
-    .logout-btn{
-
-        left:10px;
-        right:10px;
-
-        font-size:18px;
+    .sidebar.mobile-open{
+        transform:translateX(0);
     }
 
     .main{
+        width:100%;
 
-        width:calc(100% - 72px);
-
-        margin-left:72px;
+        margin-left:0;
     }
 
     .topbar{
-
-        padding:0 18px;
+        padding:0 15px;
     }
 
     .content{
-
-        padding:18px;
+        padding:15px;
     }
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+
+    .quick-actions{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
 }
 
 
 @media(max-width:600px){
 
     .topbar{
-
-        height:68px;
+        height:66px;
     }
 
     .page-title h1{
-
         font-size:18px;
     }
 
-    .page-title span{
-
-        display:none;
-    }
-
+    .page-title span,
     .user-info{
-
         display:none;
     }
 
     .welcome{
-
-        padding:22px;
-
-        border-radius:16px;
+        padding:20px;
     }
 
     .welcome h2{
-
-        font-size:21px;
-    }
-
-    .welcome-icon{
-
-        font-size:40px;
-    }
-
-    .stats{
-
-        grid-template-columns:
-            1fr 1fr;
-
-        gap:10px;
-    }
-
-    .stat-card{
-
-        padding:15px;
-    }
-
-    .stat-value{
-
         font-size:20px;
     }
 
-    .quick-actions{
+    .welcome-icon{
+        font-size:38px;
+    }
 
+    .stats{
         grid-template-columns:
-            repeat(2,1fr);
+            1fr 1fr;
+
+        gap:9px;
     }
 
-    .dashboard-card{
-
-        padding:18px;
+    .stat-card{
+        padding:14px;
     }
+
+    .stat-value{
+        font-size:19px;
+    }
+
+    .chart-grid{
+        grid-template-columns:1fr;
+    }
+
+    .chart-box{
+        height:220px;
+    }
+
+    .pending-row{
+        grid-template-columns:
+            100px 1fr auto;
+    }
+
 }
 
 
 @media(max-width:400px){
 
     .stats{
-
         grid-template-columns:1fr;
     }
 
-    .main{
-
-        width:calc(100% - 65px);
-
-        margin-left:65px;
+    .quick-actions{
+        grid-template-columns:
+            1fr 1fr;
     }
 
-    .sidebar{
-
-        width:65px;
-    }
 }
 
 </style>
@@ -1134,7 +1179,6 @@ body{
 
 <body>
 
-
 <div class="app">
 
 
@@ -1142,8 +1186,7 @@ body{
      SIDEBAR
 ===================================================== -->
 
-<aside class="sidebar">
-
+<aside class="sidebar" id="sidebar">
 
     <div class="sidebar-logo">
 
@@ -1153,13 +1196,9 @@ body{
 
         <div class="sidebar-logo-text">
 
-            <strong>
-                VYAPAR ONE
-            </strong>
+            <strong>VYAPAR ONE</strong>
 
-            <span>
-                BILLING SOFTWARE
-            </span>
+            <span>BILLING SOFTWARE</span>
 
         </div>
 
@@ -1173,72 +1212,571 @@ body{
 
     <div class="menu">
 
+        <button class="menu-btn active"
+                onclick="goHome()">
 
-        <button
-            class="menu-btn active"
-            onclick="goHome()">
+            <div class="menu-icon">🏠</div>
 
-            <div class="menu-icon">
-                🏠
-            </div>
-
-            <span>
-                DASHBOARD
-            </span>
+            <span>DASHBOARD</span>
 
         </button>
 
 
-        <button
-            class="menu-btn"
-            onclick="openModule('CUSTOMER')">
+        <button class="menu-btn"
+                onclick="openModule('CUSTOMER')">
 
-            <div class="menu-icon">
+            <div class="menu-icon">👥</div>
+
+            <span>CUSTOMER</span>
+
+        </button>
+
+
+        <button class="menu-btn"
+                onclick="openModule('ITEM')">
+
+            <div class="menu-icon">📦</div>
+
+            <span>ITEM MASTER</span>
+
+        </button>
+
+
+        <button class="menu-btn"
+                onclick="openModule('INVOICE')">
+
+            <div class="menu-icon">🧾</div>
+
+            <span>INVOICE</span>
+
+        </button>
+
+
+        <button class="menu-btn"
+                onclick="openModule('PAYMENT')">
+
+            <div class="menu-icon">💳</div>
+
+            <span>PAYMENT</span>
+
+        </button>
+
+
+        <button class="menu-btn"
+                onclick="openModule('LEDGER')">
+
+            <div class="menu-icon">📒</div>
+
+            <span>LEDGER</span>
+
+        </button>
+
+
+        <button class="menu-btn"
+                onclick="openModule('REPORT')">
+
+            <div class="menu-icon">📊</div>
+
+            <span>REPORT</span>
+
+        </button>
+
+
+        <button class="menu-btn"
+                onclick="openModule('BUSINESS')">
+
+            <div class="menu-icon">🏢</div>
+
+            <span>BUSINESS PROFILE</span>
+
+        </button>
+
+    </div>
+
+
+    <button class="logout-btn"
+            onclick="logout()">
+
+        🚪
+
+        <span>LOGOUT</span>
+
+    </button>
+
+</aside>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+<!-- =====================================================
+     TOPBAR
+===================================================== -->
+
+<div class="topbar">
+
+    <div class="top-left">
+
+        <button class="toggle-btn"
+                id="sidebarToggle">
+
+            ☰
+
+        </button>
+
+
+        <div class="page-title">
+
+            <h1>DASHBOARD</h1>
+
+            <span>
+                VYAPAR ONE BILLING SOFTWARE
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="user-area">
+
+        <div class="user-info">
+
+            <strong>DEMO USER</strong>
+
+            <span>ADMIN</span>
+
+        </div>
+
+
+        <div class="user-avatar">
+            👤
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     CONTENT
+===================================================== -->
+
+<div class="content">
+
+
+<!-- =====================================================
+     WELCOME
+===================================================== -->
+
+<div class="welcome">
+
+    <div>
+
+        <h2>
+            Welcome to VYAPAR ONE 👋
+        </h2>
+
+        <p>
+            Manage your business from one simple
+            and professional dashboard.
+        </p>
+
+    </div>
+
+    <div class="welcome-icon">
+        📊
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<div class="stats">
+
+
+<div class="stat-card">
+
+    <div class="stat-top">
+
+        <div class="stat-icon">
+            👥
+        </div>
+
+        <div class="stat-label">
+            CUSTOMERS
+        </div>
+
+    </div>
+
+    <div class="stat-value"
+         id="customerCount">
+        0
+    </div>
+
+    <div class="stat-note">
+        TOTAL CUSTOMERS
+    </div>
+
+</div>
+
+
+<div class="stat-card">
+
+    <div class="stat-top">
+
+        <div class="stat-icon">
+            🧾
+        </div>
+
+        <div class="stat-label">
+            INVOICES
+        </div>
+
+    </div>
+
+    <div class="stat-value"
+         id="invoiceCount">
+        0
+    </div>
+
+    <div class="stat-note">
+        TOTAL INVOICES
+    </div>
+
+</div>
+
+
+<div class="stat-card">
+
+    <div class="stat-top">
+
+        <div class="stat-icon">
+            💰
+        </div>
+
+        <div class="stat-label">
+            SALES
+        </div>
+
+    </div>
+
+    <div class="stat-value"
+         id="salesTotal">
+        ₹0
+    </div>
+
+    <div class="stat-note">
+        TOTAL SALES
+    </div>
+
+</div>
+
+
+<div class="stat-card">
+
+    <div class="stat-top">
+
+        <div class="stat-icon">
+            💳
+        </div>
+
+        <div class="stat-label">
+            PAYMENT
+        </div>
+
+    </div>
+
+    <div class="stat-value"
+         id="paymentTotal">
+        ₹0
+    </div>
+
+    <div class="stat-note">
+        PAYMENT + DISCOUNT
+    </div>
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     FOUR CHARTS
+===================================================== -->
+
+<div class="chart-grid">
+
+
+<!-- LINE -->
+
+<div class="chart-card">
+
+    <div class="chart-heading">
+
+        <h3>📈 LINE GRAPH</h3>
+
+        <span>14 DAYS</span>
+
+    </div>
+
+    <div class="chart-box">
+
+        <canvas id="lineChart"></canvas>
+
+        <div id="lineEmpty"
+             class="chart-empty">
+
+            NO DATA
+
+        </div>
+
+    </div>
+
+    <div class="legend">
+
+        <span>
+            <i class="dot sale"></i>SALE
+        </span>
+
+        <span>
+            <i class="dot pay"></i>PAYMENT
+        </span>
+
+        <span>
+            <i class="dot out"></i>OUTSTANDING
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- COLUMN -->
+
+<div class="chart-card">
+
+    <div class="chart-heading">
+
+        <h3>📊 COLUMN</h3>
+
+        <span>SUMMARY</span>
+
+    </div>
+
+    <div class="chart-box">
+
+        <canvas id="columnChart"></canvas>
+
+        <div id="columnEmpty"
+             class="chart-empty">
+
+            NO DATA
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- PIE -->
+
+<div class="chart-card">
+
+    <div class="chart-heading">
+
+        <h3>🥧 PIE CHART</h3>
+
+        <span>SHARE</span>
+
+    </div>
+
+    <div class="chart-box">
+
+        <canvas id="pieChart"></canvas>
+
+        <div id="pieEmpty"
+             class="chart-empty">
+
+            NO DATA
+
+        </div>
+
+    </div>
+
+    <div class="legend">
+
+        <span>
+            <i class="dot sale"></i>SALE
+        </span>
+
+        <span>
+            <i class="dot pay"></i>PAYMENT
+        </span>
+
+        <span>
+            <i class="dot out"></i>OUTSTANDING
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- DOUGHNUT -->
+
+<div class="chart-card">
+
+    <div class="chart-heading">
+
+        <h3>🍩 DOUGHNUT</h3>
+
+        <span>LIVE</span>
+
+    </div>
+
+    <div class="chart-box">
+
+        <canvas id="doughnutChart"></canvas>
+
+        <div id="doughnutEmpty"
+             class="chart-empty">
+
+            NO DATA
+
+        </div>
+
+    </div>
+
+    <div class="legend">
+
+        <span>
+            <i class="dot out"></i>OUTSTANDING
+        </span>
+
+        <span>
+            <i class="dot pay"></i>SETTLED
+        </span>
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     CUSTOMER PENDING
+===================================================== -->
+
+<div class="dashboard-card pending-card">
+
+    <div class="card-heading">
+
+        <h3>
+            👤 CUSTOMER PENDING
+        </h3>
+
+        <span id="pendingSummary">
+            LIVE FROM SUPABASE
+        </span>
+
+    </div>
+
+
+    <div class="pending-list"
+         id="pendingList">
+
+        <div class="no-pending">
+            LOADING CUSTOMER DATA...
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     QUICK ACTIONS + ACTIVITY
+===================================================== -->
+
+<div class="dashboard-grid">
+
+
+<div class="dashboard-card">
+
+    <div class="card-heading">
+
+        <h3>
+            QUICK ACTIONS
+        </h3>
+
+        <span>
+            SHORTCUTS
+        </span>
+
+    </div>
+
+
+    <div class="quick-actions">
+
+
+        <button class="quick-btn"
+                onclick="openModule('CUSTOMER')">
+
+            <div class="quick-btn-icon">
                 👥
             </div>
 
             <span>
-                CUSTOMER
+                NEW CUSTOMER
             </span>
 
         </button>
 
 
-        <button
-            class="menu-btn"
-            onclick="openModule('ITEM')">
+        <button class="quick-btn"
+                onclick="openModule('ITEM')">
 
-            <div class="menu-icon">
+            <div class="quick-btn-icon">
                 📦
             </div>
 
             <span>
-                ITEM MASTER
+                NEW ITEM
             </span>
 
         </button>
 
 
-        <button
-            class="menu-btn"
-            onclick="openModule('INVOICE')">
+        <button class="quick-btn"
+                onclick="openModule('INVOICE')">
 
-            <div class="menu-icon">
+            <div class="quick-btn-icon">
                 🧾
             </div>
 
             <span>
-                INVOICE
+                NEW INVOICE
             </span>
 
         </button>
 
 
-        <button
-            class="menu-btn"
-            onclick="openModule('PAYMENT')">
+        <button class="quick-btn"
+                onclick="openModule('PAYMENT')">
 
-            <div class="menu-icon">
+            <div class="quick-btn-icon">
                 💳
             </div>
 
@@ -1249,26 +1787,24 @@ body{
         </button>
 
 
-        <button
-            class="menu-btn"
-            onclick="openModule('LEDGER')">
+        <button class="quick-btn"
+                onclick="openModule('LEDGER')">
 
-            <div class="menu-icon">
+            <div class="quick-btn-icon">
                 📒
             </div>
 
             <span>
-                LEDGER
+                CUSTOMER LEDGER
             </span>
 
         </button>
 
 
-        <button
-            class="menu-btn"
-            onclick="openModule('REPORT')">
+        <button class="quick-btn"
+                onclick="openModule('REPORT')">
 
-            <div class="menu-icon">
+            <div class="quick-btn-icon">
                 📊
             </div>
 
@@ -1279,515 +1815,148 @@ body{
         </button>
 
 
-        <button
-            class="menu-btn"
-            onclick="openModule('BUSINESS')">
+    </div>
 
-            <div class="menu-icon">
-                🏢
-            </div>
+</div>
 
-            <span>
-                BUSINESS PROFILE
-            </span>
 
-        </button>
+<div class="dashboard-card">
 
+    <div class="card-heading">
+
+        <h3>
+            RECENT ACTIVITY
+        </h3>
+
+        <span>
+            LIVE
+        </span>
 
     </div>
 
 
-    <button
-        class="logout-btn"
-        onclick="logout()">
+    <div class="activity"
+         id="recentActivity">
 
-        🚪
-        <span>
-            LOGOUT
-        </span>
+        <div class="activity-row">
 
-    </button>
+            <div class="activity-icon">
+                📭
+            </div>
 
-
-</aside>
-
-
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
-
-<main class="main">
-
-
-    <!-- TOP BAR -->
-
-    <div class="topbar">
-
-
-        <div class="page-title">
-
-            <h1>
-                DASHBOARD
-            </h1>
-
-            <span>
-                VYAPAR ONE BILLING SOFTWARE
-            </span>
-
-        </div>
-
-
-        <div class="user-area">
-
-            <div class="user-info">
+            <div class="activity-text">
 
                 <strong>
-                    DEMO USER
+                    LOADING ACTIVITY
                 </strong>
 
                 <span>
-                    ADMIN
+                    Please wait...
                 </span>
 
             </div>
 
-            <div class="user-avatar">
-                👤
+            <div class="activity-amount">
+                —
             </div>
 
         </div>
-
 
     </div>
 
+</div>
 
 
-    <!-- CONTENT -->
+</div>
 
-    <div class="content">
 
-
-        <!-- WELCOME -->
-
-        <div class="welcome">
-
-            <div>
-
-                <h2>
-                    Welcome to VYAPAR ONE 👋
-                </h2>
-
-                <p>
-                    Manage your business from one simple
-                    and professional dashboard.
-                </p>
-
-            </div>
-
-            <div class="welcome-icon">
-                📊
-            </div>
-
-        </div>
-
-
-
-        <!-- STATS -->
-
-        <div class="stats">
-
-
-            <div class="stat-card">
-
-                <div class="stat-top">
-
-                    <div class="stat-icon">
-                        👥
-                    </div>
-
-                    <div class="stat-label">
-                        CUSTOMERS
-                    </div>
-
-                </div>
-
-                <div class="stat-value">
-                    0
-                </div>
-
-                <div class="stat-note">
-                    TOTAL CUSTOMERS
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-top">
-
-                    <div class="stat-icon">
-                        🧾
-                    </div>
-
-                    <div class="stat-label">
-                        INVOICES
-                    </div>
-
-                </div>
-
-                <div class="stat-value">
-                    0
-                </div>
-
-                <div class="stat-note">
-                    TOTAL INVOICES
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-top">
-
-                    <div class="stat-icon">
-                        💰
-                    </div>
-
-                    <div class="stat-label">
-                        SALES
-                    </div>
-
-                </div>
-
-                <div class="stat-value">
-                    ₹0
-                </div>
-
-                <div class="stat-note">
-                    TOTAL SALES
-                </div>
-
-            </div>
-
-
-            <div class="stat-card">
-
-                <div class="stat-top">
-
-                    <div class="stat-icon">
-                        💳
-                    </div>
-
-                    <div class="stat-label">
-                        PAYMENT
-                    </div>
-
-                </div>
-
-                <div class="stat-value">
-                    ₹0
-                </div>
-
-                <div class="stat-note">
-                    TOTAL PAYMENT
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-
-        <!-- DASHBOARD GRID -->
-
-        <div class="dashboard-grid">
-
-
-            <!-- QUICK ACTIONS -->
-
-            <div class="dashboard-card">
-
-                <div class="card-heading">
-
-                    <h3>
-                        QUICK ACTIONS
-                    </h3>
-
-                    <span>
-                        SHORTCUTS
-                    </span>
-
-                </div>
-
-
-                <div class="quick-actions">
-
-
-                    <button
-                        class="quick-btn"
-                        onclick="openModule('CUSTOMER')">
-
-                        <div class="quick-btn-icon">
-                            👥
-                        </div>
-
-                        <span>
-                            NEW CUSTOMER
-                        </span>
-
-                    </button>
-
-
-                    <button
-                        class="quick-btn"
-                        onclick="openModule('ITEM')">
-
-                        <div class="quick-btn-icon">
-                            📦
-                        </div>
-
-                        <span>
-                            NEW ITEM
-                        </span>
-
-                    </button>
-
-
-                    <button
-                        class="quick-btn"
-                        onclick="openModule('INVOICE')">
-
-                        <div class="quick-btn-icon">
-                            🧾
-                        </div>
-
-                        <span>
-                            NEW INVOICE
-                        </span>
-
-                    </button>
-
-
-                    <button
-                        class="quick-btn"
-                        onclick="openModule('PAYMENT')">
-
-                        <div class="quick-btn-icon">
-                            💳
-                        </div>
-
-                        <span>
-                            PAYMENT
-                        </span>
-
-                    </button>
-
-
-                    <button
-                        class="quick-btn"
-                        onclick="openModule('LEDGER')">
-
-                        <div class="quick-btn-icon">
-                            📒
-                        </div>
-
-                        <span>
-                            CUSTOMER LEDGER
-                        </span>
-
-                    </button>
-
-
-                    <button
-                        class="quick-btn"
-                        onclick="openModule('REPORT')">
-
-                        <div class="quick-btn-icon">
-                            📊
-                        </div>
-
-                        <span>
-                            REPORT
-                        </span>
-
-                    </button>
-
-
-                </div>
-
-            </div>
-
-
-
-            <!-- RECENT ACTIVITY -->
-
-            <div class="dashboard-card">
-
-                <div class="card-heading">
-
-                    <h3>
-                        RECENT ACTIVITY
-                    </h3>
-
-                    <span>
-                        TODAY
-                    </span>
-
-                </div>
-
-
-                <div class="activity">
-
-
-                    <div class="activity-row">
-
-                        <div class="activity-icon">
-                            🧾
-                        </div>
-
-                        <div class="activity-text">
-
-                            <strong>
-                                NO RECENT INVOICE
-                            </strong>
-
-                            <span>
-                                Your invoices will appear here
-                            </span>
-
-                        </div>
-
-                        <div class="activity-amount">
-                            —
-                        </div>
-
-                    </div>
-
-
-                    <div class="activity-row">
-
-                        <div class="activity-icon">
-                            💳
-                        </div>
-
-                        <div class="activity-text">
-
-                            <strong>
-                                NO RECENT PAYMENT
-                            </strong>
-
-                            <span>
-                                Your payments will appear here
-                            </span>
-
-                        </div>
-
-                        <div class="activity-amount">
-                            —
-                        </div>
-
-                    </div>
-
-
-                    <div class="activity-row">
-
-                        <div class="activity-icon">
-                            👥
-                        </div>
-
-                        <div class="activity-text">
-
-                            <strong>
-                                NO CUSTOMER
-                            </strong>
-
-                            <span>
-                                Add your first customer
-                            </span>
-
-                        </div>
-
-                        <div class="activity-amount">
-                            —
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-    </div>
+</div>
 
 </main>
 
 </div>
 
 
-
 <script>
 
 /* =========================================================
-   DASHBOARD NAVIGATION
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+    "https://jbwdsrnchncmqrvzeael.supabase.co/";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_PLoE7BlNmRLiLpmuvLt8pg_dU8eBVuo";
+
+const db =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+/* =========================================================
+   GLOBAL DATA
+========================================================= */
+
+let dashboardData = {
+
+    customers:[],
+    invoices:[],
+    payments:[],
+
+    sales:0,
+    payment:0,
+    discount:0,
+    outstanding:0,
+
+    pending:[]
+
+};
+
+
+/* =========================================================
+   NAVIGATION
 ========================================================= */
 
 function goHome(){
 
     window.location.href =
         "dashboard.html";
+
 }
+
+
 function openModule(module){
 
-    if(module === "CUSTOMER"){
-        window.location.href = "customer.html";
-        return;
+    const pages = {
+
+        CUSTOMER:"customer.html",
+
+        ITEM:"item.html",
+
+        INVOICE:"invoice.html",
+
+        PAYMENT:"payment.html",
+
+        LEDGER:"ledger.html",
+
+        REPORT:"report.html",
+
+        BUSINESS:"business-profile.html"
+
+    };
+
+
+    if(pages[module]){
+
+        window.location.href =
+            pages[module];
+
     }
 
-    if(module === "ITEM"){
-        window.location.href = "item.html";
-        return;
-    }
-
-    if(module === "INVOICE"){
-        window.location.href = "invoice.html";
-        return;
-    }
-
-    if(module === "PAYMENT"){
-        window.location.href = "payment.html";
-        return;
-    }
-
-    if(module === "LEDGER"){
-        window.location.href = "ledger.html";
-        return;
-    }
-
-    if(module === "REPORT"){
-        window.location.href = "report.html";
-        return;
-    }
-
-    if(module === "BUSINESS"){
-        window.location.href = "business-profile.html";
-        return;
-    }
-
-    alert(
-        module +
-        " MODULE WILL BE CREATED IN THE NEXT STEP."
-    );
 }
-
 
 
 /* =========================================================
@@ -1796,12 +1965,11 @@ function openModule(module){
 
 function logout(){
 
-    const confirmLogout =
+    if(
         confirm(
             "DO YOU WANT TO LOGOUT?"
-        );
-
-    if(confirmLogout){
+        )
+    ){
 
         window.location.href =
             "billing.html";
@@ -1810,8 +1978,2185 @@ function logout(){
 
 }
 
-</script>
 
+/* =========================================================
+   NORMALIZE CUSTOMER
+========================================================= */
+
+function normalizeCustomer(value){
+
+    return String(
+        value ?? ""
+    )
+    .trim()
+    .replace(/\s+/g," ")
+    .toUpperCase();
+
+}
+
+
+/* =========================================================
+   NUMBER
+========================================================= */
+
+function toNumber(value){
+
+    if(
+        value === null ||
+        value === undefined ||
+        value === ""
+    ){
+
+        return 0;
+
+    }
+
+
+    if(
+        typeof value === "number"
+    ){
+
+        return Number.isFinite(value)
+            ? value
+            : 0;
+
+    }
+
+
+    const number =
+        parseFloat(
+            String(value)
+            .replace(/₹/g,"")
+            .replace(/,/g,"")
+            .replace(/[^\d.-]/g,"")
+        );
+
+
+    return Number.isFinite(number)
+        ? number
+        : 0;
+
+}
+
+
+/* =========================================================
+   MONEY
+========================================================= */
+
+function money(value){
+
+    return "₹" +
+        toNumber(value)
+        .toLocaleString(
+            "en-IN",
+            {
+                maximumFractionDigits:2
+            }
+        );
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function getDateValue(value){
+
+    if(!value){
+
+        return null;
+
+    }
+
+
+    const text =
+        String(value)
+        .substring(0,10);
+
+
+    const parts =
+        text.split("-");
+
+
+    if(parts.length === 3){
+
+        const date =
+            new Date(
+                Date.UTC(
+                    Number(parts[0]),
+                    Number(parts[1])-1,
+                    Number(parts[2])
+                )
+            );
+
+
+        if(
+            !isNaN(
+                date.getTime()
+            )
+        ){
+
+            return date;
+
+        }
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    return isNaN(
+        date.getTime()
+    )
+    ? null
+    : date;
+
+}
+
+
+/* =========================================================
+   SAME DATE
+========================================================= */
+
+function sameDay(a,b){
+
+    if(!a || !b){
+
+        return false;
+
+    }
+
+
+    return (
+
+        a.getUTCFullYear()
+        ===
+        b.getUTCFullYear()
+
+        &&
+
+        a.getUTCMonth()
+        ===
+        b.getUTCMonth()
+
+        &&
+
+        a.getUTCDate()
+        ===
+        b.getUTCDate()
+
+    );
+
+}
+
+
+/* =========================================================
+   LOAD SUPABASE DATA
+========================================================= */
+
+async function loadDashboardData(){
+
+    try{
+
+        const results =
+            await Promise.all([
+
+                db
+                .from("customers")
+                .select("*")
+                .order(
+                    "id",
+                    {
+                        ascending:true
+                    }
+                ),
+
+                db
+                .from("invoice")
+                .select("*")
+                .order(
+                    "id",
+                    {
+                        ascending:true
+                    }
+                ),
+
+                db
+                .from("payment")
+                .select("*")
+                .order(
+                    "id",
+                    {
+                        ascending:true
+                    }
+                )
+
+            ]);
+
+
+        for(
+            const result of results
+        ){
+
+            if(result.error){
+
+                throw result.error;
+
+            }
+
+        }
+
+
+        const customers =
+            results[0].data || [];
+
+
+        const invoices =
+            results[1].data || [];
+
+
+        const payments =
+            results[2].data || [];
+
+
+        let sales = 0;
+
+        invoices.forEach(
+            function(row){
+
+                sales +=
+                    toNumber(
+                        row.total_amount
+                    );
+
+            }
+        );
+
+
+        let payment = 0;
+
+        let discount = 0;
+
+
+        payments.forEach(
+            function(row){
+
+                payment +=
+                    toNumber(
+                        row.amount
+                    );
+
+
+                discount +=
+                    toNumber(
+                        row.discount
+                    );
+
+            }
+        );
+
+
+        const outstanding =
+            Math.max(
+                sales -
+                payment -
+                discount,
+                0
+            );
+
+
+        /* =================================================
+           CUSTOMER PENDING
+        ================================================= */
+
+        const customerMap =
+            new Map();
+
+
+        customers.forEach(
+            function(customer){
+
+                const name =
+                    normalizeCustomer(
+                        customer.customer_name
+                    );
+
+
+                if(!name){
+
+                    return;
+
+                }
+
+
+                customerMap.set(
+                    name,
+                    {
+
+                        name:
+                            customer.customer_name,
+
+                        sales:0,
+
+                        paid:0,
+
+                        discount:0,
+
+                        pending:0
+
+                    }
+                );
+
+            }
+        );
+
+
+        invoices.forEach(
+            function(invoice){
+
+                const name =
+                    normalizeCustomer(
+                        invoice.customer
+                    );
+
+
+                if(!name){
+
+                    return;
+
+                }
+
+
+                if(
+                    !customerMap.has(name)
+                ){
+
+                    customerMap.set(
+                        name,
+                        {
+
+                            name:
+                                invoice.customer,
+
+                            sales:0,
+
+                            paid:0,
+
+                            discount:0,
+
+                            pending:0
+
+                        }
+                    );
+
+                }
+
+
+                customerMap
+                    .get(name)
+                    .sales +=
+                        toNumber(
+                            invoice.total_amount
+                        );
+
+            }
+        );
+
+
+        payments.forEach(
+            function(paymentRow){
+
+                const name =
+                    normalizeCustomer(
+                        paymentRow.customer
+                    );
+
+
+                if(!name){
+
+                    return;
+
+                }
+
+
+                if(
+                    !customerMap.has(name)
+                ){
+
+                    customerMap.set(
+                        name,
+                        {
+
+                            name:
+                                paymentRow.customer,
+
+                            sales:0,
+
+                            paid:0,
+
+                            discount:0,
+
+                            pending:0
+
+                        }
+                    );
+
+                }
+
+
+                const item =
+                    customerMap.get(name);
+
+
+                item.paid +=
+                    toNumber(
+                        paymentRow.amount
+                    );
+
+
+                item.discount +=
+                    toNumber(
+                        paymentRow.discount
+                    );
+
+            }
+        );
+
+
+        const pending =
+
+            Array
+            .from(
+                customerMap.values()
+            )
+            .map(
+                function(item){
+
+                    item.pending =
+                        Math.max(
+                            item.sales -
+                            item.paid -
+                            item.discount,
+                            0
+                        );
+
+                    return item;
+
+                }
+            )
+            .filter(
+                function(item){
+
+                    return item.pending > 0;
+
+                }
+            )
+            .sort(
+                function(a,b){
+
+                    return b.pending -
+                        a.pending;
+
+                }
+            );
+
+
+        dashboardData = {
+
+            customers:customers,
+
+            invoices:invoices,
+
+            payments:payments,
+
+            sales:sales,
+
+            payment:payment,
+
+            discount:discount,
+
+            outstanding:outstanding,
+
+            pending:pending
+
+        };
+
+
+        /* =================================================
+           STATISTICS
+        ================================================= */
+
+        document.getElementById(
+            "customerCount"
+        ).textContent =
+            customers.length;
+
+
+        document.getElementById(
+            "invoiceCount"
+        ).textContent =
+            invoices.length;
+
+
+        document.getElementById(
+            "salesTotal"
+        ).textContent =
+            money(sales);
+
+
+        document.getElementById(
+            "paymentTotal"
+        ).textContent =
+            money(
+                payment + discount
+            );
+
+
+        renderPending();
+
+        updateRecentActivity();
+
+        drawAllCharts();
+
+    }
+    catch(error){
+
+        console.error(
+            "DASHBOARD DATA ERROR:",
+            error
+        );
+
+
+        document.getElementById(
+            "pendingList"
+        ).innerHTML = `
+
+            <div class="no-pending">
+
+                DATA LOAD ERROR —
+                CHECK SUPABASE CONNECTION
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   CANVAS SETUP
+========================================================= */
+
+function setupCanvas(id){
+
+    const canvas =
+        document.getElementById(id);
+
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+
+    const width =
+        Math.max(
+            260,
+            rect.width
+        );
+
+
+    const height =
+        Math.max(
+            180,
+            rect.height
+        );
+
+
+    const dpr =
+        window.devicePixelRatio || 1;
+
+
+    canvas.width =
+        width * dpr;
+
+
+    canvas.height =
+        height * dpr;
+
+
+    const ctx =
+        canvas.getContext("2d");
+
+
+    ctx.setTransform(
+        dpr,
+        0,
+        0,
+        dpr,
+        0,
+        0
+    );
+
+
+    ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    return {
+
+        ctx:ctx,
+
+        width:width,
+
+        height:height
+
+    };
+
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+function drawGrid(
+    ctx,
+    x,
+    y,
+    width,
+    height
+){
+
+    ctx.strokeStyle =
+        "#21404e";
+
+    ctx.lineWidth = 1;
+
+
+    for(
+        let i=0;
+        i<=4;
+        i++
+    ){
+
+        const yy =
+            y +
+            height*i/4;
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            x,
+            yy
+        );
+
+        ctx.lineTo(
+            x+width,
+            yy
+        );
+
+        ctx.stroke();
+
+    }
+
+}
+
+
+/* =========================================================
+   LINE CHART
+========================================================= */
+
+function drawLineChart(){
+
+    const setup =
+        setupCanvas(
+            "lineChart"
+        );
+
+
+    const ctx =
+        setup.ctx;
+
+    const width =
+        setup.width;
+
+    const height =
+        setup.height;
+
+
+    const days = [];
+
+
+    for(
+        let i=13;
+        i>=0;
+        i--
+    ){
+
+        const date =
+            new Date();
+
+
+        date.setHours(
+            0,0,0,0
+        );
+
+
+        date.setDate(
+            date.getDate()-i
+        );
+
+
+        days.push(date);
+
+    }
+
+
+    const salesValues = [];
+
+    const paymentValues = [];
+
+    const outstandingValues = [];
+
+
+    let cumulativeSales = 0;
+
+    let cumulativePayment = 0;
+
+    let cumulativeDiscount = 0;
+
+
+    days.forEach(
+        function(day){
+
+            let sale = 0;
+
+            let pay = 0;
+
+            let discount = 0;
+
+
+            dashboardData
+                .invoices
+                .forEach(
+                    function(invoice){
+
+                        const date =
+                            getDateValue(
+                                invoice.invoice_date
+                            );
+
+
+                        if(
+                            sameDay(
+                                date,
+                                day
+                            )
+                        ){
+
+                            sale +=
+                                toNumber(
+                                    invoice.total_amount
+                                );
+
+                        }
+
+                    }
+                );
+
+
+            dashboardData
+                .payments
+                .forEach(
+                    function(payment){
+
+                        const date =
+                            getDateValue(
+                                payment.payment_date
+                            );
+
+
+                        if(
+                            sameDay(
+                                date,
+                                day
+                            )
+                        ){
+
+                            pay +=
+                                toNumber(
+                                    payment.amount
+                                );
+
+
+                            discount +=
+                                toNumber(
+                                    payment.discount
+                                );
+
+                        }
+
+                    }
+                );
+
+
+            cumulativeSales += sale;
+
+            cumulativePayment += pay;
+
+            cumulativeDiscount +=
+                discount;
+
+
+            salesValues.push(
+                sale
+            );
+
+
+            paymentValues.push(
+                pay
+            );
+
+
+            outstandingValues.push(
+
+                Math.max(
+
+                    cumulativeSales -
+                    cumulativePayment -
+                    cumulativeDiscount,
+
+                    0
+
+                )
+
+            );
+
+        }
+    );
+
+
+    const maxValue =
+        Math.max(
+            ...salesValues,
+            ...paymentValues,
+            ...outstandingValues,
+            100
+        );
+
+
+    const left = 30;
+
+    const right = 7;
+
+    const top = 10;
+
+    const bottom = 28;
+
+
+    const chartWidth =
+        width -
+        left -
+        right;
+
+
+    const chartHeight =
+        height -
+        top -
+        bottom;
+
+
+    drawGrid(
+        ctx,
+        left,
+        top,
+        chartWidth,
+        chartHeight
+    );
+
+
+    function drawLine(
+        values,
+        color
+    ){
+
+        ctx.beginPath();
+
+
+        values.forEach(
+            function(value,index){
+
+                const x =
+                    left +
+                    chartWidth *
+                    index /
+                    (values.length-1);
+
+
+                const y =
+                    top +
+                    chartHeight -
+                    (
+                        value /
+                        maxValue *
+                        chartHeight
+                    );
+
+
+                if(index === 0){
+
+                    ctx.moveTo(
+                        x,
+                        y
+                    );
+
+                }
+                else{
+
+                    ctx.lineTo(
+                        x,
+                        y
+                    );
+
+                }
+
+            }
+        );
+
+
+        ctx.strokeStyle =
+            color;
+
+        ctx.lineWidth = 2.5;
+
+        ctx.lineJoin =
+            "round";
+
+        ctx.stroke();
+
+
+        values.forEach(
+            function(value,index){
+
+                const x =
+                    left +
+                    chartWidth *
+                    index /
+                    (values.length-1);
+
+
+                const y =
+                    top +
+                    chartHeight -
+                    (
+                        value /
+                        maxValue *
+                        chartHeight
+                    );
+
+
+                ctx.beginPath();
+
+
+                ctx.arc(
+                    x,
+                    y,
+                    2.8,
+                    0,
+                    Math.PI*2
+                );
+
+
+                ctx.fillStyle =
+                    color;
+
+                ctx.fill();
+
+            }
+        );
+
+    }
+
+
+    drawLine(
+        salesValues,
+        "#18c5b5"
+    );
+
+
+    drawLine(
+        paymentValues,
+        "#3f91ff"
+    );
+
+
+    drawLine(
+        outstandingValues,
+        "#ff9f43"
+    );
+
+
+    ctx.fillStyle =
+        "#78929e";
+
+    ctx.font =
+        "7px Arial";
+
+    ctx.textAlign =
+        "center";
+
+
+    days.forEach(
+        function(day,index){
+
+            if(
+                index % 2 !== 0 &&
+                index !== 13
+            ){
+
+                return;
+
+            }
+
+
+            const x =
+                left +
+                chartWidth *
+                index / 13;
+
+
+            const label =
+                String(
+                    day.getDate()
+                )
+                .padStart(2,"0")
+                +
+                "/"
+                +
+                String(
+                    day.getMonth()+1
+                )
+                .padStart(2,"0");
+
+
+            ctx.fillText(
+                label,
+                x,
+                height-7
+            );
+
+        }
+    );
+
+
+    document.getElementById(
+        "lineEmpty"
+    ).style.display =
+        dashboardData.sales === 0
+        ? "block"
+        : "none";
+
+}
+
+
+/* =========================================================
+   COLUMN CHART
+========================================================= */
+
+function drawColumnChart(){
+
+    const setup =
+        setupCanvas(
+            "columnChart"
+        );
+
+
+    const ctx =
+        setup.ctx;
+
+    const width =
+        setup.width;
+
+    const height =
+        setup.height;
+
+
+    const values = [
+
+        dashboardData.sales,
+
+        dashboardData.payment +
+        dashboardData.discount,
+
+        dashboardData.outstanding
+
+    ];
+
+
+    const labels = [
+
+        "SALE",
+
+        "PAYMENT",
+
+        "OUTST."
+
+    ];
+
+
+    const colors = [
+
+        "#18c5b5",
+
+        "#3f91ff",
+
+        "#ff9f43"
+
+    ];
+
+
+    const maxValue =
+        Math.max(
+            ...values,
+            100
+        );
+
+
+    const base =
+        height - 28;
+
+
+    const top = 12;
+
+
+    drawGrid(
+        ctx,
+        20,
+        top,
+        width-27,
+        base-top
+    );
+
+
+    const barWidth =
+        Math.min(
+            42,
+            width/6
+        );
+
+
+    values.forEach(
+        function(value,index){
+
+            const barHeight =
+                value /
+                maxValue *
+                (base-top);
+
+
+            const x =
+                (index+1) *
+                width /
+                4 -
+                barWidth/2;
+
+
+            const y =
+                base -
+                barHeight;
+
+
+            ctx.fillStyle =
+                colors[index];
+
+
+            ctx.fillRect(
+                x,
+                y,
+                barWidth,
+                barHeight
+            );
+
+
+            ctx.fillStyle =
+                "#dceff3";
+
+            ctx.font =
+                "bold 8px Arial";
+
+            ctx.textAlign =
+                "center";
+
+
+            ctx.fillText(
+                money(value),
+                x +
+                barWidth/2,
+                Math.max(
+                    y-6,
+                    9
+                )
+            );
+
+
+            ctx.fillStyle =
+                "#78929e";
+
+            ctx.font =
+                "8px Arial";
+
+
+            ctx.fillText(
+                labels[index],
+                x +
+                barWidth/2,
+                base+15
+            );
+
+        }
+    );
+
+
+    document.getElementById(
+        "columnEmpty"
+    ).style.display =
+        values.every(
+            function(value){
+
+                return value === 0;
+
+            }
+        )
+        ? "block"
+        : "none";
+
+}
+
+
+/* =========================================================
+   PIE CHART
+========================================================= */
+
+function drawPieChart(){
+
+    const setup =
+        setupCanvas(
+            "pieChart"
+        );
+
+
+    const ctx =
+        setup.ctx;
+
+    const width =
+        setup.width;
+
+    const height =
+        setup.height;
+
+
+    const values = [
+
+        dashboardData.sales,
+
+        dashboardData.payment,
+
+        dashboardData.outstanding
+
+    ];
+
+
+    const colors = [
+
+        "#18c5b5",
+
+        "#3f91ff",
+
+        "#ff9f43"
+
+    ];
+
+
+    const total =
+        values.reduce(
+            function(a,b){
+
+                return a+b;
+
+            },
+            0
+        );
+
+
+    const cx =
+        width/2;
+
+
+    const cy =
+        height/2;
+
+
+    const radius =
+        Math.min(
+            72,
+            height/2-10
+        );
+
+
+    if(total > 0){
+
+        let start =
+            -Math.PI/2;
+
+
+        values.forEach(
+            function(value,index){
+
+                if(value <= 0){
+
+                    return;
+
+                }
+
+
+                const angle =
+                    value /
+                    total *
+                    Math.PI*2;
+
+
+                ctx.beginPath();
+
+
+                ctx.moveTo(
+                    cx,
+                    cy
+                );
+
+
+                ctx.arc(
+                    cx,
+                    cy,
+                    radius,
+                    start,
+                    start+angle
+                );
+
+
+                ctx.closePath();
+
+
+                ctx.fillStyle =
+                    colors[index];
+
+
+                ctx.fill();
+
+
+                start += angle;
+
+            }
+        );
+
+    }
+    else{
+
+        ctx.beginPath();
+
+
+        ctx.arc(
+            cx,
+            cy,
+            radius,
+            0,
+            Math.PI*2
+        );
+
+
+        ctx.fillStyle =
+            "#1a3442";
+
+
+        ctx.fill();
+
+    }
+
+
+    ctx.beginPath();
+
+
+    ctx.arc(
+        cx,
+        cy,
+        radius*.58,
+        0,
+        Math.PI*2
+    );
+
+
+    ctx.fillStyle =
+        "#0d1c2b";
+
+
+    ctx.fill();
+
+
+    ctx.fillStyle =
+        "#e8f5f7";
+
+    ctx.font =
+        "bold 11px Arial";
+
+    ctx.textAlign =
+        "center";
+
+
+    ctx.fillText(
+        money(
+            dashboardData.sales
+        ),
+        cx,
+        cy+2
+    );
+
+
+    ctx.fillStyle =
+        "#78929e";
+
+    ctx.font =
+        "8px Arial";
+
+
+    ctx.fillText(
+        "TOTAL SALE",
+        cx,
+        cy+15
+    );
+
+
+    document.getElementById(
+        "pieEmpty"
+    ).style.display =
+        total <= 0
+        ? "block"
+        : "none";
+
+}
+
+
+/* =========================================================
+   DOUGHNUT
+========================================================= */
+
+function drawDoughnutChart(){
+
+    const setup =
+        setupCanvas(
+            "doughnutChart"
+        );
+
+
+    const ctx =
+        setup.ctx;
+
+    const width =
+        setup.width;
+
+    const height =
+        setup.height;
+
+
+    const outstanding =
+        dashboardData.outstanding;
+
+
+    const settled =
+        Math.max(
+            dashboardData.sales -
+            outstanding,
+            0
+        );
+
+
+    const total =
+        outstanding +
+        settled;
+
+
+    const cx =
+        width/2;
+
+
+    const cy =
+        height/2;
+
+
+    const radius =
+        Math.min(
+            72,
+            height/2-10
+        );
+
+
+    if(total <= 0){
+
+        ctx.beginPath();
+
+
+        ctx.arc(
+            cx,
+            cy,
+            radius,
+            0,
+            Math.PI*2
+        );
+
+
+        ctx.strokeStyle =
+            "#1a3442";
+
+        ctx.lineWidth = 18;
+
+        ctx.stroke();
+
+    }
+    else{
+
+        const values = [
+
+            outstanding,
+
+            settled
+
+        ];
+
+
+        const colors = [
+
+            "#ff9f43",
+
+            "#3f91ff"
+
+        ];
+
+
+        let start =
+            -Math.PI/2;
+
+
+        values.forEach(
+            function(value,index){
+
+                if(value <= 0){
+
+                    return;
+
+                }
+
+
+                const angle =
+                    value /
+                    total *
+                    Math.PI*2;
+
+
+                ctx.beginPath();
+
+
+                ctx.arc(
+                    cx,
+                    cy,
+                    radius,
+                    start,
+                    start+angle
+                );
+
+
+                ctx.strokeStyle =
+                    colors[index];
+
+
+                ctx.lineWidth = 18;
+
+                ctx.lineCap =
+                    "butt";
+
+                ctx.stroke();
+
+
+                start += angle;
+
+            }
+        );
+
+    }
+
+
+    ctx.fillStyle =
+        "#e8f5f7";
+
+    ctx.font =
+        "bold 10px Arial";
+
+    ctx.textAlign =
+        "center";
+
+
+    ctx.fillText(
+        "OUTSTANDING",
+        cx,
+        cy-2
+    );
+
+
+    ctx.fillStyle =
+        "#ffb45c";
+
+    ctx.font =
+        "bold 12px Arial";
+
+
+    ctx.fillText(
+        money(
+            outstanding
+        ),
+        cx,
+        cy+14
+    );
+
+
+    document.getElementById(
+        "doughnutEmpty"
+    ).style.display =
+        total <= 0
+        ? "block"
+        : "none";
+
+}
+
+
+/* =========================================================
+   DRAW ALL
+========================================================= */
+
+function drawAllCharts(){
+
+    drawLineChart();
+
+    drawColumnChart();
+
+    drawPieChart();
+
+    drawDoughnutChart();
+
+}
+
+
+/* =========================================================
+   CUSTOMER PENDING
+========================================================= */
+
+function renderPending(){
+
+    const box =
+        document.getElementById(
+            "pendingList"
+        );
+
+
+    const data =
+        dashboardData.pending
+        .slice(0,10);
+
+
+    document.getElementById(
+        "pendingSummary"
+    ).textContent =
+        data.length +
+        " CUSTOMER(S) WITH PENDING";
+
+
+    if(!data.length){
+
+        box.innerHTML = `
+
+            <div class="no-pending">
+
+                NO CUSTOMER PENDING 🎉
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    const max =
+        data[0].pending;
+
+
+    box.innerHTML =
+        data.map(
+            function(item){
+
+                const percent =
+                    Math.max(
+                        3,
+                        item.pending /
+                        max *
+                        100
+                    );
+
+
+                return `
+
+                <div class="pending-row">
+
+                    <div
+                        class="pending-name"
+                        title="${escapeHtml(
+                            String(item.name)
+                        )}"
+                    >
+
+                        ${escapeHtml(
+                            String(item.name)
+                            .toUpperCase()
+                        )}
+
+                    </div>
+
+
+                    <div class="pending-track">
+
+                        <div
+                            class="pending-bar"
+                            style="width:${percent}%"
+                        ></div>
+
+                    </div>
+
+
+                    <div class="pending-value">
+
+                        ${money(
+                            item.pending
+                        )}
+
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value){
+
+    return String(value)
+        .replace(
+            /[&<>"']/g,
+            function(char){
+
+                return {
+
+                    "&":"&amp;",
+
+                    "<":"&lt;",
+
+                    ">":"&gt;",
+
+                    '"':"&quot;",
+
+                    "'":"&#039;"
+
+                }[char];
+
+            }
+        );
+
+}
+
+
+/* =========================================================
+   RECENT ACTIVITY
+========================================================= */
+
+function updateRecentActivity(){
+
+    const activities = [];
+
+
+    dashboardData
+        .invoices
+        .forEach(
+            function(invoice){
+
+                activities.push({
+
+                    icon:"🧾",
+
+                    title:
+                        "INVOICE " +
+                        (
+                            invoice.invoice_number
+                            || ""
+                        ),
+
+                    date:
+                        getDateValue(
+                            invoice.invoice_date
+                        ),
+
+                    amount:
+                        toNumber(
+                            invoice.total_amount
+                        )
+
+                });
+
+            }
+        );
+
+
+    dashboardData
+        .payments
+        .forEach(
+            function(payment){
+
+                activities.push({
+
+                    icon:"💳",
+
+                    title:
+                        "PAYMENT " +
+                        (
+                            payment.payment_number
+                            || ""
+                        ),
+
+                    date:
+                        getDateValue(
+                            payment.payment_date
+                        ),
+
+                    amount:
+                        toNumber(
+                            payment.amount
+                        )
+
+                });
+
+            }
+        );
+
+
+    activities.sort(
+        function(a,b){
+
+            return (
+                b.date
+                ? b.date.getTime()
+                : 0
+            )
+            -
+            (
+                a.date
+                ? a.date.getTime()
+                : 0
+            );
+
+        }
+    );
+
+
+    const recent =
+        activities.slice(0,4);
+
+
+    const box =
+        document.getElementById(
+            "recentActivity"
+        );
+
+
+    if(!recent.length){
+
+        box.innerHTML = `
+
+            <div class="activity-row">
+
+                <div class="activity-icon">
+                    📭
+                </div>
+
+                <div class="activity-text">
+
+                    <strong>
+                        NO RECENT ACTIVITY
+                    </strong>
+
+                    <span>
+                        New invoices and payments
+                        will appear here
+                    </span>
+
+                </div>
+
+                <div class="activity-amount">
+                    —
+                </div>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        recent.map(
+            function(item){
+
+                let dateText =
+                    "DATE NOT AVAILABLE";
+
+
+                if(item.date){
+
+                    dateText =
+                        String(
+                            item.date.getUTCDate()
+                        ).padStart(2,"0")
+                        +
+                        "/"
+                        +
+                        String(
+                            item.date.getUTCMonth()+1
+                        ).padStart(2,"0")
+                        +
+                        "/"
+                        +
+                        item.date.getUTCFullYear();
+
+                }
+
+
+                return `
+
+                <div class="activity-row">
+
+                    <div class="activity-icon">
+
+                        ${item.icon}
+
+                    </div>
+
+
+                    <div class="activity-text">
+
+                        <strong>
+
+                            ${escapeHtml(
+                                item.title
+                            )}
+
+                        </strong>
+
+                        <span>
+
+                            ${dateText}
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="activity-amount">
+
+                        ${money(
+                            item.amount
+                        )}
+
+                    </div>
+
+                </div>
+
+                `;
+
+            }
+        )
+        .join("");
+
+}
+
+
+/* =========================================================
+   SIDEBAR TOGGLE
+========================================================= */
+
+document
+.getElementById(
+    "sidebarToggle"
+)
+.addEventListener(
+    "click",
+    function(){
+
+        if(
+            window.innerWidth <= 800
+        ){
+
+            document
+            .getElementById(
+                "sidebar"
+            )
+            .classList
+            .toggle(
+                "mobile-open"
+            );
+
+            return;
+
+        }
+
+
+        document.body
+        .classList
+        .toggle(
+            "sidebar-hidden"
+        );
+
+
+        localStorage.setItem(
+
+            "VYAPAR_SIDEBAR_HIDDEN",
+
+            document.body
+            .classList
+            .contains(
+                "sidebar-hidden"
+            )
+            ? "1"
+            : "0"
+
+        );
+
+
+        setTimeout(
+            drawAllCharts,
+            320
+        );
+
+    }
+);
+
+
+/* =========================================================
+   RESTORE SIDEBAR STATE
+========================================================= */
+
+if(
+
+    localStorage.getItem(
+        "VYAPAR_SIDEBAR_HIDDEN"
+    ) === "1"
+
+    &&
+
+    window.innerWidth > 800
+
+){
+
+    document.body
+    .classList
+    .add(
+        "sidebar-hidden"
+    );
+
+}
+
+
+/* =========================================================
+   RESIZE
+========================================================= */
+
+window.addEventListener(
+    "resize",
+    function(){
+
+        if(
+            window.innerWidth > 800
+        ){
+
+            document
+            .getElementById(
+                "sidebar"
+            )
+            .classList
+            .remove(
+                "mobile-open"
+            );
+
+        }
+
+
+        drawAllCharts();
+
+    }
+);
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        loadDashboardData();
+
+    }
+);
+
+
+/* =========================================================
+   LIVE REFRESH
+========================================================= */
+
+setInterval(
+    function(){
+
+        loadDashboardData();
+
+    },
+    5000
+);
+
+</script>
 
 </body>
 </html>
