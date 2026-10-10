@@ -1,502 +1,1424 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>VYAPAR ONE — TRIAL</title>
+<title>VYAPAR ONE - Trial Dashboard</title>
 
 <style>
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
+:root{
+    --bg:#07111f;
+    --panel:#0d1c2b;
+    --border:#1b3b4c;
+    --text:#e8f5f7;
+    --muted:#8ca7b3;
+    --teal:#18c5b5;
+    --blue:#3f91ff;
+    --orange:#ff9f43;
+}
+
 body{
     font-family:Arial,Helvetica,sans-serif;
-    background:#07111f;
-    color:#e8f5f7;
+    background:var(--bg);
+    color:var(--text);
+    overflow-x:hidden;
+}
+
+button,a{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.app{
     min-height:100vh;
 }
 
+/* SIDEBAR */
 
-/* =========================================================
-   HEADER
-========================================================= */
+.sidebar{
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    width:250px;
+    padding:20px 15px;
+    background:linear-gradient(180deg,#04101c,#062638 60%,#063b4c);
+    border-right:1px solid #164d73;
+    z-index:100;
+    transition:transform .3s;
+    box-shadow:8px 0 30px #0005;
+}
 
-.header{
-    background:linear-gradient(
-        135deg,
-        #04101c,
-        #062c3a
-    );
-
-    padding:18px 22px;
-
+.sidebar-logo{
     display:flex;
     align-items:center;
-    justify-content:space-between;
-
-    border-bottom:1px solid #1b3b4c;
+    gap:11px;
+    padding:5px 8px 24px;
+    border-bottom:1px solid #ffffff16;
+    margin-bottom:22px;
 }
 
-.logo{
-    font-size:22px;
-    font-weight:900;
-}
-
-.logo span{
-    color:#18c5b5;
-}
-
-.trial-badge{
-    background:#8b7cff;
-    color:white;
-
-    padding:7px 12px;
-
-    border-radius:20px;
-
-    font-size:11px;
-    font-weight:900;
-}
-
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-.main{
-    padding:22px;
-
-    max-width:1400px;
-
-    margin:auto;
-}
-
-.title{
-    margin-bottom:20px;
-}
-
-.title h1{
-    font-size:25px;
-    margin-bottom:5px;
-}
-
-.title p{
-    color:#8ca7b3;
-    font-size:13px;
-}
-
-
-/* =========================================================
-   STAT CARDS
-========================================================= */
-
-.stats{
+.logo-icon{
+    width:45px;
+    height:45px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#fff,#dff7fa);
+    color:#087f8c;
     display:grid;
-
-    grid-template-columns:
-        repeat(4,minmax(0,1fr));
-
-    gap:15px;
-
-    margin-bottom:20px;
+    place-items:center;
+    font-size:24px;
+    font-weight:900;
 }
 
-.card{
-    background:#0d1c2b;
-
-    border:1px solid #1b3b4c;
-
-    border-radius:14px;
-
-    padding:20px;
+.logo-text strong{
+    display:block;
+    font-size:17px;
+    letter-spacing:.5px;
 }
 
-.card-label{
-    color:#8ca7b3;
+.logo-text span{
+    display:block;
+    font-size:8px;
+    color:#8fdce5;
+    letter-spacing:1.3px;
+    margin-top:4px;
+}
 
-    font-size:12px;
-
+.menu-title{
+    color:#7294a9;
+    font-size:10px;
     font-weight:800;
-
-    margin-bottom:10px;
+    padding:0 12px;
+    margin-bottom:9px;
+    letter-spacing:1.4px;
 }
 
-.card-value{
-    font-size:25px;
-
-    font-weight:900;
-}
-
-.sale{
-    color:#18c5b5;
-}
-
-.payment{
-    color:#3f91ff;
-}
-
-.pending{
-    color:#ff9f43;
-}
-
-.customer{
-    color:#8b7cff;
-}
-
-
-/* =========================================================
-   MODULES
-========================================================= */
-
-.modules{
+.menu{
     display:grid;
-
-    grid-template-columns:
-        repeat(4,minmax(0,1fr));
-
-    gap:15px;
-
-    margin-top:20px;
+    gap:6px;
 }
 
-.module{
-    background:#102638;
-
-    border:1px solid #1b3b4c;
-
-    border-radius:14px;
-
-    padding:22px;
-
-    text-align:center;
-
-    cursor:pointer;
-
+.menu-btn{
+    width:100%;
+    min-height:45px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:0 13px;
+    border:1px solid transparent;
+    border-radius:10px;
+    background:transparent;
+    color:#c2d5e2;
+    font-size:12px;
+    font-weight:700;
+    text-align:left;
     transition:.2s;
 }
 
-.module:hover{
-    transform:translateY(-2px);
-
-    border-color:#18c5b5;
+.menu-btn:hover,
+.menu-btn.active{
+    background:linear-gradient(135deg,#087f8c,#075b78);
+    border-color:#1695a5;
+    color:white;
 }
 
-.module-icon{
-    font-size:30px;
-
-    margin-bottom:10px;
-}
-
-.module-title{
-    font-size:14px;
-
-    font-weight:900;
-}
-
-
-/* =========================================================
-   TRIAL MESSAGE
-========================================================= */
-
-.trial-box{
-    margin-top:20px;
-
-    padding:18px;
-
-    background:#0d1c2b;
-
-    border:1px solid #8b7cff;
-
-    border-radius:14px;
-
+.menu-icon{
+    width:24px;
     text-align:center;
-}
-
-.trial-box h2{
     font-size:17px;
-
-    margin-bottom:7px;
 }
 
-.trial-box p{
-    color:#8ca7b3;
+.logout-btn{
+    position:absolute;
+    left:15px;
+    right:15px;
+    bottom:20px;
+    min-height:45px;
+    border:1px solid #245777;
+    border-radius:10px;
+    background:#ffffff09;
+    color:#d9e8f0;
+    font-size:12px;
+    font-weight:800;
+}
 
+/* MAIN */
+
+.main{
+    width:calc(100% - 250px);
+    margin-left:250px;
+    min-height:100vh;
+    transition:width .3s,margin-left .3s;
+}
+
+body.sidebar-hidden .sidebar{
+    transform:translateX(-100%);
+}
+
+body.sidebar-hidden .main{
+    width:100%;
+    margin-left:0;
+}
+
+/* TOPBAR */
+
+.topbar{
+    height:78px;
+    background:#0b1a29f5;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:0 25px;
+    position:sticky;
+    top:0;
+    z-index:50;
+    backdrop-filter:blur(10px);
+}
+
+.top-left{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    min-width:0;
+}
+
+.toggle-btn{
+    width:42px;
+    height:42px;
+    flex-shrink:0;
+    border:1px solid #285065;
+    border-radius:11px;
+    background:#102638;
+    color:#dceff3;
+    font-size:21px;
+}
+
+.page-title h1{
+    font-size:22px;
+    margin-bottom:4px;
+}
+
+.page-title span{
+    color:var(--muted);
+    font-size:10px;
+}
+
+.user-area{
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.user-info{
+    text-align:right;
+}
+
+.user-info strong{
+    display:block;
     font-size:12px;
 }
 
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:850px){
-
-    .stats{
-        grid-template-columns:
-            repeat(2,minmax(0,1fr));
-    }
-
-    .modules{
-        grid-template-columns:
-            repeat(2,minmax(0,1fr));
-    }
-
+.user-info span{
+    font-size:10px;
+    color:var(--teal);
 }
 
-@media(max-width:520px){
+.user-avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#123448;
+    border:1px solid #286075;
+    display:grid;
+    place-items:center;
+    font-size:18px;
+}
 
-    .header{
-        padding:15px;
+.trial-badge{
+    display:inline-block;
+    margin-top:5px;
+    padding:4px 8px;
+    border-radius:5px;
+    background:#174c3d;
+    color:#7cf0bc;
+    font-size:9px;
+    font-weight:900;
+}
+
+/* CONTENT */
+
+.content{
+    padding:25px;
+}
+
+.welcome{
+    background:linear-gradient(135deg,#071d35,#0b2d4d 65%,#075b78);
+    border:1px solid #164d73;
+    border-radius:18px;
+    padding:25px 28px;
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+    box-shadow:0 16px 40px #0005;
+}
+
+.welcome h2{
+    font-size:24px;
+    margin-bottom:8px;
+}
+
+.welcome p{
+    color:#bfd3df;
+    font-size:12px;
+    line-height:1.7;
+}
+
+.welcome-icon{
+    font-size:48px;
+}
+
+.demo-notice{
+    margin-bottom:20px;
+    padding:12px 15px;
+    border:1px solid #246b5c;
+    background:#10332e;
+    color:#9ff2d0;
+    border-radius:10px;
+    font-size:11px;
+    line-height:1.6;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.stat-card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:18px;
+    position:relative;
+    overflow:hidden;
+}
+
+.stat-card:before,
+.chart-card:before,
+.dashboard-card:before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:3px;
+    background:linear-gradient(90deg,var(--teal),var(--blue));
+}
+
+.stat-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    margin-bottom:13px;
+}
+
+.stat-icon{
+    width:40px;
+    height:40px;
+    border-radius:11px;
+    background:#123244;
+    display:grid;
+    place-items:center;
+    font-size:19px;
+}
+
+.stat-label{
+    color:var(--muted);
+    font-size:10px;
+    font-weight:800;
+}
+
+.stat-value{
+    font-size:clamp(18px,2vw,25px);
+    font-weight:900;
+    margin-bottom:6px;
+    overflow-wrap:anywhere;
+}
+
+.stat-note{
+    color:var(--teal);
+    font-size:9px;
+    font-weight:800;
+}
+
+/* CHARTS */
+
+.chart-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.chart-card,
+.dashboard-card{
+    position:relative;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:18px;
+    overflow:hidden;
+    min-width:0;
+}
+
+.chart-heading,
+.card-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.chart-heading h3,
+.card-heading h3{
+    font-size:13px;
+}
+
+.chart-heading span,
+.card-heading span{
+    color:var(--teal);
+    font-size:9px;
+    font-weight:800;
+}
+
+.chart-box{
+    height:220px;
+    width:100%;
+}
+
+.chart-box canvas{
+    display:block;
+    width:100%;
+    height:100%;
+}
+
+.legend{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:13px;
+    margin-top:8px;
+}
+
+.legend span{
+    font-size:9px;
+    color:var(--muted);
+}
+
+.dot{
+    display:inline-block;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    margin-right:4px;
+}
+
+.sale{background:var(--teal)}
+.pay{background:var(--blue)}
+.out{background:var(--orange)}
+
+/* LOWER SECTIONS */
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:18px;
+    margin-bottom:20px;
+}
+
+.pending-list{
+    display:grid;
+    gap:15px;
+}
+
+.pending-row{
+    display:grid;
+    grid-template-columns:minmax(80px,1fr) 2fr auto;
+    align-items:center;
+    gap:12px;
+}
+
+.pending-name{
+    color:#dceff3;
+    font-size:11px;
+    font-weight:800;
+    overflow-wrap:anywhere;
+}
+
+.pending-track{
+    height:11px;
+    background:#102838;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.pending-bar{
+    height:100%;
+    background:linear-gradient(90deg,#8b7cff,#c06cff);
+    border-radius:20px;
+}
+
+.pending-value{
+    color:#ffb45c;
+    font-size:11px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+.quick-actions{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:10px;
+}
+
+.quick-btn{
+    min-height:90px;
+    border:1px solid #204455;
+    background:linear-gradient(145deg,#102333,#0b1a28);
+    border-radius:12px;
+    color:#dceff3;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition:.2s;
+}
+
+.quick-btn:hover{
+    border-color:var(--teal);
+    transform:translateY(-2px);
+}
+
+.quick-btn-icon{
+    font-size:24px;
+}
+
+.quick-btn span{
+    color:#9eb6c0;
+    font-size:9px;
+    font-weight:800;
+    text-align:center;
+}
+
+.activity{
+    display:grid;
+    gap:12px;
+}
+
+.activity-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding-bottom:12px;
+    border-bottom:1px solid #1a3341;
+}
+
+.activity-row:last-child{
+    border-bottom:none;
+}
+
+.activity-icon{
+    width:35px;
+    height:35px;
+    flex-shrink:0;
+    background:#123244;
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+}
+
+.activity-text{
+    flex:1;
+    min-width:0;
+}
+
+.activity-text strong{
+    display:block;
+    font-size:10px;
+    margin-bottom:4px;
+}
+
+.activity-text span{
+    color:var(--muted);
+    font-size:9px;
+}
+
+.activity-amount{
+    color:var(--teal);
+    font-size:11px;
+    font-weight:900;
+    white-space:nowrap;
+}
+
+.footer-note{
+    color:#66818d;
+    text-align:center;
+    padding:10px 0 20px;
+    font-size:10px;
+}
+
+.mobile-overlay{
+    display:none;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1200px){
+    .stats{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+
+@media(max-width:800px){
+    .sidebar{
+        width:250px;
+        transform:translateX(-100%);
+    }
+
+    .sidebar.mobile-open{
+        transform:translateX(0);
     }
 
     .main{
+        width:100%;
+        margin-left:0;
+    }
+
+    body.sidebar-hidden .sidebar{
+        transform:translateX(-100%);
+    }
+
+    body.sidebar-hidden .main{
+        width:100%;
+        margin-left:0;
+    }
+
+    .mobile-overlay.show{
+        display:block;
+        position:fixed;
+        inset:0;
+        background:#0009;
+        z-index:90;
+    }
+
+    .content{
         padding:15px;
     }
 
-    .logo{
+    .topbar{
+        padding:0 15px;
+    }
+
+    .dashboard-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+    .topbar{
+        height:66px;
+    }
+
+    .page-title h1{
+        font-size:17px;
+    }
+
+    .page-title span,
+    .user-info{
+        display:none;
+    }
+
+    .user-avatar{
+        width:36px;
+        height:36px;
+    }
+
+    .welcome{
+        padding:20px;
+    }
+
+    .welcome h2{
+        font-size:19px;
+    }
+
+    .welcome-icon{
+        font-size:35px;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:9px;
+    }
+
+    .stat-card{
+        padding:13px;
+    }
+
+    .stat-value{
         font-size:18px;
     }
 
+    .chart-grid{
+        grid-template-columns:1fr;
+    }
+
+    .chart-box{
+        height:210px;
+    }
+
+    .quick-actions{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .pending-row{
+        grid-template-columns:minmax(75px,1fr) 1.2fr auto;
+        gap:7px;
+    }
+}
+
+@media(max-width:360px){
     .stats{
         grid-template-columns:1fr;
     }
 
-    .modules{
-        grid-template-columns:1fr;
+    .welcome-icon{
+        display:none;
     }
-
 }
-
 </style>
-
 </head>
 
-
 <body>
+<div class="app">
 
-
-<!-- =======================================================
-     HEADER
-======================================================= -->
-
-<header class="header">
-
-    <div class="logo">
-        VYAPAR <span>ONE</span>
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <div class="logo-icon">V</div>
+        <div class="logo-text">
+            <strong>VYAPAR ONE</strong>
+            <span>BILLING SOFTWARE</span>
+        </div>
     </div>
 
-    <div class="trial-badge">
-        TRIAL VERSION
-    </div>
+    <div class="menu-title">MAIN MENU · DEMO</div>
 
-</header>
+    <nav class="menu">
+        <button class="menu-btn active" data-page="DASHBOARD">
+            <span class="menu-icon">🏠</span>DASHBOARD
+        </button>
 
+        <button class="menu-btn" data-page="CUSTOMER">
+            <span class="menu-icon">👥</span>CUSTOMER
+        </button>
 
+        <button class="menu-btn" data-page="ITEM">
+            <span class="menu-icon">📦</span>ITEM MASTER
+        </button>
 
-<!-- =======================================================
-     MAIN
-======================================================= -->
+        <button class="menu-btn" data-page="INVOICE">
+            <span class="menu-icon">🧾</span>INVOICE
+        </button>
+
+        <button class="menu-btn" data-page="PAYMENT">
+            <span class="menu-icon">💳</span>PAYMENT
+        </button>
+
+        <button class="menu-btn" data-page="LEDGER">
+            <span class="menu-icon">📒</span>LEDGER
+        </button>
+
+        <button class="menu-btn" data-page="REPORT">
+            <span class="menu-icon">📊</span>REPORT
+        </button>
+
+        <button class="menu-btn" data-page="BUSINESS">
+            <span class="menu-icon">🏢</span>BUSINESS PROFILE
+        </button>
+    </nav>
+
+    <button class="logout-btn" id="websiteBtn">
+        🌐 &nbsp; BACK TO WEBSITE
+    </button>
+</aside>
+
+<div class="mobile-overlay" id="mobileOverlay"></div>
 
 <main class="main">
+    <header class="topbar">
+        <div class="top-left">
+            <button class="toggle-btn" id="sidebarToggle"
+                    aria-label="Toggle sidebar" aria-expanded="true">☰</button>
 
+            <div class="page-title">
+                <h1>DASHBOARD</h1>
+                <span>VYAPAR ONE BILLING SOFTWARE</span>
+            </div>
+        </div>
 
-    <div class="title">
+        <div class="user-area">
+            <div class="user-info">
+                <strong>DEMO USER</strong>
+                <span>TRIAL ACCOUNT</span>
+            </div>
+            <div class="user-avatar">👤</div>
+        </div>
+    </header>
 
-        <h1>
-            DEMO BUSINESS DASHBOARD
-        </h1>
+    <div class="content">
 
-        <p>
-            Explore VYAPAR ONE smart business software
-        </p>
+        <section class="welcome">
+            <div>
+                <h2>Welcome to VYAPAR ONE 👋</h2>
+                <p>Manage your business from one simple and professional dashboard.</p>
+                <span class="trial-badge">★ TRIAL VERSION</span>
+            </div>
+            <div class="welcome-icon">📊</div>
+        </section>
 
+        <div class="demo-notice">
+            🛡️ <strong>DEMO MODE:</strong>
+            यहाँ केवल नमूना डेटा दिखाया जाता है। यह Dashboard वास्तविक
+            व्यापार के डेटा या Supabase से कनेक्ट नहीं है।
+        </div>
+
+        <section class="stats">
+            <div class="stat-card">
+                <div class="stat-top">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-label">CUSTOMERS</div>
+                </div>
+                <div class="stat-value" id="customerCount">25</div>
+                <div class="stat-note">SAMPLE CUSTOMERS</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <div class="stat-icon">🧾</div>
+                    <div class="stat-label">INVOICES</div>
+                </div>
+                <div class="stat-value" id="invoiceCount">48</div>
+                <div class="stat-note">SAMPLE INVOICES</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-label">SALES</div>
+                </div>
+                <div class="stat-value" id="salesTotal">₹1,25,000</div>
+                <div class="stat-note">SAMPLE SALES</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-top">
+                    <div class="stat-icon">💳</div>
+                    <div class="stat-label">PAYMENT</div>
+                </div>
+                <div class="stat-value" id="paymentTotal">₹95,000</div>
+                <div class="stat-note">PAYMENT RECEIVED</div>
+            </div>
+        </section>
+
+        <section class="chart-grid">
+
+            <div class="chart-card">
+                <div class="chart-heading">
+                    <h3>📈 LINE GRAPH</h3>
+                    <span>14 DAYS · DEMO</span>
+                </div>
+                <div class="chart-box">
+                    <canvas id="lineChart" aria-label="Sample sales and payment line chart"></canvas>
+                </div>
+                <div class="legend">
+                    <span><i class="dot sale"></i>SALE</span>
+                    <span><i class="dot pay"></i>PAYMENT</span>
+                    <span><i class="dot out"></i>OUTSTANDING</span>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-heading">
+                    <h3>📊 COLUMN CHART</h3>
+                    <span>SUMMARY · DEMO</span>
+                </div>
+                <div class="chart-box">
+                    <canvas id="columnChart" aria-label="Sample sales payment outstanding column chart"></canvas>
+                </div>
+                <div class="legend">
+                    <span><i class="dot sale"></i>SALE</span>
+                    <span><i class="dot pay"></i>PAYMENT</span>
+                    <span><i class="dot out"></i>OUTSTANDING</span>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-heading">
+                    <h3>🥧 PIE CHART</h3>
+                    <span>SHARE · DEMO</span>
+                </div>
+                <div class="chart-box">
+                    <canvas id="pieChart" aria-label="Sample financial share pie chart"></canvas>
+                </div>
+                <div class="legend">
+                    <span><i class="dot sale"></i>SALE</span>
+                    <span><i class="dot pay"></i>PAYMENT</span>
+                    <span><i class="dot out"></i>OUTSTANDING</span>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-heading">
+                    <h3>🍩 DOUGHNUT CHART</h3>
+                    <span>SETTLEMENT · DEMO</span>
+                </div>
+                <div class="chart-box">
+                    <canvas id="doughnutChart" aria-label="Sample settled and outstanding doughnut chart"></canvas>
+                </div>
+                <div class="legend">
+                    <span><i class="dot out"></i>OUTSTANDING</span>
+                    <span><i class="dot pay"></i>SETTLED</span>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="dashboard-card" style="margin-bottom:20px">
+            <div class="card-heading">
+                <h3>👤 CUSTOMER PENDING</h3>
+                <span>SAMPLE DATA</span>
+            </div>
+            <div class="pending-list" id="pendingList"></div>
+        </section>
+
+        <section class="dashboard-grid">
+
+            <div class="dashboard-card">
+                <div class="card-heading">
+                    <h3>QUICK ACTIONS</h3>
+                    <span>DEMO SHORTCUTS</span>
+                </div>
+
+                <div class="quick-actions">
+                    <button class="quick-btn" data-page="CUSTOMER">
+                        <div class="quick-btn-icon">👥</div>
+                        <span>CUSTOMER</span>
+                    </button>
+
+                    <button class="quick-btn" data-page="ITEM">
+                        <div class="quick-btn-icon">📦</div>
+                        <span>ITEM MASTER</span>
+                    </button>
+
+                    <button class="quick-btn" data-page="INVOICE">
+                        <div class="quick-btn-icon">🧾</div>
+                        <span>INVOICE</span>
+                    </button>
+
+                    <button class="quick-btn" data-page="PAYMENT">
+                        <div class="quick-btn-icon">💳</div>
+                        <span>PAYMENT</span>
+                    </button>
+
+                    <button class="quick-btn" data-page="LEDGER">
+                        <div class="quick-btn-icon">📒</div>
+                        <span>CUSTOMER LEDGER</span>
+                    </button>
+
+                    <button class="quick-btn" data-page="REPORT">
+                        <div class="quick-btn-icon">📊</div>
+                        <span>REPORT</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-heading">
+                    <h3>RECENT ACTIVITY</h3>
+                    <span>SAMPLE DATA</span>
+                </div>
+                <div class="activity" id="recentActivity"></div>
+            </div>
+
+        </section>
+
+        <div class="footer-note">
+            VYAPAR ONE · TRIAL VERSION · SAMPLE DATA ONLY
+        </div>
     </div>
-
-
-
-    <!-- ===================================================
-         STAT CARDS
-    =================================================== -->
-
-    <section class="stats">
-
-
-        <div class="card">
-
-            <div class="card-label">
-                TOTAL CUSTOMERS
-            </div>
-
-            <div class="card-value customer">
-                25
-            </div>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <div class="card-label">
-                TOTAL SALES
-            </div>
-
-            <div class="card-value sale">
-                ₹1,25,000
-            </div>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <div class="card-label">
-                TOTAL PAYMENT
-            </div>
-
-            <div class="card-value payment">
-                ₹95,000
-            </div>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <div class="card-label">
-                OUTSTANDING
-            </div>
-
-            <div class="card-value pending">
-                ₹30,000
-            </div>
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- ===================================================
-         MODULES
-    =================================================== -->
-
-    <section class="modules">
-
-
-        <div class="module"
-             onclick="demoMessage('CUSTOMER')">
-
-            <div class="module-icon">
-                👥
-            </div>
-
-            <div class="module-title">
-                CUSTOMER
-            </div>
-
-        </div>
-
-
-
-        <div class="module"
-             onclick="demoMessage('ITEM')">
-
-            <div class="module-icon">
-                📦
-            </div>
-
-            <div class="module-title">
-                ITEM MASTER
-            </div>
-
-        </div>
-
-
-
-        <div class="module"
-             onclick="demoMessage('INVOICE')">
-
-            <div class="module-icon">
-                🧾
-            </div>
-
-            <div class="module-title">
-                INVOICE
-            </div>
-
-        </div>
-
-
-
-        <div class="module"
-             onclick="demoMessage('PAYMENT')">
-
-            <div class="module-icon">
-                💰
-            </div>
-
-            <div class="module-title">
-                PAYMENT
-            </div>
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- ===================================================
-         TRIAL MESSAGE
-    =================================================== -->
-
-    <div class="trial-box">
-
-        <h2>
-            🚀 THIS IS A DEMO / TRIAL VERSION
-        </h2>
-
-        <p>
-            Sample data is displayed here.
-            Your real business data is protected.
-        </p>
-
-    </div>
-
-
 </main>
-
-
+</div>
 
 <script>
+"use strict";
 
-/* =========================================================
-   DEMO MESSAGE
-========================================================= */
+/* =========================================
+   DEMO DATA ONLY - NO SUPABASE
+========================================= */
 
-function demoMessage(module){
+const demoData = {
+    customers: 25,
+    invoices: 48,
+    sales: 125000,
+    payment: 95000,
 
-    alert(
-        module +
-        " MODULE IS AVAILABLE IN VYAPAR ONE."
-    );
+    pending: [
+        {name:"RAJESH KUMAR", amount:12000},
+        {name:"AMIT SINGH", amount:8500},
+        {name:"SUNIL PRASAD", amount:6000},
+        {name:"RAMESH YADAV", amount:3500}
+    ],
 
+    activity: [
+        {icon:"🧾", title:"INVOICE INV-0048", date:"TODAY", amount:8500},
+        {icon:"💳", title:"PAYMENT PAY-0032", date:"TODAY", amount:5000},
+        {icon:"🧾", title:"INVOICE INV-0047", date:"YESTERDAY", amount:6200},
+        {icon:"💳", title:"PAYMENT PAY-0031", date:"YESTERDAY", amount:3500}
+    ]
+};
+
+const money = value =>
+    "₹" + Number(value).toLocaleString("en-IN",{
+        maximumFractionDigits:0
+    });
+
+/* =========================================
+   DEMO NAVIGATION
+========================================= */
+
+const demoPages = {
+    CUSTOMER:"customer-demo.html",
+    ITEM:"item-demo.html",
+    INVOICE:"invoice-demo.html",
+    PAYMENT:"payment-demo.html",
+    LEDGER:"ledger-demo.html",
+    REPORT:null,
+    BUSINESS:null
+};
+
+function openDemoPage(page){
+    if(page === "DASHBOARD"){
+        window.location.href = "trial-dashboard.html";
+        return;
+    }
+
+    if(page === "CUSTOMER"){
+        window.location.href = "customer-demo.html";
+        return;
+    }
+
+    const destination = demoPages[page];
+
+    if(destination){
+        window.location.href = destination;
+        return;
+    }
+
+    const messages = {
+        REPORT:"REPORT DEMO MODULE अभी तैयार नहीं है।",
+        BUSINESS:"BUSINESS PROFILE DEMO अभी तैयार नहीं है।",
+        ITEM:"ITEM MASTER DEMO PAGE अभी तैयार नहीं है।",
+        INVOICE:"INVOICE DEMO PAGE अभी तैयार नहीं है।",
+        PAYMENT:"PAYMENT DEMO PAGE अभी तैयार नहीं है।",
+        LEDGER:"LEDGER DEMO PAGE अभी तैयार नहीं है।"
+    };
+
+    alert(messages[page] || "DEMO MODULE अभी उपलब्ध नहीं है।");
 }
 
-</script>
+document.querySelectorAll("[data-page]").forEach(button=>{
+    button.addEventListener("click",()=>{
+        openDemoPage(button.dataset.page);
+    });
+});
 
+document.getElementById("websiteBtn").addEventListener("click",()=>{
+    window.location.href = "index.html";
+});
+
+/* =========================================
+   SIDEBAR TOGGLE
+========================================= */
+
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("mobileOverlay");
+const toggle = document.getElementById("sidebarToggle");
+
+function closeMobileSidebar(){
+    sidebar.classList.remove("mobile-open");
+    overlay.classList.remove("show");
+    toggle.setAttribute("aria-expanded","false");
+}
+
+toggle.addEventListener("click",()=>{
+    if(window.innerWidth <= 800){
+        const isOpen = sidebar.classList.toggle("mobile-open");
+        overlay.classList.toggle("show",isOpen);
+        toggle.setAttribute("aria-expanded",String(isOpen));
+    }else{
+        document.body.classList.toggle("sidebar-hidden");
+
+        try{
+            localStorage.setItem(
+                "VYAPAR_TRIAL_SIDEBAR_HIDDEN",
+                document.body.classList.contains("sidebar-hidden") ? "1" : "0"
+            );
+        }catch(error){}
+
+        toggle.setAttribute(
+            "aria-expanded",
+            String(!document.body.classList.contains("sidebar-hidden"))
+        );
+
+        setTimeout(drawAllCharts,320);
+    }
+});
+
+overlay.addEventListener("click",closeMobileSidebar);
+
+document.querySelectorAll(".menu-btn").forEach(button=>{
+    button.addEventListener("click",()=>{
+        document.querySelectorAll(".menu-btn").forEach(item=>{
+            item.classList.remove("active");
+        });
+        button.classList.add("active");
+        if(window.innerWidth <= 800) closeMobileSidebar();
+    });
+});
+
+window.addEventListener("resize",()=>{
+    if(window.innerWidth > 800){
+        closeMobileSidebar();
+        try{
+            document.body.classList.toggle(
+                "sidebar-hidden",
+                localStorage.getItem("VYAPAR_TRIAL_SIDEBAR_HIDDEN") === "1"
+            );
+        }catch(error){}
+    }else{
+        document.body.classList.remove("sidebar-hidden");
+    }
+
+    drawAllCharts();
+});
+
+try{
+    if(window.innerWidth > 800 &&
+       localStorage.getItem("VYAPAR_TRIAL_SIDEBAR_HIDDEN") === "1"){
+        document.body.classList.add("sidebar-hidden");
+    }
+}catch(error){}
+
+/* =========================================
+   SHOW DEMO STATISTICS
+========================================= */
+
+document.getElementById("customerCount").textContent = demoData.customers;
+document.getElementById("invoiceCount").textContent = demoData.invoices;
+document.getElementById("salesTotal").textContent = money(demoData.sales);
+document.getElementById("paymentTotal").textContent = money(demoData.payment);
+
+/* =========================================
+   CUSTOMER PENDING
+========================================= */
+
+const maxPending = Math.max(...demoData.pending.map(item=>item.amount),1);
+
+document.getElementById("pendingList").innerHTML =
+    demoData.pending.map(item=>{
+        const width = item.amount / maxPending * 100;
+
+        return `
+            <div class="pending-row">
+                <div class="pending-name">${item.name}</div>
+                <div class="pending-track">
+                    <div class="pending-bar" style="width:${width}%"></div>
+                </div>
+                <div class="pending-value">${money(item.amount)}</div>
+            </div>
+        `;
+    }).join("");
+
+/* =========================================
+   RECENT ACTIVITY
+========================================= */
+
+document.getElementById("recentActivity").innerHTML =
+    demoData.activity.map(item=>`
+        <div class="activity-row">
+            <div class="activity-icon">${item.icon}</div>
+            <div class="activity-text">
+                <strong>${item.title}</strong>
+                <span>${item.date} · DEMO TRANSACTION</span>
+            </div>
+            <div class="activity-amount">${money(item.amount)}</div>
+        </div>
+    `).join("");
+
+/* =========================================
+   CANVAS HELPERS
+========================================= */
+
+function setupCanvas(id){
+    const canvas = document.getElementById(id);
+    const rect = canvas.getBoundingClientRect();
+    const width = Math.max(rect.width,260);
+    const height = Math.max(rect.height,180);
+    const dpr = Math.min(window.devicePixelRatio || 1,2);
+
+    canvas.width = Math.round(width*dpr);
+    canvas.height = Math.round(height*dpr);
+
+    const ctx = canvas.getContext("2d");
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,width,height);
+
+    return {ctx,width,height};
+}
+
+function drawGrid(ctx,x,y,width,height){
+    ctx.strokeStyle = "#21404e";
+    ctx.lineWidth = 1;
+
+    for(let i=0;i<=4;i++){
+        const yy = y + height*i/4;
+        ctx.beginPath();
+        ctx.moveTo(x,yy);
+        ctx.lineTo(x+width,yy);
+        ctx.stroke();
+    }
+}
+
+/* =========================================
+   LINE GRAPH - SAMPLE DATA
+========================================= */
+
+function drawLineChart(){
+    const {ctx,width,height} = setupCanvas("lineChart");
+
+    const sales = [18,25,20,34,28,40,32,48,37,55,45,62,52,70];
+    const payments = [12,15,18,24,21,30,25,35,32,40,38,45,42,50];
+    const outstanding = sales.map((value,index)=>Math.max(value-payments[index],3));
+
+    const left=30,right=8,top=12,bottom=25;
+    const chartWidth=width-left-right;
+    const chartHeight=height-top-bottom;
+    const maxValue=80;
+
+    drawGrid(ctx,left,top,chartWidth,chartHeight);
+
+    function line(values,color){
+        ctx.beginPath();
+
+        values.forEach((value,index)=>{
+            const x=left+chartWidth*index/(values.length-1);
+            const y=top+chartHeight-(value/maxValue)*chartHeight;
+
+            if(index===0) ctx.moveTo(x,y);
+            else ctx.lineTo(x,y);
+        });
+
+        ctx.strokeStyle=color;
+        ctx.lineWidth=2.5;
+        ctx.lineJoin="round";
+        ctx.stroke();
+
+        values.forEach((value,index)=>{
+            const x=left+chartWidth*index/(values.length-1);
+            const y=top+chartHeight-(value/maxValue)*chartHeight;
+
+            ctx.beginPath();
+            ctx.arc(x,y,2.5,0,Math.PI*2);
+            ctx.fillStyle=color;
+            ctx.fill();
+        });
+    }
+
+    line(sales,"#18c5b5");
+    line(payments,"#3f91ff");
+    line(outstanding,"#ff9f43");
+
+    ctx.fillStyle="#78929e";
+    ctx.font="9px Arial";
+    ctx.textAlign="center";
+
+    [1,4,7,10,14].forEach(day=>{
+        const x=left+chartWidth*(day-1)/13;
+        ctx.fillText(String(day),x,height-7);
+    });
+}
+
+/* =========================================
+   COLUMN CHART
+========================================= */
+
+function drawColumnChart(){
+    const {ctx,width,height} = setupCanvas("columnChart");
+
+    const values=[125,95,30];
+    const labels=["SALE","PAYMENT","PENDING"];
+    const colors=["#18c5b5","#3f91ff","#ff9f43"];
+
+    const left=22,top=15,bottom=30;
+    const base=height-bottom;
+    const plotHeight=base-top;
+
+    drawGrid(ctx,left,top,width-left-8,plotHeight);
+
+    const slot=(width-left-8)/3;
+    const barWidth=Math.min(42,slot*.52);
+
+    values.forEach((value,index)=>{
+        const barHeight=value/140*plotHeight;
+        const x=left+slot*index+(slot-barWidth)/2;
+        const y=base-barHeight;
+
+        ctx.fillStyle=colors[index];
+        ctx.fillRect(x,y,barWidth,barHeight);
+
+        ctx.fillStyle="#dceff3";
+        ctx.font="bold 9px Arial";
+        ctx.textAlign="center";
+        ctx.fillText("₹"+value+"K",x+barWidth/2,Math.max(y-5,10));
+
+        ctx.fillStyle="#78929e";
+        ctx.font="8px Arial";
+        ctx.fillText(labels[index],x+barWidth/2,base+17);
+    });
+}
+
+/* =========================================
+   PIE CHART
+========================================= */
+
+function drawPieChart(){
+    const {ctx,width,height} = setupCanvas("pieChart");
+
+    const values=[95000,30000];
+    const colors=["#3f91ff","#ff9f43"];
+    const total=values.reduce((a,b)=>a+b,0);
+
+    const cx=width/2;
+    const cy=height/2;
+    const radius=Math.min(78,height/2-10);
+
+    let start=-Math.PI/2;
+
+    values.forEach((value,index)=>{
+        const angle=value/total*Math.PI*2;
+
+        ctx.beginPath();
+        ctx.moveTo(cx,cy);
+        ctx.arc(cx,cy,radius,start,start+angle);
+        ctx.closePath();
+
+        ctx.fillStyle=colors[index];
+        ctx.fill();
+
+        start+=angle;
+    });
+
+    ctx.beginPath();
+    ctx.arc(cx,cy,radius*.57,0,Math.PI*2);
+    ctx.fillStyle="#0d1c2b";
+    ctx.fill();
+
+    ctx.fillStyle="#e8f5f7";
+    ctx.font="bold 12px Arial";
+    ctx.textAlign="center";
+    ctx.fillText("₹1.25L",cx,cy+2);
+
+    ctx.fillStyle="#78929e";
+    ctx.font="9px Arial";
+    ctx.fillText("TOTAL",cx,cy+16);
+}
+
+/* =========================================
+   DOUGHNUT CHART
+========================================= */
+
+function drawDoughnutChart(){
+    const {ctx,width,height} = setupCanvas("doughnutChart");
+
+    const settled=95000;
+    const outstanding=30000;
+    const total=settled+outstanding;
+
+    const cx=width/2;
+    const cy=height/2;
+    const radius=Math.min(73,height/2-12);
+    const lineWidth=19;
+
+    ctx.beginPath();
+    ctx.arc(cx,cy,radius,0,Math.PI*2);
+    ctx.strokeStyle="#1a3442";
+    ctx.lineWidth=lineWidth;
+    ctx.stroke();
+
+    const settledAngle=settled/total*Math.PI*2;
+
+    ctx.beginPath();
+    ctx.arc(cx,cy,radius,-Math.PI/2,-Math.PI/2+settledAngle);
+    ctx.strokeStyle="#3f91ff";
+    ctx.lineWidth=lineWidth;
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(cx,cy,radius,-Math.PI/2+settledAngle,Math.PI*1.5);
+    ctx.strokeStyle="#ff9f43";
+    ctx.lineWidth=lineWidth;
+    ctx.stroke();
+
+    ctx.fillStyle="#e8f5f7";
+    ctx.font="bold 10px Arial";
+    ctx.textAlign="center";
+    ctx.fillText("PENDING",cx,cy-3);
+
+    ctx.fillStyle="#ffb45c";
+    ctx.font="bold 13px Arial";
+    ctx.fillText("₹30,000",cx,cy+15);
+}
+
+function drawAllCharts(){
+    drawLineChart();
+    drawColumnChart();
+    drawPieChart();
+    drawDoughnutChart();
+}
+
+drawAllCharts();
+window.addEventListener("load",drawAllCharts);
+window.addEventListener("resize",drawAllCharts);
+</script>
 
 </body>
 </html>
